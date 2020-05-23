@@ -142,14 +142,11 @@ float V10Futter;
 unsigned long PowerLEDMillis = 0;
 unsigned long FutterMillis = 0;
 
-
-
 /**************** Pin Belegung *******************/
 
 #define heizung				12      //Pin Relais Heizung
 #define luefter				25      //Pin Lüfter
 #define co2					27		//Pin Relais CO2 Abschaltung
-
 
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
@@ -512,20 +509,20 @@ void loop()
 	if (V[3] != V3SonneAuf)
 	{
 
-	V3SonneAuf = V[3];
-	preferences.putFloat("V3Zeit", V3SonneAuf);
+		V3SonneAuf = V[3];
+		preferences.putFloat("V3Zeit", V3SonneAuf);
 
-	SoAuStd = V3SonneAuf  / (60*60*1000);
-    V3SonneAuf  = V3SonneAuf  - SoAuStd*(60*60*1000);
-    SoAuMin = V3SonneAuf  / (60*1000);
+		SoAuStd = V3SonneAuf  / (60*60*1000);
+   		V3SonneAuf  = V3SonneAuf  - SoAuStd*(60*60*1000);
+    	SoAuMin = V3SonneAuf  / (60*1000);
 
-	preferences.putUInt("StartS", SoAuStd);
-	preferences.putUInt("StartM", SoAuMin);
+		preferences.putUInt("StartS", SoAuStd);
+		preferences.putUInt("StartM", SoAuMin);
 	
-    //V3Zeit = V3Zeit - SoAuMin*(60*1000);
-    //uint16_t s = x / 1000;
-    //x = x - s*1000;
-	SunTimer();
+    	//V3Zeit = V3Zeit - SoAuMin*(60*1000);
+    	//uint16_t s = x / 1000;
+    	//x = x - s*1000;
+		SunTimer();
 	
 	}
 
@@ -564,40 +561,40 @@ void loop()
 	if (V[6] != V6SonneUnt)
 	{
 
-	V6SonneUnt = V[6];
-	preferences.putFloat("V6Zeit", V6SonneUnt);
+		V6SonneUnt = V[6];
+		preferences.putFloat("V6Zeit", V6SonneUnt);
 
-	SoUnStd = V6SonneUnt / (60*60*1000);
-    V6SonneUnt = V6SonneUnt - SoUnStd*(60*60*1000);
-    SoUnMin = V6SonneUnt / (60*1000);
+		SoUnStd = V6SonneUnt / (60*60*1000);
+    	V6SonneUnt = V6SonneUnt - SoUnStd*(60*60*1000);
+    	SoUnMin = V6SonneUnt / (60*1000);
 
-	preferences.putUInt("StopS", SoUnStd);
-	preferences.putUInt("StopM", SoUnMin);
+		preferences.putUInt("StopS", SoUnStd);
+		preferences.putUInt("StopM", SoUnMin);
 	
-    //V3Zeit = V3Zeit - SoAuMin*(60*1000);
-    //uint16_t s = x / 1000;
-    //x = x - s*1000;
-	SunTimer();
+    	//V3Zeit = V3Zeit - SoAuMin*(60*1000);
+   	 	//uint16_t s = x / 1000;
+   	 	//x = x - s*1000;
+		SunTimer();
 	
 	}
 
 	if (V[7] != V7SonneNac)
 	{
 
-	V7SonneNac = V[7];
-	preferences.putFloat("V7Zeit", V7SonneNac);
+		V7SonneNac = V[7];
+		preferences.putFloat("V7Zeit", V7SonneNac);
 
-	SoNaStd = V7SonneNac / (60*60*1000);
-    V7SonneNac = V7SonneNac - SoNaStd*(60*60*1000);
-    SoNaMin = V7SonneNac / (60*1000);
+		SoNaStd = V7SonneNac / (60*60*1000);
+    	V7SonneNac = V7SonneNac - SoNaStd*(60*60*1000);
+    	SoNaMin = V7SonneNac / (60*1000);
 
-	preferences.putUInt("NaLS", SoNaStd);
-	preferences.putUInt("NaLM", SoNaMin);
+		preferences.putUInt("NaLS", SoNaStd);
+		preferences.putUInt("NaLM", SoNaMin);
 	
-    //V3Zeit = V3Zeit - SoAuMin*(60*1000);
-    //uint16_t s = x / 1000;
-    //x = x - s*1000;
-	SunTimer();
+    	//V3Zeit = V3Zeit - SoAuMin*(60*1000);
+    	//uint16_t s = x / 1000;
+    	//x = x - s*1000;
+		SunTimer();
 	
 	}
 	
@@ -632,7 +629,7 @@ void loop()
 		CO2Timer();
 	}
 
-		if (V[10] != V10Futter)
+	if (V[10] != V10Futter)
 	{
 		V10Futter = V[10];
 		preferences.putFloat("V10Futt", V10Futter);
