@@ -351,7 +351,7 @@ void Heizung(void)
 			digitalWrite(heizung, HIGH);
 			tft.setTextColor(TFT_RED, TFT_BLACK);
 			tft.drawFloat(IstTemp, 1, 90, 33, 4);
-			V[2] = 1;
+			V[21] = 1;
 			
 		}
 
@@ -360,7 +360,7 @@ void Heizung(void)
 			digitalWrite(heizung, LOW);
 			tft.setTextColor(TFT_GREEN, TFT_BLACK);
 			tft.drawFloat(IstTemp, 1, 90, 33, 4);
-			V[2] = 0;
+			V[21] = 0;
 		
 		}
 
@@ -368,11 +368,13 @@ void Heizung(void)
 		if (IstTemp >= LuefTemp)
 		{
 			digitalWrite(luefter, HIGH);
+			V[22] = 1;
 			
 		}
 		else
 		{
 			digitalWrite(luefter, LOW);
+			V[22] = 0;
 		
 		}
 	}

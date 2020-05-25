@@ -61,11 +61,13 @@ void ProgrammTimer()
 	if ((Zeit > (CO2AN - 1)) && (Zeit < CO2AUS))
 	{
 		digitalWrite(co2, HIGH);
+		V[23] = 1;
 		
 	}
 	else
 	{
 		digitalWrite(co2, LOW);
+		V[23] = 0;
 		
 	}
 }

@@ -138,6 +138,16 @@ float V7SonneNac;
 float V8CO2AN;
 float V9CO2AUS;
 float V10Futter;
+uint8_t V11Durchwait;
+uint8_t V12MaxHell;
+uint8_t V13MiHell;
+uint8_t V14PowerHell;
+uint8_t V15BackLT;
+uint8_t V16BackLN;
+uint8_t V17TFTRot;
+uint8_t V18FuDau;
+uint8_t V19FuGes;
+
 
 unsigned long PowerLEDMillis = 0;
 unsigned long FutterMillis = 0;
@@ -269,7 +279,7 @@ time_t getNtpTime()
 /************ Timer setzen fuer Funktion *********/
 
 Ticker tickerPro(ProgrammTimer, 1000);
-Ticker tickerHei(Heizung, 1000);
+Ticker tickerHei(Heizung, 5000);
 
 /**************************************************/
 
@@ -401,20 +411,27 @@ void setup()
 	FutterStd = preferences.getUInt("FuttS", 0);
 	FutterMin = preferences.getUInt("FuttM", 0);
 	V10Futter = preferences.getFloat("V10Futt");
-	//BacklightwertNacht = preferences.getUInt("BackLN", 0);
-	//BacklightwertTag = preferences.getUInt("BackLT", 0);
-	TFTRotation = preferences.getInt("TFTR", 0);
-
 	DurchWait = preferences.getUInt("Wait", 0);
-	//Hysterese = preferences.getFloat("Hyst", 0);
+	V11Durchwait = preferences.getUInt("V11Wait");
 	maxHell = preferences.getUInt("MaxH", 0);
+	V12MaxHell = preferences.getUInt("V12MaxHell", 100);
 	mittagHell = preferences.getUInt("MitH", 0);
+	V13MiHell = preferences.getUInt("V13MitH", 100);
 	Powerledmax = preferences.getUInt("PowH", 0);
+	V14PowerHell = preferences.getUInt("V14PoHell", 100);
+	BacklightwertTag = preferences.getUInt("BackLT", 0);
+	V15BackLT = preferences.getUInt("V15BackLT", 100);
+	BacklightwertNacht = preferences.getUInt("BackLN", 100);
+	V16BackLN = preferences.getUInt("V16BackLN", 5);
+	TFTRotation = preferences.getInt("TFTR", 0);
+	V17TFTRot = preferences.getUInt("V17TFTR", 1);
 	Futterdauer = preferences.getUInt("FutD", 0);
+	V18FuDau = preferences.getUInt("V18FuDau", 2);
 	Futtergesch = preferences.getUInt("FutG", 0);
+	V19FuGes = preferences.getUInt("V19FuGes", 150);
 	SollTemp = preferences.getFloat("SollT");
 	LuefTemp = preferences.getUInt("LueT", 0);
-	
+	Hysterese = preferences.getFloat("Hyst", 0);
 	
 	
 	CO2Timer();
@@ -424,6 +441,7 @@ void setup()
 	/**************** Virduino Werte zuordnen *******/
 
 	V[1] = SollTemp;
+	V[2] = LuefTemp;
 	V[3] = V3SonneAuf;
 	V[4] = V4MittagAN;
 	V[5] = V5MittagAUS;
@@ -432,6 +450,16 @@ void setup()
 	V[8] = V8CO2AN;
 	V[9] = V9CO2AUS;
 	V[10] = V10Futter;
+	V[11] = DurchWait;
+	V[12] =	maxHell;
+	V[13] = minHell;
+	V[14] = Powerledmax;
+	V[15] = BacklightwertTag;
+	V[16] = BacklightwertNacht;
+	V[17] = TFTRotation;
+	V[18] = Futterdauer;
+	V[19] = Futtergesch;
+	V[20] = Hysterese;
 	
 	
 	/*********** GPIO´s definieren ****************/
@@ -502,7 +530,15 @@ void loop()
 	{
 		SollTemp = V[1];
 		preferences.putFloat("SollT", SollTemp);
+		Heizung();
 
+	}
+
+	if (V[2] != LuefTemp)
+	{
+		LuefTemp = V[2];
+		preferences.putUInt("LueT", LuefTemp);
+		Heizung();
 	}
 
 
@@ -644,6 +680,87 @@ void loop()
 		FutterTimer();
 	}
 
+	if (V[11] != DurchWait)
+	{
+		DurchWait = V[11];
+		preferences.putUInt ("Wait", DurchWait);
+	}
+
+	if  (V[12] != maxHell)
+	{
+		maxHell = V[12];
+		preferences.putUInt("MaxH", maxHell);
+	} 
+
+	if  (V[13] != mittagHell)
+	{
+		mittagHell = V[13];
+		preferences.putUInt("MitH", mittagHell);
+	} 
+
+	if (V[14] != Powerledmax)
+	{
+		Powerledmax = V[14];
+		preferences.putUInt ("PowH", Powerledmax);
+	}
+
+	if (V[15] != BacklightwertTag)
+	{
+		BacklightwertTag = V[15];
+		preferences.putUInt("BackLT", BacklightwertTag);
+		ledcWrite(BacklightKanalTFT, BacklightwertTag);
+	}
+
+	if (V[16] != BacklightwertNacht)
+	{
+		BacklightwertNacht = V[16];
+		preferences.putUInt("BackLN", BacklightwertNacht);
+	}
+
+	/*if (V[17] == 1)
+	{
+		TFTRotation = 3;
+		delay(250);
+		preferences.putInt("TFTR", TFTRotation);	
+
+		TFT_Layout();
+		WIFI_TFT();
+		CO2Timer();
+		SunTimer();
+		FutterTimer();
+	
+	}
+	
+	if (V[17] == 0)
+	{
+		TFTRotation = 1;
+
+		preferences.putInt("TFTR", TFTRotation);	
+		TFT_Layout();
+		WIFI_TFT();
+		CO2Timer();
+		SunTimer();
+		FutterTimer();
+	}
+	*/
+
+	if (V[18] != Futterdauer)
+	{
+		Futterdauer = V[18] * 1000;
+		preferences.putUInt("FutD", Futterdauer);
+	}
+
+	if (V[19] != Futtergesch)
+	{
+		Futtergesch = V[18];
+		preferences.putUInt("FutG", Futtergesch);
+	}
+
+	if (V[20] != Hysterese)
+	{
+		Hysterese = V[20];
+		preferences.putFloat("Hyst", Hysterese);
+	}
 
 	/************** Stripe helligkeit ändern ************/
 
