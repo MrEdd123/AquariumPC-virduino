@@ -1,5 +1,4 @@
 ﻿
-
 #include <Arduino.h>
 #include <TFT_eSPI.h>
 #include <NeoPixelAnimator.h>
@@ -13,29 +12,26 @@
 #include <Preferences.h>
 #include <Ticker.h>
 #include <WiFi.h>
+#include <ESPmDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
 
 
-
-//--- SETTINGS ------------------------------------------------
+/********** SETTINGS ******************************/
 const char* ssid = "Andre+Janina";            // WIFI network SSID
 const char* password = "sommer12";            // WIFI network PASSWORD
 WiFiServer server(8000);                      // Server port
 IPAddress ip(192, 168, 178, 150);            // where 150 is the desired IP Address. The first three numbers must be the same as the router IP
 IPAddress gateway(192, 168, 178, 1);         // set gateway to match your network. Replace with your router IP
-//---
 
-//---VirtuinoCM  Library settings --------------
+
+/*********** VirtuinoCM  Library settings *********/
 #include "VirtuinoCM.h"
 VirtuinoCM virtuino;               
 #define V_memory_count 32          // the size of V memory. You can change it to a number <=255)
 float V[V_memory_count];           // This array is synchronized with Virtuino V memory. You can change the type to int, long etc.
-//---
-
 
 boolean debug = true;              // set this variable to false on the finale code to decrease the request time.
-
-//-------------------------------------------------------------
-
 
 
 /*********** EEPROM Speichern ********************/
@@ -116,6 +112,7 @@ uint8_t FutterKanal = 0;
 uint8_t FutterRes = 8;
 uint16_t Futtergesch = 180;
 uint16_t Futterdauer = 2000;
+uint8_t Futterdauerhelp = 2;
 
 uint8_t PowerledPin = 16;
 uint16_t Powerledfreq = 2000;
@@ -138,15 +135,7 @@ float V7SonneNac;
 float V8CO2AN;
 float V9CO2AUS;
 float V10Futter;
-uint8_t V11Durchwait;
-uint8_t V12MaxHell;
-uint8_t V13MiHell;
-uint8_t V14PowerHell;
-uint8_t V15BackLT;
-uint8_t V16BackLN;
-uint8_t V17TFTRot;
-uint8_t V18FuDau;
-uint8_t V19FuGes;
+
 
 
 unsigned long PowerLEDMillis = 0;
@@ -376,6 +365,7 @@ void setup()
 
   server.begin();
 
+
 	/************ TFT Layout setzen ***************/  
 
 	TFT_Layout();
@@ -412,23 +402,15 @@ void setup()
 	FutterMin = preferences.getUInt("FuttM", 0);
 	V10Futter = preferences.getFloat("V10Futt");
 	DurchWait = preferences.getUInt("Wait", 0);
-	V11Durchwait = preferences.getUInt("V11Wait");
 	maxHell = preferences.getUInt("MaxH", 0);
-	V12MaxHell = preferences.getUInt("V12MaxHell", 100);
 	mittagHell = preferences.getUInt("MitH", 0);
-	V13MiHell = preferences.getUInt("V13MitH", 100);
 	Powerledmax = preferences.getUInt("PowH", 0);
-	V14PowerHell = preferences.getUInt("V14PoHell", 100);
 	BacklightwertTag = preferences.getUInt("BackLT", 0);
-	V15BackLT = preferences.getUInt("V15BackLT", 100);
 	BacklightwertNacht = preferences.getUInt("BackLN", 100);
-	V16BackLN = preferences.getUInt("V16BackLN", 5);
 	TFTRotation = preferences.getInt("TFTR", 0);
-	V17TFTRot = preferences.getUInt("V17TFTR", 1);
 	Futterdauer = preferences.getUInt("FutD", 0);
-	V18FuDau = preferences.getUInt("V18FuDau", 2);
 	Futtergesch = preferences.getUInt("FutG", 0);
-	V19FuGes = preferences.getUInt("V19FuGes", 150);
+	Futterdauerhelp = preferences.getUInt("FutDHelp", 0);
 	SollTemp = preferences.getFloat("SollT");
 	LuefTemp = preferences.getUInt("LueT", 0);
 	Hysterese = preferences.getFloat("Hyst", 0);
@@ -452,12 +434,12 @@ void setup()
 	V[10] = V10Futter;
 	V[11] = DurchWait;
 	V[12] =	maxHell;
-	V[13] = minHell;
+	V[13] = mittagHell;
 	V[14] = Powerledmax;
 	V[15] = BacklightwertTag;
 	V[16] = BacklightwertNacht;
 	V[17] = TFTRotation;
-	V[18] = Futterdauer;
+	V[18] = Futterdauerhelp;
 	V[19] = Futtergesch;
 	V[20] = Hysterese;
 	
@@ -511,10 +493,59 @@ void setup()
 	setSyncInterval(300);
 	digitalClockDisplay();
 
+
+	/******************** OTA Update ********************/
+	 // Port defaults to 3232
+  //ArduinoOTA.setPort(3232);
+
+  // Hostname defaults to esp3232-[MAC]
+  ArduinoOTA.setHostname("AquariumPC");
+
+  // No authentication by default
+  // ArduinoOTA.setPassword("admin");
+
+  // Password can be set with it's md5 value as well
+  // MD5(admin) = 21232f297a57a5a743894a0e4a801fc3
+  // ArduinoOTA.setPasswordHash("21232f297a57a5a743894a0e4a801fc3");
+
+	 ArduinoOTA
+    .onStart([]() {
+      String type;
+      if (ArduinoOTA.getCommand() == U_FLASH)
+        type = "sketch";
+      else // U_SPIFFS
+        type = "filesystem";
+
+      // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
+      Serial.println("Start updating " + type);
+    })
+    .onEnd([]() {
+      Serial.println("\nEnd");
+    })
+    .onProgress([](unsigned int progress, unsigned int total) {
+      Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+    })
+    .onError([](ota_error_t error) {
+      Serial.printf("Error[%u]: ", error);
+      if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+      else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+      else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+      else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+      else if (error == OTA_END_ERROR) Serial.println("End Failed");
+    });
+
+  ArduinoOTA.begin();
+
+  Serial.println("Ready");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
 }
 
 void loop() 
 {
+
+	ArduinoOTA.handle();
 	/*********** Timer updaten *************************/
 
 	tickerPro.update();
@@ -744,15 +775,17 @@ void loop()
 	}
 	*/
 
-	if (V[18] != Futterdauer)
+	if (V[18] != Futterdauerhelp)
 	{
-		Futterdauer = V[18] * 1000;
+		Futterdauerhelp = V[18];
+		Futterdauer = (Futterdauerhelp * 1000);
 		preferences.putUInt("FutD", Futterdauer);
+		preferences.putUInt("FutDHelp", Futterdauerhelp);
 	}
 
 	if (V[19] != Futtergesch)
 	{
-		Futtergesch = V[18];
+		Futtergesch = V[19];
 		preferences.putUInt("FutG", Futtergesch);
 	}
 
