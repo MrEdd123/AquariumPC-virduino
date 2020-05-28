@@ -31,7 +31,7 @@ VirtuinoCM virtuino;
 #define V_memory_count 32          // the size of V memory. You can change it to a number <=255)
 float V[V_memory_count];           // This array is synchronized with Virtuino V memory. You can change the type to int, long etc.
 
-boolean debug = true;              // set this variable to false on the finale code to decrease the request time.
+boolean debug = false;              // set this variable to false on the finale code to decrease the request time.
 
 
 /*********** EEPROM Speichern ********************/
@@ -358,6 +358,7 @@ void setup()
    while (WiFi.status() != WL_CONNECTED) {
      delay(500);
      Serial.print(".");
+	 ESP.restart();
     }
    Serial.println("");
    Serial.println("WiFi connected");
@@ -793,6 +794,22 @@ void loop()
 	{
 		Hysterese = V[20];
 		preferences.putFloat("Hyst", Hysterese);
+	}
+
+	/************** Manuelle Funktionen *****************/
+
+	if (V[30] == 1)		//Sonnenaufgang
+	{
+		Serial.println("Sonnenauf Manu");
+		SonneIndex = 1;
+		V[30] = 0;
+	}
+
+	if (V[31] == 1)		//Sonnenuntergang
+	{
+		Serial.println("Sonnenunter Manu");
+		SonneIndex = 2;
+		V[31] = 0;
 	}
 
 	/************** Stripe helligkeit ändern ************/
