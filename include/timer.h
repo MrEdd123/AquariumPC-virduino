@@ -30,6 +30,7 @@ void ProgrammTimer()
 	SoTimerMiAn = ((SoMiAnMin)+(SoMiAnStd) * 100);
 	if ((Zeit == SoTimerMiAn) & (second(local_t) == 0))
 	{
+		if (debug) Serial.println("Mittag AN");
 		SonneIndex = 3;
 	}
 
@@ -37,6 +38,7 @@ void ProgrammTimer()
 	SoTimerMiAus = ((SoMiAusMin)+(SoMiAusStd) * 100);
 	if ((Zeit == SoTimerMiAus) & (second(local_t) == 0))
 	{
+		if (debug) Serial.println("Mittag AUS");
 		SonneIndex = 4;
 	}
 

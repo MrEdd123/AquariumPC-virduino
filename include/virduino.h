@@ -12,7 +12,7 @@ void virduino()
 		SollTemp = V[1];
 		preferences.putFloat("SollT", SollTemp);
 		Heizung();
-
+		SollTemp = V[1];
 	}
 
 	if (V[2] != LuefTemp)
@@ -20,12 +20,12 @@ void virduino()
 		LuefTemp = V[2];
 		preferences.putUInt("LueT", LuefTemp);
 		Heizung();
+		LuefTemp = V[2];
 	}
 
 
 	if (V[3] != V3SonneAuf)
 	{
-
 		V3SonneAuf = V[3];
 		preferences.putFloat("V3Zeit", V3SonneAuf);
 
@@ -35,8 +35,14 @@ void virduino()
 
 		preferences.putUInt("StartS", SoAuStd);
 		preferences.putUInt("StartM", SoAuMin);
-	
-    	//V3Zeit = V3Zeit - SoAuMin*(60*1000);
+		V3SonneAuf = V[3];
+		if(debug) 
+		{
+			Serial.println("Sonne Auf");
+			Serial.println(SoAuStd);
+			Serial.println(SoAuMin);
+		}
+		//V3Zeit = V3Zeit - SoAuMin*(60*1000);
     	//uint16_t s = x / 1000;
     	//x = x - s*1000;
 		SunTimer();
@@ -48,28 +54,41 @@ void virduino()
 		V4MittagAN = V[4];
 		preferences.putFloat("V4Zeit", V4MittagAN);
 
-		SoMiAnStd = V4MittagAN / (60*60+100);
-		V4MittagAN = V4MittagAN - SoMiAnStd*(60*6*1000);
+		SoMiAnStd = V4MittagAN / (60*60*1000);
+		V4MittagAN = V4MittagAN - SoMiAnStd*(60*60*1000);
 		SoMiAnMin = V4MittagAN / (60*1000);
+	
 
-		preferences.putInt("MiAnLS", SoMiAnStd);
-		preferences.putInt("MiAnLM", SoMiAnMin);
-
+		preferences.putUInt("MiAnLS", SoMiAnStd);
+		preferences.putUInt("MiAnLM", SoMiAnMin);
+		V4MittagAN = V[4];
+		if(debug) 
+		{
+			Serial.println("Mittag Timer AN");
+			Serial.println(SoMiAnStd);
+			Serial.println(SoMiAnMin);
+		}
 		SunTimer();
 	}
 
 	if (V[5] != V5MittagAUS)
-	{
+	{	
 		V5MittagAUS = V[5];
 		preferences.putFloat("V5Zeit", V5MittagAUS);
 
-		SoMiAusStd = V5MittagAUS / (60*60+100);
-		V5MittagAUS = V5MittagAUS - SoMiAusStd*(60*6*1000);
+		SoMiAusStd = V5MittagAUS / (60*60*1000);
+		V5MittagAUS = V5MittagAUS - SoMiAusStd*(60*60*1000);
 		SoMiAusMin = V5MittagAUS / (60*1000);
 
-		preferences.putInt("MiAuLS", SoMiAusStd);
-		preferences.putInt("MiAuLM", SoMiAusMin);
-
+		preferences.putUInt("MiAuLS", SoMiAusStd);
+		preferences.putUInt("MiAuLM", SoMiAusMin);
+		V5MittagAUS = V[5];
+		if (debug) 
+		{
+			Serial.println("Mittag Timer AUS");
+			Serial.println(SoMiAusStd);
+			Serial.println(SoMiAusMin);
+		}
 		SunTimer();
 	}
 
@@ -77,7 +96,6 @@ void virduino()
 
 	if (V[6] != V6SonneUnt)
 	{
-
 		V6SonneUnt = V[6];
 		preferences.putFloat("V6Zeit", V6SonneUnt);
 
@@ -87,8 +105,14 @@ void virduino()
 
 		preferences.putUInt("StopS", SoUnStd);
 		preferences.putUInt("StopM", SoUnMin);
-	
-    	//V3Zeit = V3Zeit - SoAuMin*(60*1000);
+		V6SonneUnt = V[6];
+		if(debug) 
+		{
+			Serial.println("Sonne Unt");
+			Serial.println(SoUnStd);
+			Serial.println(SoUnMin);
+		}
+		//V3Zeit = V3Zeit - SoAuMin*(60*1000);
    	 	//uint16_t s = x / 1000;
    	 	//x = x - s*1000;
 		SunTimer();
@@ -97,7 +121,6 @@ void virduino()
 
 	if (V[7] != V7SonneNac)
 	{
-
 		V7SonneNac = V[7];
 		preferences.putFloat("V7Zeit", V7SonneNac);
 
@@ -107,7 +130,7 @@ void virduino()
 
 		preferences.putUInt("NaLS", SoNaStd);
 		preferences.putUInt("NaLM", SoNaMin);
-	
+		V7SonneNac = V[7];
     	//V3Zeit = V3Zeit - SoAuMin*(60*1000);
     	//uint16_t s = x / 1000;
     	//x = x - s*1000;
@@ -127,7 +150,7 @@ void virduino()
 
 		preferences.putUInt("COSS", CO2AnStd);
 		preferences.putUInt("COSM", CO2AnMin);
-
+		V8CO2AN = V[8];
 		CO2Timer();
 	}
 
@@ -142,7 +165,7 @@ void virduino()
 
 		preferences.putUInt("COAS", CO2AusStd);
 		preferences.putUInt("COAM", CO2AusMin);
-
+		V9CO2AUS = V[9];
 		CO2Timer();
 	}
 
@@ -157,7 +180,7 @@ void virduino()
 
 		preferences.putUInt("FuttS", FutterStd);
 		preferences.putUInt("FuttM", FutterMin);
-
+		V10Futter = V[10];
 		FutterTimer();
 	}
 
@@ -175,27 +198,34 @@ void virduino()
 
 	if  (V[13] != mittagHell)
 	{
+		if (debug)
+		{
+		Serial.print("Mittag Hell: ");
+		Serial.println(mittagHell);
+		}
 		mittagHell = V[13];
 		preferences.putUInt("MitH", mittagHell);
 	} 
 
 	if (V[14] != Powerledmax)
 	{
-		Powerledmax = V[14];
+		
 		preferences.putUInt ("PowH", Powerledmax);
+		Powerledmax = V[14];
 	}
 
 	if (V[15] != BacklightwertTag)
 	{
-		BacklightwertTag = V[15];
+		
 		preferences.putUInt("BackLT", BacklightwertTag);
 		ledcWrite(BacklightKanalTFT, BacklightwertTag);
+		BacklightwertTag = V[15];
 	}
 
 	if (V[16] != BacklightwertNacht)
 	{
-		BacklightwertNacht = V[16];
 		preferences.putUInt("BackLN", BacklightwertNacht);
+		BacklightwertNacht = V[16];
 	}
 
 	/*if (V[17] == 1)
@@ -231,18 +261,21 @@ void virduino()
 		Futterdauer = (Futterdauerhelp * 500);
 		preferences.putUInt("FutD", Futterdauer);
 		preferences.putUInt("FutDHelp", Futterdauerhelp);
+		Futterdauerhelp = V[18];
 	}
 
 	if (V[19] != Futtergesch)
 	{
-		Futtergesch = V[19];
+		
 		preferences.putUInt("FutG", Futtergesch);
+		Futtergesch = V[19];
 	}
 
 	if (V[20] != Hysterese)
 	{
-		Hysterese = V[20];
+		
 		preferences.putFloat("Hyst", Hysterese);
+		Hysterese = V[20];
 	}
 
 	/************** Manuelle Funktionen *****************/
@@ -259,6 +292,20 @@ void virduino()
 		Serial.println("Sonnenunter Manu");
 		SonneIndex = 2;
 		V[31] = 0;
+	}
+
+	if (V[32] == 1)		//Sonnen Mittag AN
+	{
+		Serial.println("Mittag AN Manu");
+		SonneIndex = 3;
+		V[32] = 0;
+	}
+
+	if (V[33] == 1)		//Sonnen Mittag AUS
+	{
+		Serial.println("Mittag AUS Manu");
+		SonneIndex = 4;
+		V[33] = 0;
 	}
 
 }

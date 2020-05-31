@@ -423,7 +423,7 @@ void setup()
 	FutterTimer();
 
 	/**************** Virduino Werte zuordnen *******/
-
+	
 	V[1] = SollTemp;
 	V[2] = LuefTemp;
 	V[3] = V3SonneAuf;
