@@ -198,7 +198,7 @@ static const char ntpServerName[] = "de.pool.ntp.org";
 const int timeZone = 1;
 
 const uint32_t syncIntervalMax = 300; // could be the same value like the syncInterval in time.cpp | 300
-const uint32_t syncIntervalAfterFail = 30; // if sync with NTP fails, retry earlier | 60
+const uint32_t syncIntervalAfterFail = 60; // if sync with NTP fails, retry earlier | 60
 const uint32_t ntpWaitMax = 1500; // maximum time in ms to wait for an answer of NTP Server, most used value 1500 I prefere below one second: 900
 uint32_t ntpWaitActual = ntpWaitMax; // optimized/reduced wait time, start with maximum.
 
