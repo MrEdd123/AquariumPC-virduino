@@ -308,6 +308,12 @@ void virduino()
 		V[33] = 0;
 	}
 
+	if (V[34] == 1)		//Futterautomat
+	{
+		FutterIndex = 1;
+		V[34] = 0;
+	}
+
 }
 
 #endif

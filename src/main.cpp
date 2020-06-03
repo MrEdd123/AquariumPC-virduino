@@ -1,38 +1,38 @@
 ﻿
 #include <Arduino.h>
 #include <TFT_eSPI.h>
-#include <NeoPixelAnimator.h>
 #include "bitmaps.h"
-#include <ESPmDNS.h>
+//#include <ESPmDNS.h>
 #include <Time.h>
 #include <SPI.h>
+#include <NeoPixelAnimator.h>
 #include <NeoPixelBrightnessBus.h>
 #include <OneWire.h>
 #include <DS18B20.h>
 #include <Preferences.h>
 #include <Ticker.h>
 #include <WiFi.h>
-#include <ESPmDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 
 
+boolean debug = false;              			// set this variable to false on the finale code to decrease the request time.
+
+
+
 /********** SETTINGS ******************************/
-const char* ssid = "Andre+Janina";            // WIFI network SSID
-const char* password = "sommer12";            // WIFI network PASSWORD
-WiFiServer server(8000);                      // Server port
-IPAddress ip(192, 168, 178, 150);            // where 150 is the desired IP Address. The first three numbers must be the same as the router IP
-IPAddress gateway(192, 168, 178, 1);         // set gateway to match your network. Replace with your router IP
+const char* ssid = "Andre+Janina";            	// WIFI network SSID
+const char* password = "sommer12";            	// WIFI network PASSWORD
+WiFiServer server(8000);                      	// Server port
+IPAddress ip(192, 168, 178, 38);         		// where 150 is the desired IP Address. The first three numbers must be the same as the router IP
+IPAddress gateway(192, 168, 178, 1);         	// set gateway to match your network. Replace with your router IP
 
 
 /*********** VirtuinoCM  Library settings *********/
 #include "VirtuinoCM.h"
 VirtuinoCM virtuino;               
-#define V_memory_count 32          // the size of V memory. You can change it to a number <=255)
-float V[V_memory_count];           // This array is synchronized with Virtuino V memory. You can change the type to int, long etc.
-
-boolean debug = false;              // set this variable to false on the finale code to decrease the request time.
-
+#define V_memory_count 32          				// the size of V memory. You can change it to a number <=255)
+float V[V_memory_count];           				// This array is synchronized with Virtuino V memory. You can change the type to int, long etc.
 
 /*********** EEPROM Speichern ********************/
 
@@ -225,9 +225,12 @@ time_t getNtpTime()
 	Serial.println("Transmit NTP Request");
 	// get a random server from the pool
 	WiFi.hostByName(ntpServerName, ntpServerIP);
+	if (debug)
+	{
 	Serial.print(ntpServerName);
 	Serial.print(": ");
 	Serial.println(ntpServerIP);
+	}
 	sendNTPpacket(ntpServerIP);
 	uint32_t beginWait = millis();
 	while (millis() - beginWait < 1500) {
@@ -246,7 +249,7 @@ time_t getNtpTime()
 
 		}
 	}
-	Serial.println("No NTP Response :-(");
+	if (debug) Serial.println("No NTP Response :-(");
 	tft.setTextColor(TFT_BLACK);
 	tft.drawString("           ", 3, 2, 2);
 	tft.setTextColor(TFT_RED);
@@ -308,7 +311,7 @@ String onRequested(char variableType, uint8_t variableIndex)
    unsigned long timeout = millis() + 3000;
    while (!client.available() && millis() < timeout) delay(1);
    if (millis() > timeout) {
-    Serial.println("timeout");
+     if (debug) Serial.println("timeout");
     client.flush();
     client.stop();
     return;
@@ -338,39 +341,44 @@ String onRequested(char variableType, uint8_t variableIndex)
 
 void setup() 
 {
-
+		Serial.begin(115200);
 	  if (debug) 
 	  {
     	Serial.begin(115200);
     	while (!Serial) continue;
 	  }	
+	/************ TFT Layout setzen ***************/  
+
+	TFT_Layout();
 
 	/********** Virtuino settings *****************/
  	virtuino.begin(onReceived,onRequested,512);  //Start Virtuino. Set the buffer to 512. With this buffer Virtuino can control about 50 pins (1 command >= 9bytes) The T(text) commands with 20 characters need 20+6 bytes
   	virtuino.key="4593";                       //This is the Virtuino password. Only requests the start with this key are accepted from the library
 
-     Serial.println("Connecting to "+String(ssid));
-   // If you don't want to config IP manually disable the next two lines
-   IPAddress subnet(255, 255, 255, 0);        // set subnet mask to match your network
- //WiFi.config(ip, gateway, subnet);          // If you don't want to config IP manually disable this line
- // WiFi.mode(WIFI_STA);                       // Config module as station only.
-  WiFi.begin(ssid, password);
-  delay(500);
-   while (WiFi.status() != WL_CONNECTED) {
+    if (debug) Serial.println("Connecting to "+String(ssid));
+   	// If you don't want to config IP manually disable the next two lines
+   	IPAddress subnet(255, 255, 255, 0);        // set subnet mask to match your network
+ 	//WiFi.config(ip, gateway, subnet);          // If you don't want to config IP manually disable this line
+	//WiFi.mode(WIFI_STA);                       // Config module as station only.
+  	WiFi.begin(ssid, password);
+  	delay(1000);
+  	tft.drawBitmap(140, 0, wlan, 20, 20, TFT_GREEN);
+  
+  /* while (WiFi.status() != WL_CONNECTED) {
+	 tft.drawBitmap(140, 0, wlan, 20, 20, TFT_RED);  
      delay(500);
      Serial.print(".");
 	 ESP.restart();
-    }
-   Serial.println("");
-   Serial.println("WiFi connected");
-   Serial.println(WiFi.localIP());
-
+    }*/
+	if (debug)
+	{
+   	Serial.println("");
+   	Serial.println("WiFi connected");
+   	Serial.println(WiFi.localIP());
+	}
   server.begin();
 
 
-	/************ TFT Layout setzen ***************/  
-
-	TFT_Layout();
 
 	/************** EEPROM auslesen ***************/
 
@@ -547,6 +555,32 @@ void setup()
 
 void loop() 
 {
+	/************** WIFI Satus ueberpruefen *************/
+
+	int wifi_retry = 0;
+	while(WiFi.status() != WL_CONNECTED && wifi_retry < 10 ) 
+		{
+		tft.drawBitmap(140, 0, wlan, 20, 20, TFT_BLUE);	
+      	wifi_retry++;
+      	if (debug)
+		  {
+		  Serial.println("WiFi not connected. Try to reconnect");
+		  Serial.println(wifi_retry);
+		  }
+      	WiFi.disconnect();
+      	WiFi.mode(WIFI_OFF);
+      	WiFi.mode(WIFI_STA);
+		WiFi.begin(ssid, password);
+      	delay(100);
+  		}
+  	if(wifi_retry >= 10) 
+  		{
+      	if (debug) Serial.println("\nReboot");
+      	ESP.restart();
+  		}
+		
+	
+	/************** OTA ********************************/
 
 	ArduinoOTA.handle();
 	/*********** Timer updaten *************************/
