@@ -209,23 +209,23 @@ void virduino()
 
 	if (V[14] != Powerledmax)
 	{
-		
-		preferences.putUInt ("PowH", Powerledmax);
 		Powerledmax = V[14];
+		preferences.putUInt ("PowH", Powerledmax);
+		
 	}
 
 	if (V[15] != BacklightwertTag)
 	{
 		
-		preferences.putUInt("BackLT", BacklightwertTag);
 		ledcWrite(BacklightKanalTFT, BacklightwertTag);
 		BacklightwertTag = V[15];
+		preferences.putUInt("BackLT", BacklightwertTag);
 	}
 
 	if (V[16] != BacklightwertNacht)
 	{
-		preferences.putUInt("BackLN", BacklightwertNacht);
 		BacklightwertNacht = V[16];
+		preferences.putUInt("BackLN", BacklightwertNacht);
 	}
 
 	/*if (V[17] == 1)
@@ -260,22 +260,22 @@ void virduino()
 		Futterdauerhelp = V[18];
 		Futterdauer = (Futterdauerhelp * 500);
 		preferences.putUInt("FutD", Futterdauer);
-		preferences.putUInt("FutDHelp", Futterdauerhelp);
 		Futterdauerhelp = V[18];
+		preferences.putUInt("FutDHelp", Futterdauerhelp);
 	}
 
 	if (V[19] != Futtergesch)
 	{
-		
-		preferences.putUInt("FutG", Futtergesch);
 		Futtergesch = V[19];
+		preferences.putUInt("FutG", Futtergesch);
+		
 	}
 
 	if (V[20] != Hysterese)
 	{
-		
-		preferences.putFloat("Hyst", Hysterese);
 		Hysterese = V[20];
+		preferences.putFloat("Hyst", Hysterese);
+		
 	}
 
 	/************** Manuelle Funktionen *****************/
@@ -294,24 +294,24 @@ void virduino()
 		V[31] = 0;
 	}
 
-	if (V[32] == 1)		//Sonnen Mittag AN
+	if (V[27] == 1)		//Sonnen Mittag AN
 	{
 		Serial.println("Mittag AN Manu");
 		SonneIndex = 3;
-		V[32] = 0;
+		V[27] = 0;
 	}
 
-	if (V[33] == 1)		//Sonnen Mittag AUS
+	if (V[28] == 1)		//Sonnen Mittag AUS
 	{
 		Serial.println("Mittag AUS Manu");
 		SonneIndex = 4;
-		V[33] = 0;
+		V[28] = 0;
 	}
 
-	if (V[34] == 1)		//Futterautomat
+	if (V[29] == 1)		//Futterautomat
 	{
 		FutterIndex = 1;
-		V[34] = 0;
+		V[29] = 0;
 	}
 
 }
