@@ -16,8 +16,7 @@
 #include <ArduinoOTA.h>
 
 
-boolean debug = false;              			// set this variable to false on the finale code to decrease the request time.
-
+boolean debug = true;              			// set this variable to false on the finale code to decrease the request time.
 
 
 /********** SETTINGS ******************************/
@@ -50,6 +49,7 @@ NeoPixelBrightnessBus<NeoGrbwFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS,
 
 TFT_eSPI tft = TFT_eSPI();
 #define MAX_GEN_COUNT 500
+#define USE_DMA_TO_TFT
 
 /************* One Wire (Tempfühler) **********/
 
@@ -346,7 +346,7 @@ void setup()
     	while (!Serial) continue;
 	  }	
 	/************ TFT Layout setzen ***************/  
-
+	tft.initDMA(); 
 	TFT_Layout();
 
 	/********** Virtuino settings *****************/
@@ -375,8 +375,6 @@ void setup()
    	Serial.println(WiFi.localIP());
 	}
   server.begin();
-
-
 
 	/************** EEPROM auslesen ***************/
 
@@ -550,33 +548,16 @@ void setup()
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  /***************** Licht Zustand nach Neustart *********/
+  
 
-  switch (LichtZustand)
-  {
-
-	case 1:
-		SonneAuf();
-		break;
-	case 2:
-		SonneUn();
-		break;
-	case 3:
-		SonneMitAn();
-		break;
-	case 4:
-		SonneMitAus();
-		break;
-	case 5:
-		SonneNaAus();
-		break;
-
-  }
+  
 
 }
 
 void loop() 
 {
+
+	if (debug) Serial.println(LichtZustand);
 	/************** WIFI Satus ueberpruefen *************/
 
 	int wifi_retry = 0;
@@ -630,7 +611,8 @@ void loop()
 	
 	/******** Schalter für Beleuchtung ********/
 
-	switch (SonneIndex) {
+	switch (SonneIndex) 
+	{
 
 	case 1:
 		SonneAuf();
@@ -648,6 +630,28 @@ void loop()
 		SonneNaAus();
 		break;
 	}
+
+	/***************** Licht Zustand nach Neustart *********/
+	switch (LichtZustand)
+  	{
+
+	case 1:
+		SonneAuf();
+		break;
+	case 2:
+		SonneUn();
+		break;
+	case 3:
+		SonneMitAn();
+		break;
+	case 4:
+		SonneMitAus();
+		break;
+	case 5:
+		SonneNaAus();
+		break;
+
+  	}
 
 	switch (FutterIndex)
 	{

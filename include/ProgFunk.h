@@ -158,6 +158,9 @@ void crossFade(int color[4])
 
 void SonneAuf(void)
 {
+
+	LichtZustand = 1;
+	preferences.putUInt("LichtZu", LichtZustand);
 	ledcWrite(BacklightKanalTFT, BacklightwertTag);
 	AblaufI++;
 
@@ -208,8 +211,7 @@ void SonneAuf(void)
 		Durchlauf = 1;
 		SonneIndex = 0;
 		AblaufX = 1;
-		LichtZustand = 1;
-		preferences.putUInt("LichtZu", LichtZustand);
+		
 
 		break;
 	}
@@ -217,6 +219,8 @@ void SonneAuf(void)
 
 void SonneUn(void)
 {
+	LichtZustand = 2;
+	preferences.putUInt("LichtZu", LichtZustand);
 	ledcWrite(BacklightKanalTFT, BacklightwertNacht);
 	AblaufI++;
 
@@ -285,15 +289,15 @@ void SonneUn(void)
 		Durchlauf = 1;
 		SonneIndex = 0;
 		AblaufY = 159;
-		LichtZustand = 2;
-		preferences.putUInt("LichtZu", LichtZustand);
+		
 		break;
 	}
 }
 
 void SonneMitAn(void)
 {
-
+	LichtZustand = 3;
+	preferences.putUInt("LichtZu", LichtZustand);
 	strip1.SetBrightness(mittagHell);
 	strip1.Show();
 	aktHell = mittagHell;
@@ -306,13 +310,13 @@ void SonneMitAn(void)
 	Powerledwert = Powerledmin;
 	ledcWrite(PowerledKanal, Powerledwert);
 	SonneIndex = 0;
-	LichtZustand = 3;
-	preferences.putUInt("LichtZu", LichtZustand);
+	
 }
 
 void SonneMitAus(void)
 {
-
+	LichtZustand = 4;
+	preferences.putUInt("LichtZu", LichtZustand);
 	strip1.SetBrightness(maxHell);
 	strip1.Show();
 	aktHell = maxHell;
@@ -324,12 +328,13 @@ void SonneMitAus(void)
 	Powerledwert = Powerledmax;
 	ledcWrite(PowerledKanal, Powerledwert);
 	SonneIndex = 0;
-	LichtZustand = 4;
-	preferences.putUInt("LichtZu", LichtZustand);
+	
 }
 
 void SonneNaAus(void)
 {
+	LichtZustand = 5;
+	preferences.putUInt("LichtZu", LichtZustand);
 	switch (Durchlauf)
 	{
 	case 1:
@@ -339,8 +344,7 @@ void SonneNaAus(void)
 	case 2:
 		Durchlauf = 1;
 		SonneIndex = 0;
-		LichtZustand = 5;
-		preferences.putUInt("LichtZu", LichtZustand);
+	
 		break;
 	}
 }
