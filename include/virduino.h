@@ -92,8 +92,6 @@ void virduino()
 		SunTimer();
 	}
 
-
-
 	if (V[6] != V6SonneUnt)
 	{
 		V6SonneUnt = V[6];

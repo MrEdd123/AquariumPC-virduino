@@ -208,6 +208,8 @@ void SonneAuf(void)
 		Durchlauf = 1;
 		SonneIndex = 0;
 		AblaufX = 1;
+		LichtZustand = 1;
+		preferences.putUInt("LichtZu", LichtZustand);
 
 		break;
 	}
@@ -283,6 +285,8 @@ void SonneUn(void)
 		Durchlauf = 1;
 		SonneIndex = 0;
 		AblaufY = 159;
+		LichtZustand = 2;
+		preferences.putUInt("LichtZu", LichtZustand);
 		break;
 	}
 }
@@ -302,6 +306,8 @@ void SonneMitAn(void)
 	Powerledwert = Powerledmin;
 	ledcWrite(PowerledKanal, Powerledwert);
 	SonneIndex = 0;
+	LichtZustand = 3;
+	preferences.putUInt("LichtZu", LichtZustand);
 }
 
 void SonneMitAus(void)
@@ -318,6 +324,8 @@ void SonneMitAus(void)
 	Powerledwert = Powerledmax;
 	ledcWrite(PowerledKanal, Powerledwert);
 	SonneIndex = 0;
+	LichtZustand = 4;
+	preferences.putUInt("LichtZu", LichtZustand);
 }
 
 void SonneNaAus(void)
@@ -331,6 +339,8 @@ void SonneNaAus(void)
 	case 2:
 		Durchlauf = 1;
 		SonneIndex = 0;
+		LichtZustand = 5;
+		preferences.putUInt("LichtZu", LichtZustand);
 		break;
 	}
 }

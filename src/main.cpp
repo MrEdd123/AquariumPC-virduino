@@ -123,10 +123,8 @@ uint8_t Powerledwert_virtuell = 0;
 uint8_t Powerledmax = 250;
 uint8_t Powerledmin = 0;
 
-uint8_t LEDRot;
-uint8_t LEDGruen;
-uint8_t LEDBlau;
-uint8_t LEDWeiss;
+uint8_t LichtZustand;
+
 float V3SonneAuf;
 float V4MittagAN;
 float V5MittagAUS;
@@ -424,6 +422,7 @@ void setup()
 	SollTemp = preferences.getFloat("SollT");
 	LuefTemp = preferences.getUInt("LueT", 0);
 	Hysterese = preferences.getFloat("Hyst", 0);
+	LichtZustand = preferences.getUInt("LichtZu", 0);
 	
 	
 	CO2Timer();
@@ -550,6 +549,29 @@ void setup()
   Serial.println("Ready");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+
+  /***************** Licht Zustand nach Neustart *********/
+
+  switch (LichtZustand)
+  {
+
+	case 1:
+		SonneAuf();
+		break;
+	case 2:
+		SonneUn();
+		break;
+	case 3:
+		SonneMitAn();
+		break;
+	case 4:
+		SonneMitAus();
+		break;
+	case 5:
+		SonneNaAus();
+		break;
+
+  }
 
 }
 
