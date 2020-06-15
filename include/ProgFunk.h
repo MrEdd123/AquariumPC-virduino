@@ -207,12 +207,11 @@ void SonneAuf(void)
 		break;
 
 	case 9:
-		Serial.println("Case9 Ende");
+		//Serial.println("Case9 Ende");
 		Durchlauf = 1;
 		SonneIndex = 0;
 		AblaufX = 1;
 		
-
 		break;
 	}
 }

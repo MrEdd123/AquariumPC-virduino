@@ -2,7 +2,6 @@
 #include <Arduino.h>
 #include <TFT_eSPI.h>
 #include "bitmaps.h"
-//#include <ESPmDNS.h>
 #include <Time.h>
 #include <SPI.h>
 #include <NeoPixelAnimator.h>
@@ -16,7 +15,7 @@
 #include <ArduinoOTA.h>
 
 
-boolean debug = true;              			// set this variable to false on the finale code to decrease the request time.
+boolean debug = false;              			// set this variable to false on the finale code to decrease the request time.
 
 
 /********** SETTINGS ******************************/
@@ -124,6 +123,7 @@ uint8_t Powerledmax = 250;
 uint8_t Powerledmin = 0;
 
 uint8_t LichtZustand;
+uint8_t LichtZustandStatus = 1;
 
 float V3SonneAuf;
 float V4MittagAN;
@@ -548,16 +548,63 @@ void setup()
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  
+  if (LichtZustand == 1)
+  {
+	  ledcWrite(PowerledKanal, Powerledmax);
+	  for (int i = 0; i < NUMLEDS; i++)
+			{
+				strip1.SetPixelColor(i, RgbwColor(230, 0, 240, 100));
+			}
+  }
 
-  
+   if (LichtZustand == 2)
+  {
+	  ledcWrite(PowerledKanal, 0);
+	  for (int i = 0; i < NUMLEDS; i++)
+			{
+				strip1.SetPixelColor(i, RgbwColor(0, 0, 4, 0));
+			}
+  }
+
+	if (LichtZustand == 3)
+  {
+	  ledcWrite(PowerledKanal, Powerledmax);
+	  for (int i = 0; i < NUMLEDS; i++)
+			{
+				strip1.SetPixelColor(i, RgbwColor(230, 0, 240, 100));
+			}
+
+		strip1.SetBrightness(mittagHell);
+		strip1.Show();
+		ledcWrite(PowerledKanal, Powerledmin);		
+  }
+
+  	if (LichtZustand == 4)
+  {
+	  ledcWrite(PowerledKanal, Powerledmax);
+	  for (int i = 0; i < NUMLEDS; i++)
+			{
+				strip1.SetPixelColor(i, RgbwColor(230, 0, 240, 100));
+			}
+		strip1.SetBrightness(maxHell);
+		strip1.Show();
+		ledcWrite(PowerledKanal, Powerledmax);		
+  }
+
+
+   if (LichtZustand == 5)
+  {
+	  ledcWrite(PowerledKanal, 0);
+	  for (int i = 0; i < NUMLEDS; i++)
+			{
+				strip1.SetPixelColor(i, RgbwColor(0, 0, 0, 0));
+			}
+  }
 
 }
 
 void loop() 
-{
-
-	if (debug) Serial.println(LichtZustand);
+{	
 	/************** WIFI Satus ueberpruefen *************/
 
 	int wifi_retry = 0;
@@ -576,6 +623,7 @@ void loop()
 		WiFi.begin(ssid, password);
       	delay(100);
   		}
+		  
   	if(wifi_retry >= 10) 
   		{
       	if (debug) Serial.println("\nReboot");
@@ -586,6 +634,7 @@ void loop()
 	/************** OTA ********************************/
 
 	ArduinoOTA.handle();
+
 	/*********** Timer updaten *************************/
 
 	tickerPro.update();
@@ -603,10 +652,10 @@ void loop()
 
 	/************* Uhr im Display aktualisieren ********/
 
-	if (second(nowLocal()) == 00)
-	{
+	//if (second(nowLocal()) == 00)
+	//{
 		digitalClockDisplay();
-	}
+	//}
 	
 	
 	/******** Schalter für Beleuchtung ********/
@@ -631,27 +680,6 @@ void loop()
 		break;
 	}
 
-	/***************** Licht Zustand nach Neustart *********/
-	switch (LichtZustand)
-  	{
-
-	case 1:
-		SonneAuf();
-		break;
-	case 2:
-		SonneUn();
-		break;
-	case 3:
-		SonneMitAn();
-		break;
-	case 4:
-		SonneMitAus();
-		break;
-	case 5:
-		SonneNaAus();
-		break;
-
-  	}
 
 	switch (FutterIndex)
 	{
