@@ -271,6 +271,7 @@ time_t getNtpTime()
 Ticker tickerPro(ProgrammTimer, 1000);
 Ticker tickerHei(Heizung, 5000);
 Ticker tickerVirdu(virduino, 500);
+Ticker tickerClock(digitalClockDisplay, 60000);
 
 /**************************************************/
 
@@ -462,6 +463,7 @@ void setup()
 	tickerPro.start();
 	tickerHei.start();
 	tickerVirdu.start();
+	tickerClock.start();
 
 	/*********** Neopixel Starten ***************/
 
@@ -548,7 +550,9 @@ void setup()
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  if (LichtZustand == 1)
+/****************** Lichtzustand bei Neustart *****************/
+
+  	if (LichtZustand == 1)
   {
 	  ledcWrite(PowerledKanal, Powerledmax);
 	  for (int i = 0; i < NUMLEDS; i++)
@@ -559,6 +563,7 @@ void setup()
 
    if (LichtZustand == 2)
   {
+	  ledcWrite(BacklightKanalTFT, BacklightwertNacht);
 	  ledcWrite(PowerledKanal, 0);
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
@@ -640,6 +645,7 @@ void loop()
 	tickerPro.update();
 	tickerHei.update();
 	tickerVirdu.update();
+	tickerClock.update();
 
 	/*********** virtuino starten *********************/
 
@@ -652,10 +658,10 @@ void loop()
 
 	/************* Uhr im Display aktualisieren ********/
 
-	//if (second(nowLocal()) == 00)
-	//{
+	/*if (second(nowLocal()) == 00)
+	{
 		digitalClockDisplay();
-	//}
+	}*/
 	
 	
 	/******** Schalter für Beleuchtung ********/
