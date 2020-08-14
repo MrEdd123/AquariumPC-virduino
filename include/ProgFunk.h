@@ -106,7 +106,6 @@ void crossFade(int color[4])
 	int stepR = calculateStep(prevR, (color[0] * 255) / 100);
 	int stepG = calculateStep(prevG, (color[1] * 255) / 100);
 	int stepB = calculateStep(prevB, (color[2] * 255) / 100);
-	int stepW = calculateStep(prevW, (color[3] * 255) / 100);
 
 	
 	if (millis() - CrossLEDMillis > DurchWait)
@@ -127,8 +126,6 @@ void crossFade(int color[4])
 			redVal = calculateVal(stepR, redVal, LEDStep);
 			grnVal = calculateVal(stepG, grnVal, LEDStep);
 			bluVal = calculateVal(stepB, bluVal, LEDStep);
-			whiteVal = calculateVal(stepW, whiteVal, LEDStep);
-
 			/*for (int i = 0; i < NUMLEDS; i++)
 			{
 				strip1.SetPixelColor(i, RgbwColor(redVal, grnVal, bluVal, whiteVal));
@@ -136,14 +133,13 @@ void crossFade(int color[4])
 
 			for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbwColor(redVal, 0, bluVal, whiteVal));
+				strip1.SetPixelColor(i, RgbColor(redVal, 0, bluVal));
 			}
 
 
 			prevR = redVal; // Update current values for next loop
 			prevG = grnVal;
 			prevB = bluVal;
-			prevW = whiteVal;
 
 			strip1.Show();
 
@@ -261,7 +257,7 @@ void SonneUn(void)
 		for (int i = 0; i < 10; i++)
 		{
 
-			strip1.SetPixelColor(i, RgbwColor(0, 0, 0, 0));
+			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
 			delay(10);
 			strip1.Show();
 		}
@@ -269,7 +265,7 @@ void SonneUn(void)
 		for (int i = 166; i > 100; i--)
 		{
 
-			strip1.SetPixelColor(i, RgbwColor(0, 0, 0, 0));
+			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
 			delay(10);
 			strip1.Show();
 		}
@@ -277,7 +273,7 @@ void SonneUn(void)
 		for (int i = 10; i < 100; i++)
 		{
 
-			strip1.SetPixelColor(i, RgbwColor(0, 0, 200, 0));
+			strip1.SetPixelColor(i, RgbColor(0, 0, 200));
 			delay(10);
 			strip1.Show();
 		}
