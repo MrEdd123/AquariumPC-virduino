@@ -22,7 +22,7 @@ boolean debug = false;              			// set this variable to false on the fina
 const char* ssid = "Andre+Janina";            	// WIFI network SSID
 const char* password = "sommer12";            	// WIFI network PASSWORD
 WiFiServer server(8000);                      	// Server port
-IPAddress ip(192, 168, 178, 38);         		// where 150 is the desired IP Address. The first three numbers must be the same as the router IP
+IPAddress ip(192, 168, 178, 23);         		// where 150 is the desired IP Address. The first three numbers must be the same as the router IP
 IPAddress gateway(192, 168, 178, 1);         	// set gateway to match your network. Replace with your router IP
 
 
@@ -39,10 +39,10 @@ Preferences preferences;
 
 /***********  NeoPixel Einstellungen   ***********/
 
-#define PIN_STRIPE1			13
+#define PIN_STRIPE			13
 #define NUMLEDS				30
 
-NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp32I2s1800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE1);
+NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp32Rmt7Ws2811Method> strip1(NUMLEDS, PIN_STRIPE);
 
 /************ TFT Einstellungen ***************/
 
@@ -94,9 +94,9 @@ uint8_t CO2AusMin = 00;
 
 uint16_t Zeit;
 
-uint8_t AblaufX = 0;
-uint8_t AblaufY = 159;
-uint8_t AblaufI = 0;
+//uint8_t AblaufX = 0;
+//uint8_t AblaufY = 159;
+//uint8_t AblaufI = 0;
 
 uint8_t BacklightPin = 22;
 uint16_t BacklightFrequenz = 500;
@@ -145,23 +145,23 @@ unsigned long FutterMillis = 0;
 
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
-//				{ R, G , B }
+//				{ R, G, B }
 int SonAu1[3] = { 30,0,0 };
 int SonAu2[3] = { 150,5,0 };
-int SonAu3[3] = { 157,13,0 };
-int SonAu4[3] = { 163,21,1 };
-int SonAu5[3] = { 200,30,60 };
-int SonAu6[3] = { 240,60,100 };
-int SonAu7[3] = { 230,100,240 };
+int SonAu3[3] = { 157,7,10 };
+int SonAu4[3] = { 163,12,30 };
+int SonAu5[3] = { 200,20,80 };
+int SonAu6[3] = { 230,50,100 };
+int SonAu7[3] = { 240,80,220 };
 
 // Sonnenuntergang Color Array
 //				{ R, G, B }
-int SonUn1[3] = { 250,80,100 };
-int SonUn2[3] = { 240,50,60 };
-int SonUn3[3] = { 200,30,40 };
-int SonUn4[3] = { 150,20,0 };
-int SonUn5[3] = { 50, 14,1 };
-int SonUn6[3] = { 0, 0, 6 };
+int SonUn1[3] = { 250,60,100 };
+int SonUn2[3] = { 240,30,60 };
+int SonUn3[3] = { 200,20,40 };
+int SonUn4[3] = { 150,10,20 };
+int SonUn5[3] = { 50, 5,8 };
+int SonUn6[3] = { 5, 2, 5 };
 int SonUn7[3] = { 0, 0, 4 };
 
 //Nachtlicht AUS Color Array
@@ -409,6 +409,7 @@ void setup()
 	maxHell = preferences.getUInt("MaxH", 0);
 	mittagHell = preferences.getUInt("MitH", 0);
 	Powerledmax = preferences.getUInt("PowH", 0);
+	Powerledwert = preferences.getUInt("PowWe", 0);
 	BacklightwertTag = preferences.getUInt("BackLT", 0);
 	BacklightwertNacht = preferences.getUInt("BackLN", 100);
 	TFTRotation = preferences.getInt("TFTR", 0);
@@ -419,6 +420,7 @@ void setup()
 	LuefTemp = preferences.getUInt("LueT", 0);
 	Hysterese = preferences.getFloat("Hyst", 0);
 	LichtZustand = preferences.getUInt("LichtZu", 0);
+
 	
 	
 	CO2Timer();
@@ -551,26 +553,29 @@ void setup()
 
   	if (LichtZustand == 1) 	//Sonnenaufgang
   {
-	  ledcWrite(PowerledKanal, Powerledmax);
+	  ledcWrite(PowerledKanal, Powerledwert);
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(230, 100, 240));
+				strip1.SetPixelColor(i, RgbColor(240, 80, 220));
 			}
+		strip1.SetBrightness(maxHell);
+		strip1.Show();	
   }
 
    if (LichtZustand == 2)	//Sonnenauntergang
   {
 	  ledcWrite(BacklightKanalTFT, BacklightwertNacht);
-	  ledcWrite(PowerledKanal, 0);
+	  ledcWrite(PowerledKanal, Powerledwert);
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
 				strip1.SetPixelColor(i, RgbColor(0, 0, 4));
 			}
+		strip1.SetBrightness(maxHell);
+		strip1.Show();
   }
 
 	if (LichtZustand == 3)	//Sonnen Mittag AN
   {
-	  ledcWrite(PowerledKanal, Powerledmax);
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
 				strip1.SetPixelColor(i, RgbColor(100, 50, 100));
@@ -578,7 +583,7 @@ void setup()
 
 		strip1.SetBrightness(mittagHell);
 		strip1.Show();
-		ledcWrite(PowerledKanal, Powerledmin);		
+		ledcWrite(PowerledKanal, 0);		
   }
 
   	if (LichtZustand == 4)	//Sonnen Mittag AUS
@@ -651,8 +656,8 @@ void loop()
 
 	/************** Stripe helligkeit ändern ************/
 
-	strip1.SetBrightness(aktHell);
-	strip1.Show();
+	//strip1.SetBrightness(aktHell);
+	//strip1.Show();
 
 	/************* Uhr im Display aktualisieren ********/
 

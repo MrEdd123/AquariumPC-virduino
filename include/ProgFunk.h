@@ -7,6 +7,18 @@ void PowerLEDplus()
 {
 	uint16_t PowerLEDFade;
 	PowerLEDFade = DurchWait * 70;
+	/*
+	Serial.print("PowerLEDFade : ");
+	Serial.println(PowerLEDFade);
+	Serial.print("millis : ");
+	Serial.println(millis());
+	Serial.print("PowerLEDMillis : ");
+	Serial.println(PowerLEDMillis);
+	Serial.print("millis summe : ");
+	Serial.println(millis() - PowerLEDMillis);
+	Serial.print("PowerLEDWert : ");
+	Serial.println(Powerledwert);
+	*/
 
 	if (millis() - PowerLEDMillis > PowerLEDFade)
 	{
@@ -18,16 +30,10 @@ void PowerLEDplus()
 		}
 		if (Powerledwert == Powerledmax)
 		{
+			ledcWrite(PowerledKanal, Powerledwert);
+			preferences.putUInt ("PowWe", Powerledwert);
 			Durchlauf = 9;
 		}
-
-		/*Serial.print("PowerLED++ ");
-			Serial.print(Powerledwert);
-			Serial.print("  ");
-			Serial.println(Powerledmax);	
-			Serial.print(DurchWait);
-			Serial.print("  ");
-			Serial.println(PowerLEDFade);*/
 	}
 }
 
@@ -35,6 +41,20 @@ void PowerLEDminus()
 {
 	uint16_t PowerLEDFade;
 	PowerLEDFade = DurchWait * 70;
+
+	/*
+	Serial.print("PowerLEDFade : ");
+	Serial.println(PowerLEDFade);
+	Serial.print("millis : ");
+	Serial.println(millis());
+	Serial.print("PowerLEDMillis : ");
+	Serial.println(PowerLEDMillis);
+	Serial.print("millis summe : ");
+	Serial.println(millis() - PowerLEDMillis);
+	Serial.print("PowerLEDWert : ");
+	Serial.println(Powerledwert);
+	*/
+
 	if (millis() - PowerLEDMillis > PowerLEDFade)
 	{
 		PowerLEDMillis = millis();
@@ -45,10 +65,10 @@ void PowerLEDminus()
 		}
 		if (Powerledwert == 0)
 		{
+			ledcWrite(PowerledKanal, Powerledwert);
+			preferences.putUInt ("PowWe", Powerledwert);
 			Durchlauf = 2;
-		}
-		/*Serial.print("PowerLED-- ");
-		Serial.println(Powerledwert);	*/
+		}	
 	}
 }
 
@@ -100,7 +120,7 @@ int calculateVal(int step, int val, int i)
 *  the color values to the correct pins.
 */
 
-void crossFade(int color[4])
+void crossFade(int color[3])
 {
 
 	int stepR = calculateStep(prevR, (color[0] * 255) / 100);
@@ -126,14 +146,10 @@ void crossFade(int color[4])
 			redVal = calculateVal(stepR, redVal, LEDStep);
 			grnVal = calculateVal(stepG, grnVal, LEDStep);
 			bluVal = calculateVal(stepB, bluVal, LEDStep);
-			/*for (int i = 0; i < NUMLEDS; i++)
-			{
-				strip1.SetPixelColor(i, RgbwColor(redVal, grnVal, bluVal, whiteVal));
-			}*/
-
+			
 			for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(redVal, 0, bluVal));
+				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
 
 
@@ -154,19 +170,10 @@ void crossFade(int color[4])
 
 void SonneAuf(void)
 {
-
 	LichtZustand = 1;
 	preferences.putUInt("LichtZu", LichtZustand);
 	ledcWrite(BacklightKanalTFT, BacklightwertTag);
-	AblaufI++;
-
-	if (AblaufI >= 100)
-	{
-		AblaufX++;
-		AblaufI = 0;
-		tft.drawFastVLine(AblaufX, 116, 11, TFT_WHITE);
-	}
-
+	
 	switch (Durchlauf)
 	{
 	case 1:
@@ -206,7 +213,7 @@ void SonneAuf(void)
 		//Serial.println("Case9 Ende");
 		Durchlauf = 1;
 		SonneIndex = 0;
-		AblaufX = 1;
+		//AblaufX = 1;
 		
 		break;
 	}
@@ -217,14 +224,6 @@ void SonneUn(void)
 	LichtZustand = 2;
 	preferences.putUInt("LichtZu", LichtZustand);
 	ledcWrite(BacklightKanalTFT, BacklightwertNacht);
-	AblaufI++;
-
-	if (AblaufI >= 102)
-	{
-		AblaufY--;
-		AblaufI = 0;
-		tft.drawFastVLine(AblaufY, 116, 11, TFT_BLACK);
-	}
 
 	switch (Durchlauf)
 	{
@@ -258,23 +257,23 @@ void SonneUn(void)
 		{
 
 			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
-			delay(10);
+			//delay(10);
 			strip1.Show();
 		}
 
-		for (int i = 166; i > 100; i--)
+		for (int i = 20; i > 30; i--)
 		{
 
 			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
-			delay(10);
+			//delay(10);
 			strip1.Show();
 		}
 
-		for (int i = 10; i < 100; i++)
+		for (int i = 11; i < 29; i++)
 		{
 
 			strip1.SetPixelColor(i, RgbColor(0, 0, 200));
-			delay(10);
+			//delay(10);
 			strip1.Show();
 		}
 		Durchlauf++;
@@ -283,7 +282,7 @@ void SonneUn(void)
 	case 10:
 		Durchlauf = 1;
 		SonneIndex = 0;
-		AblaufY = 159;
+		//AblaufY = 159;
 		
 		break;
 	}
@@ -330,6 +329,7 @@ void SonneNaAus(void)
 {
 	LichtZustand = 5;
 	preferences.putUInt("LichtZu", LichtZustand);
+
 	switch (Durchlauf)
 	{
 	case 1:
