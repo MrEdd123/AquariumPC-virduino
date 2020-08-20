@@ -4,12 +4,12 @@
 #include "bitmaps.h"
 #include <Time.h>
 #include <SPI.h>
-#include <NeoPixelAnimator.h>
+//#include <NeoPixelAnimator.h>
 #include <NeoPixelBrightnessBus.h>
 #include <OneWire.h>
 #include <DS18B20.h>
 #include <Preferences.h>
-#include <Ticker.h>
+#include <SimpleTimer.h>
 #include <WiFi.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
@@ -17,8 +17,10 @@
 
 boolean debug = false;              			// set this variable to false on the finale code to decrease the request time.
 
+SimpleTimer timer;
 
-/********** SETTINGS ******************************/
+/******************* SETTINGS ********************/
+
 const char* ssid = "Andre+Janina";            	// WIFI network SSID
 const char* password = "sommer12";            	// WIFI network PASSWORD
 WiFiServer server(8000);                      	// Server port
@@ -42,15 +44,15 @@ Preferences preferences;
 #define PIN_STRIPE			13
 #define NUMLEDS				30
 
-NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp32Rmt7Ws2811Method> strip1(NUMLEDS, PIN_STRIPE);
+NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp32I2s0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE);
 
-/************ TFT Einstellungen ***************/
+/************ TFT Einstellungen ******************/
 
 TFT_eSPI tft = TFT_eSPI();
 #define MAX_GEN_COUNT 500
 #define USE_DMA_TO_TFT
 
-/************* One Wire (Tempfühler) **********/
+/************* One Wire (Tempfühler) **************/
 
 #define ONE_WIRE_BUS			26				// Anschlusspin für OneWire			
 OneWire oneWire(ONE_WIRE_BUS);
@@ -93,10 +95,6 @@ uint8_t CO2AusStd = 18;
 uint8_t CO2AusMin = 00;
 
 uint16_t Zeit;
-
-//uint8_t AblaufX = 0;
-//uint8_t AblaufY = 159;
-//uint8_t AblaufI = 0;
 
 uint8_t BacklightPin = 22;
 uint16_t BacklightFrequenz = 500;
@@ -152,7 +150,7 @@ int SonAu3[3] = { 157,7,10 };
 int SonAu4[3] = { 163,12,30 };
 int SonAu5[3] = { 200,20,80 };
 int SonAu6[3] = { 230,50,100 };
-int SonAu7[3] = { 240,80,220 };
+int SonAu7[3] = { 240,90,210 };
 
 // Sonnenuntergang Color Array
 //				{ R, G, B }
@@ -262,13 +260,6 @@ time_t getNtpTime()
 
 	return 0; // return 0 if unable to get the time
 }
-
-/************ Timer setzen fuer Funktion *********/
-
-Ticker tickerPro(ProgrammTimer, 1000);
-Ticker tickerHei(Heizung, 5000);
-Ticker tickerVirdu(virduino, 500);
-Ticker tickerClock(digitalClockDisplay, 60000);
 
 /**************************************************/
 
@@ -409,7 +400,7 @@ void setup()
 	maxHell = preferences.getUInt("MaxH", 0);
 	mittagHell = preferences.getUInt("MitH", 0);
 	Powerledmax = preferences.getUInt("PowH", 0);
-	Powerledwert = preferences.getUInt("PowWe", 0);
+	//Powerledwert = preferences.getUInt("PowWe", 0);
 	BacklightwertTag = preferences.getUInt("BackLT", 0);
 	BacklightwertNacht = preferences.getUInt("BackLN", 100);
 	TFTRotation = preferences.getInt("TFTR", 0);
@@ -459,17 +450,17 @@ void setup()
 
 	/**** Alarm Timer starten für Funktionen ******/ 
 	
-	tickerPro.start();
-	tickerHei.start();
-	tickerVirdu.start();
-	tickerClock.start();
+	timer.setInterval(1000, ProgrammTimer);
+	timer.setInterval(5000, Heizung);
+	timer.setInterval(500, virduino);
+	timer.setInterval(60000, digitalClockDisplay);
 
 	/*********** Neopixel Starten ***************/
 
 	strip1.Begin();
-	strip1.ClearTo(0);
+	//strip1.GlearTo(0);
 	strip1.SetPixelColor(10, RgbColor(0, 0, 200));
-	strip1.SetBrightness(250);
+	//strip1.SetBrightness(250);
 	aktHell = maxHell;
 	strip1.Show();
 
@@ -553,10 +544,11 @@ void setup()
 
   	if (LichtZustand == 1) 	//Sonnenaufgang
   {
+	  Powerledwert = Powerledmax;
 	  ledcWrite(PowerledKanal, Powerledwert);
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(240, 80, 220));
+				strip1.SetPixelColor(i, RgbColor(240, 90, 210));
 			}
 		strip1.SetBrightness(maxHell);
 		strip1.Show();	
@@ -564,6 +556,7 @@ void setup()
 
    if (LichtZustand == 2)	//Sonnenauntergang
   {
+	  Powerledwert = 0;
 	  ledcWrite(BacklightKanalTFT, BacklightwertNacht);
 	  ledcWrite(PowerledKanal, Powerledwert);
 	  for (int i = 0; i < NUMLEDS; i++)
@@ -606,6 +599,7 @@ void setup()
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
 				strip1.SetPixelColor(i, RgbColor(0, 0, 0));
+				strip1.Show();
 			}
   }
 
@@ -645,10 +639,7 @@ void loop()
 
 	/*********** Timer updaten *************************/
 
-	tickerPro.update();
-	tickerHei.update();
-	tickerVirdu.update();
-	tickerClock.update();
+	timer.run();
 
 	/*********** virtuino starten *********************/
 

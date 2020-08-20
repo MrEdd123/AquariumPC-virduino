@@ -31,7 +31,7 @@ void PowerLEDplus()
 		if (Powerledwert == Powerledmax)
 		{
 			ledcWrite(PowerledKanal, Powerledwert);
-			preferences.putUInt ("PowWe", Powerledwert);
+			//preferences.putUInt ("PowWe", Powerledwert);
 			Durchlauf = 9;
 		}
 	}
@@ -66,7 +66,7 @@ void PowerLEDminus()
 		if (Powerledwert == 0)
 		{
 			ledcWrite(PowerledKanal, Powerledwert);
-			preferences.putUInt ("PowWe", Powerledwert);
+			//preferences.putUInt ("PowWe", Powerledwert);
 			Durchlauf = 2;
 		}	
 	}
@@ -157,6 +157,7 @@ void crossFade(int color[3])
 			prevG = grnVal;
 			prevB = bluVal;
 
+			delay(1);
 			strip1.Show();
 
 		}
@@ -257,7 +258,7 @@ void SonneUn(void)
 		{
 
 			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
-			//delay(10);
+			delay(1);
 			strip1.Show();
 		}
 
@@ -265,7 +266,7 @@ void SonneUn(void)
 		{
 
 			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
-			//delay(10);
+			delay(1);
 			strip1.Show();
 		}
 
@@ -273,7 +274,7 @@ void SonneUn(void)
 		{
 
 			strip1.SetPixelColor(i, RgbColor(0, 0, 200));
-			//delay(10);
+			delay(1);
 			strip1.Show();
 		}
 		Durchlauf++;
@@ -293,6 +294,7 @@ void SonneMitAn(void)
 	LichtZustand = 3;
 	preferences.putUInt("LichtZu", LichtZustand);
 	strip1.SetBrightness(mittagHell);
+	delay(1);
 	strip1.Show();
 	aktHell = mittagHell;
 	//PowerLEDminus();
@@ -312,6 +314,7 @@ void SonneMitAus(void)
 	LichtZustand = 4;
 	preferences.putUInt("LichtZu", LichtZustand);
 	strip1.SetBrightness(maxHell);
+	delay(1);
 	strip1.Show();
 	aktHell = maxHell;
 	//PowerLEDplus();
