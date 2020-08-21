@@ -7,12 +7,13 @@
 //#include <NeoPixelAnimator.h>
 #include <NeoPixelBrightnessBus.h>
 #include <OneWire.h>
-#include <DS18B20.h>
+//#include <DS18B20.h>
 #include <Preferences.h>
 #include <SimpleTimer.h>
 #include <WiFi.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
+#include <DallasTemperature.h>
 
 
 boolean debug = false;              			// set this variable to false on the finale code to decrease the request time.
@@ -56,7 +57,7 @@ TFT_eSPI tft = TFT_eSPI();
 
 #define ONE_WIRE_BUS			26				// Anschlusspin für OneWire			
 OneWire oneWire(ONE_WIRE_BUS);
-DS18B20 Tempfueh(&oneWire);
+DallasTemperature Tempfueh(&oneWire);
 
 /******* Variablen *******************************/
 
@@ -144,20 +145,20 @@ unsigned long FutterMillis = 0;
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
 //				{ R, G, B }
-int SonAu1[3] = { 30,0,0 };
-int SonAu2[3] = { 150,5,0 };
-int SonAu3[3] = { 157,7,10 };
-int SonAu4[3] = { 163,12,30 };
-int SonAu5[3] = { 200,20,80 };
-int SonAu6[3] = { 230,50,100 };
-int SonAu7[3] = { 240,90,210 };
+int SonAu1[3] = { 50,5,0 };
+int SonAu2[3] = { 150,20,0 };
+int SonAu3[3] = { 157,40,10 };
+int SonAu4[3] = { 163,60,30 };
+int SonAu5[3] = { 200,70,80 };
+int SonAu6[3] = { 230,80,100 };
+int SonAu7[3] = { 240,90,200 };
 
 // Sonnenuntergang Color Array
 //				{ R, G, B }
 int SonUn1[3] = { 250,60,100 };
-int SonUn2[3] = { 240,30,60 };
-int SonUn3[3] = { 200,20,40 };
-int SonUn4[3] = { 150,10,20 };
+int SonUn2[3] = { 240,80,60 };
+int SonUn3[3] = { 200,60,30 };
+int SonUn4[3] = { 150,30,15 };
 int SonUn5[3] = { 50, 5,8 };
 int SonUn6[3] = { 5, 2, 5 };
 int SonUn7[3] = { 0, 0, 4 };
@@ -548,7 +549,7 @@ void setup()
 	  ledcWrite(PowerledKanal, Powerledwert);
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(240, 90, 210));
+				strip1.SetPixelColor(i, RgbColor(240, 90, 200));
 			}
 		strip1.SetBrightness(maxHell);
 		strip1.Show();	

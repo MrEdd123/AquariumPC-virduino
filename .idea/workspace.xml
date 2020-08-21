@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated>
-      <config projectName="AquariumPC-virduino" targetName="Z_DUMMY_TARGET" />
-      <config projectName="AquariumPC-virduino" targetName="Production" />
-      <config projectName="AquariumPC-virduino" targetName="Debug" />
-    </generated>
+    <generated />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -22,7 +18,6 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="ProjectId" id="1cXfnB20Hvy89KMadwOu6zWV8Jy" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -35,28 +30,6 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-  </component>
-  <component name="RunManager" selected="CMake Application.Z_DUMMY_TARGET">
-    <configuration name="Debug" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="AquariumPC-virduino" TARGET_NAME="Debug" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Production" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="AquariumPC-virduino" TARGET_NAME="Production" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Z_DUMMY_TARGET" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="AquariumPC-virduino" TARGET_NAME="Z_DUMMY_TARGET" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="AquariumPC-virduino" RUN_TARGET_NAME="Z_DUMMY_TARGET">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="CMake Application.Debug" />
-      <item itemvalue="CMake Application.Production" />
-      <item itemvalue="CMake Application.Z_DUMMY_TARGET" />
-    </list>
   </component>
   <component name="WindowStateProjectService">
     <state x="804" y="331" key="FileChooserDialogImpl" timestamp="1590680836944">

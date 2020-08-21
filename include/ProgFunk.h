@@ -349,8 +349,10 @@ void SonneNaAus(void)
 
 void Heizung(void)
 {
+	Tempfueh.setWaitForConversion(false); 
 	Tempfueh.requestTemperatures();
-	IstTemp = Tempfueh.getTempC();
+	Tempfueh.setWaitForConversion(true); 
+	IstTemp = Tempfueh.getTempCByIndex(0);
 	tft.setTextColor(TFT_WHITE, TFT_BLACK);
 	tft.drawFloat(SollTemp, 1, 27, 47, 2); //SollWert in TFT einblenden
 	V[0] = IstTemp;
