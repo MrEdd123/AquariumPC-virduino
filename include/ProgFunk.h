@@ -270,10 +270,10 @@ void SonneUn(void)
 			strip1.Show();
 		}
 
-		for (int i = 11; i < 29; i++)
+		for (int i = 11; i < 19; i++)
 		{
 
-			strip1.SetPixelColor(i, RgbColor(0, 0, 200));
+			strip1.SetPixelColor(i, RgbColor(0, 0, 10));
 			delay(1);
 			strip1.Show();
 		}
