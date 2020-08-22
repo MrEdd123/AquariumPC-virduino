@@ -142,27 +142,27 @@ unsigned long FutterMillis = 0;
 
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
-//				{ R, G, B }
-int SonAu1[3] = { 50,5,0 };
-int SonAu2[3] = { 150,20,0 };
-int SonAu3[3] = { 157,30,10 };
-int SonAu4[3] = { 163,40,30 };
-int SonAu5[3] = { 200,50,70 };
-int SonAu6[3] = { 230,60,80 };
-int SonAu7[3] = { 250,70,200 };
+//				{   R,  G,   B };
+int SonAu1[3] = {  50,  5,   0 };
+int SonAu2[3] = { 200, 20,   0 };
+int SonAu3[3] = { 210, 30,   5 };
+int SonAu4[3] = { 220, 40,  10 };
+int SonAu5[3] = { 230, 50,  30 };
+int SonAu6[3] = { 240, 60,  40 };
+int SonAu7[3] = { 250, 60, 180 };
 
 // Sonnenuntergang Color Array
-//				{ R, G, B }
-int SonUn1[3] = { 250,50,100 };
-int SonUn2[3] = { 240,40,60 };
-int SonUn3[3] = { 200,30,30 };
-int SonUn4[3] = { 150,20,15 };
-int SonUn5[3] = { 50, 5,8 };
-int SonUn6[3] = { 5, 2, 5 };
-int SonUn7[3] = { 0, 0, 4 };
+//				{   R,  G,   B };
+int SonUn1[3] = { 250, 60,  80};
+int SonUn2[3] = { 240, 60,  60 };
+int SonUn3[3] = { 230, 50,  30 };
+int SonUn4[3] = { 220, 40,  15 };
+int SonUn5[3] = { 200, 30,   8 };
+int SonUn6[3] = { 100, 20,   5 };
+int SonUn7[3] = {   0,  0,  15 };
 
 //Nachtlicht AUS Color Array
-//					 { R, G, B }
+//					 { R, G, B };
 int Nachtlicht1[3] = { 0, 0, 0 };
 
 // Set initial color

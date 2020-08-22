@@ -273,7 +273,7 @@ void SonneUn(void)
 		for (int i = 11; i < 19; i++)
 		{
 
-			strip1.SetPixelColor(i, RgbColor(0, 0, 10));
+			strip1.SetPixelColor(i, RgbColor(0, 0, 15));
 			delay(1);
 			strip1.Show();
 		}
