@@ -6,7 +6,7 @@
 void PowerLEDplus()
 {
 	uint16_t PowerLEDFade;
-	PowerLEDFade = DurchWait * 70;
+	PowerLEDFade = DurchWait * 50;
 	/*
 	Serial.print("PowerLEDFade : ");
 	Serial.println(PowerLEDFade);
@@ -40,7 +40,7 @@ void PowerLEDplus()
 void PowerLEDminus()
 {
 	uint16_t PowerLEDFade;
-	PowerLEDFade = DurchWait * 70;
+	PowerLEDFade = DurchWait * 50;
 
 	/*
 	Serial.print("PowerLEDFade : ");

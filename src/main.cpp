@@ -4,10 +4,8 @@
 #include "bitmaps.h"
 #include <Time.h>
 #include <SPI.h>
-//#include <NeoPixelAnimator.h>
 #include <NeoPixelBrightnessBus.h>
 #include <OneWire.h>
-//#include <DS18B20.h>
 #include <Preferences.h>
 #include <SimpleTimer.h>
 #include <WiFi.h>
@@ -147,18 +145,18 @@ unsigned long FutterMillis = 0;
 //				{ R, G, B }
 int SonAu1[3] = { 50,5,0 };
 int SonAu2[3] = { 150,20,0 };
-int SonAu3[3] = { 157,40,10 };
-int SonAu4[3] = { 163,60,30 };
-int SonAu5[3] = { 200,70,80 };
-int SonAu6[3] = { 230,80,100 };
-int SonAu7[3] = { 240,90,200 };
+int SonAu3[3] = { 157,30,10 };
+int SonAu4[3] = { 163,40,30 };
+int SonAu5[3] = { 200,50,70 };
+int SonAu6[3] = { 230,60,80 };
+int SonAu7[3] = { 250,70,200 };
 
 // Sonnenuntergang Color Array
 //				{ R, G, B }
-int SonUn1[3] = { 250,60,100 };
-int SonUn2[3] = { 240,80,60 };
-int SonUn3[3] = { 200,60,30 };
-int SonUn4[3] = { 150,30,15 };
+int SonUn1[3] = { 250,50,100 };
+int SonUn2[3] = { 240,40,60 };
+int SonUn3[3] = { 200,30,30 };
+int SonUn4[3] = { 150,20,15 };
 int SonUn5[3] = { 50, 5,8 };
 int SonUn6[3] = { 5, 2, 5 };
 int SonUn7[3] = { 0, 0, 4 };
@@ -461,7 +459,7 @@ void setup()
 	strip1.Begin();
 	//strip1.GlearTo(0);
 	strip1.SetPixelColor(10, RgbColor(0, 0, 200));
-	//strip1.SetBrightness(250);
+	strip1.SetBrightness(250);
 	aktHell = maxHell;
 	strip1.Show();
 
@@ -549,7 +547,7 @@ void setup()
 	  ledcWrite(PowerledKanal, Powerledwert);
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(240, 90, 200));
+				strip1.SetPixelColor(i, RgbColor(250, 70, 200));
 			}
 		strip1.SetBrightness(maxHell);
 		strip1.Show();	
