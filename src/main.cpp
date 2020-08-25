@@ -3,13 +3,13 @@
 #include <TFT_eSPI.h>
 #include "bitmaps.h"
 #include <Time.h>
-#include <SPI.h>
+//#include <SPI.h>
 #include <NeoPixelBrightnessBus.h>
 #include <OneWire.h>
 #include <Preferences.h>
 #include <SimpleTimer.h>
 #include <WiFi.h>
-#include <WiFiUdp.h>
+//#include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <DallasTemperature.h>
 
@@ -28,10 +28,13 @@ IPAddress gateway(192, 168, 178, 1);         	// set gateway to match your netwo
 
 
 /*********** VirtuinoCM  Library settings *********/
+
 #include "VirtuinoCM.h"
-VirtuinoCM virtuino;               
+VirtuinoCM virtuino; 
+           
 #define V_memory_count 32          				// the size of V memory. You can change it to a number <=255)
 float V[V_memory_count];           				// This array is synchronized with Virtuino V memory. You can change the type to int, long etc.
+
 
 /*********** EEPROM Speichern ********************/
 
@@ -289,6 +292,7 @@ String onRequested(char variableType, uint8_t variableIndex)
 
 
  //==============================================================
+ 
   void virtuinoRun()
   {
    WiFiClient client = server.available();
@@ -399,7 +403,6 @@ void setup()
 	maxHell = preferences.getUInt("MaxH", 0);
 	mittagHell = preferences.getUInt("MitH", 0);
 	Powerledmax = preferences.getUInt("PowH", 0);
-	//Powerledwert = preferences.getUInt("PowWe", 0);
 	BacklightwertTag = preferences.getUInt("BackLT", 0);
 	BacklightwertNacht = preferences.getUInt("BackLN", 100);
 	TFTRotation = preferences.getInt("TFTR", 0);
@@ -450,9 +453,9 @@ void setup()
 	/**** Alarm Timer starten für Funktionen ******/ 
 	
 	timer.setInterval(1000, ProgrammTimer);
-	timer.setInterval(5000, Heizung);
+	timer.setInterval(30000, Heizung);
 	timer.setInterval(500, virduino);
-	timer.setInterval(60000, digitalClockDisplay);
+	//timer.setInterval(60000, digitalClockDisplay);
 
 	/*********** Neopixel Starten ***************/
 
@@ -651,10 +654,10 @@ void loop()
 
 	/************* Uhr im Display aktualisieren ********/
 
-	/*if (second(nowLocal()) == 00)
+	if (second(nowLocal()) == 00)
 	{
 		digitalClockDisplay();
-	}*/
+	}
 	
 	
 	/******** Schalter für Beleuchtung ********/

@@ -5,11 +5,9 @@
 
 void PowerLEDplus()
 {
-	uint16_t PowerLEDFade;
-	PowerLEDFade = DurchWait * 50;
 	/*
 	Serial.print("PowerLEDFade : ");
-	Serial.println(PowerLEDFade);
+	Serial.println((DurchWait * 50));
 	Serial.print("millis : ");
 	Serial.println(millis());
 	Serial.print("PowerLEDMillis : ");
@@ -20,7 +18,7 @@ void PowerLEDplus()
 	Serial.println(Powerledwert);
 	*/
 
-	if (millis() - PowerLEDMillis > PowerLEDFade)
+	if (millis() - PowerLEDMillis > (DurchWait * 50))
 	{
 		PowerLEDMillis = millis();
 		if (Powerledwert < Powerledmax)
@@ -31,7 +29,6 @@ void PowerLEDplus()
 		if (Powerledwert == Powerledmax)
 		{
 			ledcWrite(PowerledKanal, Powerledwert);
-			//preferences.putUInt ("PowWe", Powerledwert);
 			Durchlauf = 9;
 		}
 	}
@@ -39,12 +36,9 @@ void PowerLEDplus()
 
 void PowerLEDminus()
 {
-	uint16_t PowerLEDFade;
-	PowerLEDFade = DurchWait * 50;
-
-	/*
+	
 	Serial.print("PowerLEDFade : ");
-	Serial.println(PowerLEDFade);
+	Serial.println((DurchWait * 50));
 	Serial.print("millis : ");
 	Serial.println(millis());
 	Serial.print("PowerLEDMillis : ");
@@ -53,9 +47,9 @@ void PowerLEDminus()
 	Serial.println(millis() - PowerLEDMillis);
 	Serial.print("PowerLEDWert : ");
 	Serial.println(Powerledwert);
-	*/
+	
 
-	if (millis() - PowerLEDMillis > PowerLEDFade)
+	if (millis() - PowerLEDMillis > (DurchWait * 50))
 	{
 		PowerLEDMillis = millis();
 		if (Powerledwert > 0)
@@ -66,7 +60,6 @@ void PowerLEDminus()
 		if (Powerledwert == 0)
 		{
 			ledcWrite(PowerledKanal, Powerledwert);
-			//preferences.putUInt ("PowWe", Powerledwert);
 			Durchlauf = 2;
 		}	
 	}
@@ -128,7 +121,7 @@ void crossFade(int color[3])
 	int stepB = calculateStep(prevB, (color[2] * 255) / 100);
 
 	
-	if (millis() - CrossLEDMillis > DurchWait)
+	if (millis() - CrossLEDMillis > (DurchWait*10))
 	{
 	
 		CrossLEDMillis = millis();
@@ -233,24 +226,31 @@ void SonneUn(void)
 		PowerLEDminus();
 		break;
 	case 2:
+	Serial.println("SonUn1");
 		crossFade(SonUn1);
 		break;
 	case 3:
+	Serial.println("SonUn2");
 		crossFade(SonUn2);
 		break;
 	case 4:
+	Serial.println("SonUn3");
 		crossFade(SonUn3);
 		break;
 	case 5:
+	Serial.println("SonUn4");
 		crossFade(SonUn4);
 		break;
 	case 6:
+	Serial.println("SonUn5");
 		crossFade(SonUn5);
 		break;
 	case 7:
+	Serial.println("SonUn6");
 		crossFade(SonUn6);
 		break;
 	case 8:
+	Serial.println("SonUn7");
 		crossFade(SonUn7);
 		break;
 	case 9:
