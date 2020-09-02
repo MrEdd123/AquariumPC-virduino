@@ -160,9 +160,9 @@ int SonUn1[3] = { 250, 60,  80};
 int SonUn2[3] = { 240, 60,  60 };
 int SonUn3[3] = { 230, 50,  30 };
 int SonUn4[3] = { 220, 40,  15 };
-int SonUn5[3] = { 200, 30,   8 };
-int SonUn6[3] = { 100, 20,   5 };
-int SonUn7[3] = {   0,  0,  15 };
+int SonUn5[3] = { 200, 25,   8 };
+int SonUn6[3] = { 100, 15,   8 };
+int SonUn7[3] = {   1,  0,   5 };
 
 //Nachtlicht AUS Color Array
 //					 { R, G, B };

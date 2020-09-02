@@ -36,7 +36,7 @@ void PowerLEDplus()
 
 void PowerLEDminus()
 {
-	
+	/*
 	Serial.print("PowerLEDFade : ");
 	Serial.println((DurchWait * 50));
 	Serial.print("millis : ");
@@ -47,7 +47,7 @@ void PowerLEDminus()
 	Serial.println(millis() - PowerLEDMillis);
 	Serial.print("PowerLEDWert : ");
 	Serial.println(Powerledwert);
-	
+	*/
 
 	if (millis() - PowerLEDMillis > (DurchWait * 50))
 	{
@@ -226,57 +226,54 @@ void SonneUn(void)
 		PowerLEDminus();
 		break;
 	case 2:
-	Serial.println("SonUn1");
+	//Serial.println("SonUn1");
 		crossFade(SonUn1);
 		break;
 	case 3:
-	Serial.println("SonUn2");
+	//Serial.println("SonUn2");
 		crossFade(SonUn2);
 		break;
 	case 4:
-	Serial.println("SonUn3");
+	//Serial.println("SonUn3");
 		crossFade(SonUn3);
 		break;
 	case 5:
-	Serial.println("SonUn4");
+	//Serial.println("SonUn4");
 		crossFade(SonUn4);
 		break;
 	case 6:
-	Serial.println("SonUn5");
+	//Serial.println("SonUn5");
 		crossFade(SonUn5);
 		break;
 	case 7:
-	Serial.println("SonUn6");
+	//Serial.println("SonUn6");
 		crossFade(SonUn6);
 		break;
 	case 8:
-	Serial.println("SonUn7");
+	//Serial.println("SonUn7");
 		crossFade(SonUn7);
 		break;
 	case 9:
+		
 		for (int i = 0; i < 10; i++)
 		{
-
-			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
-			delay(1);
+			strip1.SetPixelColor(i, RgbColor(0, 0, 0));	
 			strip1.Show();
+		}
+		
+		for (int i = 11; i < 19; i++)
+		{
+			strip1.SetPixelColor(i, RgbColor(0, 0, 10));
+			strip1.Show();		
 		}
 
 		for (int i = 20; i > 30; i--)
 		{
-
-			strip1.SetPixelColor(i, RgbColor(0, 0, 0));
-			delay(1);
+			strip1.SetPixelColor(i, RgbColor(0, 0, 0));	
 			strip1.Show();
 		}
-
-		for (int i = 11; i < 19; i++)
-		{
-
-			strip1.SetPixelColor(i, RgbColor(0, 0, 15));
-			delay(1);
-			strip1.Show();
-		}
+		
+		strip1.Show();
 		Durchlauf++;
 		break;
 
@@ -297,13 +294,7 @@ void SonneMitAn(void)
 	delay(1);
 	strip1.Show();
 	aktHell = mittagHell;
-	//PowerLEDminus();
-
-	/*for (int i = Powerledmin; Powerledwert > i; Powerledwert--)
-	{
-		ledcWrite(PowerledKanal, Powerledwert);
-	}*/
-	Powerledwert = Powerledmin;
+	Powerledwert = mittagHell;
 	ledcWrite(PowerledKanal, Powerledwert);
 	SonneIndex = 0;
 	
@@ -317,11 +308,6 @@ void SonneMitAus(void)
 	delay(1);
 	strip1.Show();
 	aktHell = maxHell;
-	//PowerLEDplus();
-	/*for (int i = Powerledmax; Powerledwert < i; Powerledwert++) 
-	{
-		ledcWrite(PowerledKanal, Powerledwert);
-	}*/
 	Powerledwert = Powerledmax;
 	ledcWrite(PowerledKanal, Powerledwert);
 	SonneIndex = 0;
