@@ -143,6 +143,14 @@ void crossFade(int color[3])
 			for (int i = 0; i < NUMLEDS; i++)
 			{
 				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
+				/*
+				Serial.print ("R:");
+				Serial.println (redVal);
+				Serial.print ("G:");
+				Serial.println (grnVal);
+				Serial.print ("B:");
+				Serial.println (bluVal);
+				*/
 			}
 
 
@@ -255,12 +263,12 @@ void SonneUn(void)
 		break;
 	case 9:
 		
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < NUMLEDS; i++)
 		{
-			strip1.SetPixelColor(i, RgbColor(0, 0, 0));	
+			strip1.SetPixelColor(i, RgbColor(0, 0, 10));	
 			strip1.Show();
 		}
-		
+		/*
 		for (int i = 11; i < 19; i++)
 		{
 			strip1.SetPixelColor(i, RgbColor(0, 0, 10));
@@ -272,6 +280,7 @@ void SonneUn(void)
 			strip1.SetPixelColor(i, RgbColor(0, 0, 0));	
 			strip1.Show();
 		}
+		*/
 		
 		strip1.Show();
 		Durchlauf++;

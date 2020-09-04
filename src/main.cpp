@@ -548,9 +548,14 @@ void setup()
   {
 	  Powerledwert = Powerledmax;
 	  ledcWrite(PowerledKanal, Powerledwert);
+
+	  redVal = 122;
+	  grnVal = 152;
+	  bluVal = 102;
+
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(250, 70, 200));
+				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
 		strip1.SetBrightness(maxHell);
 		strip1.Show();	
@@ -561,9 +566,15 @@ void setup()
 	  Powerledwert = 0;
 	  ledcWrite(BacklightKanalTFT, BacklightwertNacht);
 	  ledcWrite(PowerledKanal, Powerledwert);
+
+	  redVal = 18;
+	  grnVal = 0;
+	  bluVal = 12;
+
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(0, 0, 4));
+				//strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
+				strip1.SetPixelColor(i, RgbColor(0, 0, 10));
 			}
 		strip1.SetBrightness(maxHell);
 		strip1.Show();
