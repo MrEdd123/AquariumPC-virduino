@@ -59,7 +59,7 @@ TFT_eSPI tft = TFT_eSPI();
 #define ONE_WIRE_BUS			26				// Anschlusspin für OneWire			
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature Tempfueh(&oneWire);
-
+#define REQUIRESNEW true
 /******* Variablen *******************************/
 
 uint8_t TFTRotation = 3;
@@ -146,23 +146,23 @@ unsigned long FutterMillis = 0;
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
 //				{   R,  G,   B };
-int SonAu1[3] = {  50,  5,   0 };
-int SonAu2[3] = { 200, 20,   0 };
-int SonAu3[3] = { 210, 30,   5 };
-int SonAu4[3] = { 220, 40,  10 };
-int SonAu5[3] = { 230, 50,  30 };
-int SonAu6[3] = { 240, 60,  40 };
-int SonAu7[3] = { 250, 60, 180 };
+int SonAu1[3] = {  50, 	 5,   0 };
+int SonAu2[3] = { 200,	10,  10 };
+int SonAu3[3] = { 210, 	20,  30 };
+int SonAu4[3] = { 220, 	30,  50 };
+int SonAu5[3] = { 230, 	40,  70 };
+int SonAu6[3] = { 240, 	50,  90 };
+int SonAu7[3] = { 250, 	60, 250 };
 
 // Sonnenuntergang Color Array
 //				{   R,  G,   B };
 int SonUn1[3] = { 250, 60,  80};
-int SonUn2[3] = { 240, 60,  60 };
-int SonUn3[3] = { 230, 50,  30 };
-int SonUn4[3] = { 220, 40,  15 };
-int SonUn5[3] = { 200, 25,   8 };
-int SonUn6[3] = { 100, 15,   8 };
-int SonUn7[3] = {   1,  0,   5 };
+int SonUn2[3] = { 240, 50,  60 };
+int SonUn3[3] = { 230, 40,  30 };
+int SonUn4[3] = { 220, 20,  15 };
+int SonUn5[3] = { 200, 10,   8 };
+int SonUn6[3] = { 100,  5,   8 };
+int SonUn7[3] = {   0,  0,  10 };
 
 //Nachtlicht AUS Color Array
 //					 { R, G, B };
@@ -549,9 +549,9 @@ void setup()
 	  Powerledwert = Powerledmax;
 	  ledcWrite(PowerledKanal, Powerledwert);
 
-	  redVal = 122;
-	  grnVal = 152;
-	  bluVal = 102;
+	  redVal = 250;
+	  grnVal = 60;
+	  bluVal = 250;
 
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
@@ -567,9 +567,9 @@ void setup()
 	  ledcWrite(BacklightKanalTFT, BacklightwertNacht);
 	  ledcWrite(PowerledKanal, Powerledwert);
 
-	  redVal = 18;
+	  redVal = 1;
 	  grnVal = 0;
-	  bluVal = 12;
+	  bluVal = 10;
 
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
@@ -582,38 +582,56 @@ void setup()
 
 	if (LichtZustand == 3)	//Sonnen Mittag AN
   {
+	  Powerledwert = mittagHell;
+	  ledcWrite(PowerledKanal, Powerledwert);
+
+	  redVal = 250;
+	  grnVal = 60;
+	  bluVal = 180;
+
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(100, 50, 100));
+				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
 
 		strip1.SetBrightness(mittagHell);
-		strip1.Show();
-		ledcWrite(PowerledKanal, 0);		
+		strip1.Show();		
   }
 
   	if (LichtZustand == 4)	//Sonnen Mittag AUS
   {
-	  ledcWrite(PowerledKanal, Powerledmax);
-	  for (int i = 0; i < NUMLEDS; i++)
+		Powerledwert = Powerledmax;
+	  	ledcWrite(PowerledKanal, Powerledwert);
+
+	  	redVal = 250;
+	 	grnVal = 60;
+	  	bluVal = 180;
+
+	  	for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(230, 100, 240));
+				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
 		strip1.SetBrightness(maxHell);
-		strip1.Show();
-		ledcWrite(PowerledKanal, Powerledmax);		
+		strip1.Show();		
+	  		
   }
 
 
    if (LichtZustand == 5)	//Nachtlicht AUS
   {
-	  ledcWrite(BacklightKanalTFT, BacklightwertNacht);
-	  ledcWrite(PowerledKanal, 0);
-	  for (int i = 0; i < NUMLEDS; i++)
+	  	ledcWrite(BacklightKanalTFT, BacklightwertNacht);
+	  	ledcWrite(PowerledKanal, 0);
+
+		redVal = 0;
+	 	grnVal = 0;
+	  	bluVal = 0;
+
+	  	for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(0, 0, 0));
-				strip1.Show();
+				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
+		strip1.SetBrightness(maxHell);
+		strip1.Show();
   }
 
 }
@@ -622,7 +640,7 @@ void loop()
 {	
 	/************** WIFI Satus ueberpruefen *************/
 
-	int wifi_retry = 0;
+	uint8_t wifi_retry = 0;
 	while(WiFi.status() != WL_CONNECTED && wifi_retry < 10 ) 
 		{
 		tft.drawBitmap(140, 0, wlan, 20, 20, TFT_BLUE);	
@@ -636,7 +654,7 @@ void loop()
       	WiFi.mode(WIFI_OFF);
       	WiFi.mode(WIFI_STA);
 		WiFi.begin(ssid, password);
-      	delay(100);
+      	delay(500);
   		}
 		  
   	if(wifi_retry >= 10) 
@@ -662,6 +680,7 @@ void loop()
 
 	//strip1.SetBrightness(aktHell);
 	//strip1.Show();
+	ledcWrite(PowerledKanal, Powerledmax);
 
 	/************* Uhr im Display aktualisieren ********/
 

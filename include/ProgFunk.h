@@ -265,23 +265,13 @@ void SonneUn(void)
 		
 		for (int i = 0; i < NUMLEDS; i++)
 		{
-			strip1.SetPixelColor(i, RgbColor(0, 0, 10));	
-			strip1.Show();
-		}
-		/*
-		for (int i = 11; i < 19; i++)
-		{
-			strip1.SetPixelColor(i, RgbColor(0, 0, 10));
-			strip1.Show();		
-		}
-
-		for (int i = 20; i > 30; i--)
-		{
 			strip1.SetPixelColor(i, RgbColor(0, 0, 0));	
 			strip1.Show();
 		}
-		*/
-		
+	
+		strip1.SetPixelColor(15, RgbColor(0, 0, 200));
+		strip1.SetPixelColor(16, RgbColor(0, 0, 200));
+
 		strip1.Show();
 		Durchlauf++;
 		break;
