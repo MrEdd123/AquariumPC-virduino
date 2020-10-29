@@ -212,6 +212,8 @@ void virduino()
 		
 	}
 
+
+
 	if (V[15] != BacklightwertTag)
 	{
 		
@@ -274,6 +276,12 @@ void virduino()
 		Hysterese = V[20];
 		preferences.putFloat("Hyst", Hysterese);
 		
+	}
+
+		if (V[21])
+	{
+		Powerledwert = V[21];
+		ledcWrite(PowerledKanal, Powerledwert);
 	}
 
 	/************** Manuelle Funktionen *****************/

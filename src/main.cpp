@@ -680,7 +680,7 @@ void loop()
 
 	//strip1.SetBrightness(aktHell);
 	//strip1.Show();
-	ledcWrite(PowerledKanal, Powerledmax);
+	//ledcWrite(PowerledKanal, Powerledwert);
 
 	/************* Uhr im Display aktualisieren ********/
 
