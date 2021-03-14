@@ -278,11 +278,12 @@ void virduino()
 		
 	}
 
-		if (V[21])
+	/*	if (V[21])
 	{
 		Powerledwert = V[21];
 		ledcWrite(PowerledKanal, Powerledwert);
 	}
+	*/
 
 	/************** Manuelle Funktionen *****************/
 

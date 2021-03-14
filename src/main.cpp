@@ -59,7 +59,7 @@ TFT_eSPI tft = TFT_eSPI();
 #define ONE_WIRE_BUS			26				// Anschlusspin für OneWire			
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature Tempfueh(&oneWire);
-#define REQUIRESNEW true
+//#define REQUIRESNEW true
 /******* Variablen *******************************/
 
 uint8_t TFTRotation = 3;
@@ -152,7 +152,7 @@ int SonAu3[3] = { 210, 	20,  30 };
 int SonAu4[3] = { 220, 	30,  50 };
 int SonAu5[3] = { 230, 	40,  70 };
 int SonAu6[3] = { 240, 	50,  90 };
-int SonAu7[3] = { 250, 	60, 250 };
+int SonAu7[3] = { 250, 	60, 230 };
 
 // Sonnenuntergang Color Array
 //				{   R,  G,   B };
