@@ -146,13 +146,13 @@ unsigned long FutterMillis = 0;
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
 //				{   R,  G,   B };
-int SonAu1[3] = {  50, 	 5,   0 };
-int SonAu2[3] = { 200,	10,  10 };
-int SonAu3[3] = { 210, 	20,  30 };
-int SonAu4[3] = { 220, 	30,  50 };
-int SonAu5[3] = { 230, 	40,  70 };
-int SonAu6[3] = { 240, 	50,  90 };
-int SonAu7[3] = { 250, 	60, 230 };
+int SonAu1[3] = {  50, 	 3,   0 };
+int SonAu2[3] = { 100,	8,  10 };
+int SonAu3[3] = { 150, 	15,  30 };
+int SonAu4[3] = { 180, 	25,  50 };
+int SonAu5[3] = { 200, 	25,  70 };
+int SonAu6[3] = { 230, 	35,  90 };
+int SonAu7[3] = { 250, 	50, 230 };
 
 // Sonnenuntergang Color Array
 //				{   R,  G,   B };

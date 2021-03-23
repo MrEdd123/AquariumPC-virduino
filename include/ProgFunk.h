@@ -207,11 +207,13 @@ void SonneAuf(void)
 		crossFade(SonAu7);
 		break;
 	case 8:
+		/*
 		for (int i = 0; i < NUMLEDS; i++)
 		{
 		strip1.SetPixelColor(i, RgbColor(250, 60, 230));
 		}
 		//Serial.println("Case8 PowerLED");
+		*/
 		PowerLEDplus();
 		break;
 
