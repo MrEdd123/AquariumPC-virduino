@@ -10,7 +10,6 @@
             "includePath": [
                 "c:/Users/andre/Repo/AquariumPC-virduino/include",
                 "c:/Users/andre/Repo/AquariumPC-virduino/src",
-                "C:/Users/andre/.platformio/lib/Time_ID44",
                 "C:/Users/andre/.platformio/lib/TFT_eSPI",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
@@ -97,6 +96,7 @@
                 "C:/Users/andre/.platformio/lib/PageBuilder/src",
                 "C:/Users/andre/.platformio/lib/ThingSpeak/src",
                 "C:/Users/andre/.platformio/lib/Ticker",
+                "C:/Users/andre/.platformio/lib/Time",
                 "C:/Users/andre/.platformio/lib/Virtuino ESP",
                 "C:/Users/andre/.platformio/lib/WiFiManager",
                 "C:/Users/andre/.platformio/lib/arduino-timer/src",
@@ -128,7 +128,6 @@
                 "path": [
                     "c:/Users/andre/Repo/AquariumPC-virduino/include",
                     "c:/Users/andre/Repo/AquariumPC-virduino/src",
-                    "C:/Users/andre/.platformio/lib/Time_ID44",
                     "C:/Users/andre/.platformio/lib/TFT_eSPI",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
@@ -215,6 +214,7 @@
                     "C:/Users/andre/.platformio/lib/PageBuilder/src",
                     "C:/Users/andre/.platformio/lib/ThingSpeak/src",
                     "C:/Users/andre/.platformio/lib/Ticker",
+                    "C:/Users/andre/.platformio/lib/Time",
                     "C:/Users/andre/.platformio/lib/Virtuino ESP",
                     "C:/Users/andre/.platformio/lib/WiFiManager",
                     "C:/Users/andre/.platformio/lib/arduino-timer/src",
@@ -245,6 +245,7 @@
             "defines": [
                 "PLATFORMIO=50101",
                 "ARDUINO_ESP32_DEV",
+                "CORE_DEBUG_LEVEL=0",
                 "ESP32",
                 "ESP_PLATFORM",
                 "F_CPU=240000000L",

@@ -453,7 +453,7 @@ void setup()
 	/**** Alarm Timer starten für Funktionen ******/ 
 	
 	timer.setInterval(1000, ProgrammTimer);
-	timer.setInterval(30000, Heizung);
+	timer.setInterval(2000, Heizung);
 	timer.setInterval(500, virduino);
 	//timer.setInterval(60000, digitalClockDisplay);
 
