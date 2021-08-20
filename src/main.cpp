@@ -1,9 +1,10 @@
 ﻿
 #include <Arduino.h>
+//#include <SPI.h>
 #include <TFT_eSPI.h>
 #include "bitmaps.h"
-#include <Time.h>
-//#include <SPI.h>
+#include <TimeLib.h>
+
 #include <NeoPixelBrightnessBus.h>
 #include <OneWire.h>
 #include <Preferences.h>
@@ -51,8 +52,8 @@ NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp32I2s0800KbpsMethod> strip1(NUMLEDS, 
 /************ TFT Einstellungen ******************/
 
 TFT_eSPI tft = TFT_eSPI();
-#define MAX_GEN_COUNT 500
-#define USE_DMA_TO_TFT
+//#define MAX_GEN_COUNT 500
+//#define USE_DMA_TO_TFT
 
 /************* One Wire (Tempfühler) **************/
 
@@ -119,7 +120,7 @@ uint8_t PowerledKanal = 1;
 uint8_t PowerledBit = 8;
 uint8_t Powerledwert = 0;
 uint8_t Powerledwert_virtuell = 0;
-uint8_t Powerledmax = 250;
+uint8_t Powerledmax = 190;
 uint8_t Powerledmin = 0;
 
 uint8_t LichtZustand;
