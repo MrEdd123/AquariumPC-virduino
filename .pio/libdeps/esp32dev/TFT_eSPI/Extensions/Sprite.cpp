@@ -37,6 +37,9 @@ TFT_eSprite::TFT_eSprite(TFT_eSPI *tft)
   _colorMap = nullptr;
 
   _psram_enable = true;
+  
+  // Ensure end_tft_write() does nothing in inherited functions.
+  lockTransaction = true;
 }
 
 
@@ -441,7 +444,7 @@ bool TFT_eSprite::pushRotated(int16_t angle, uint32_t transp)
       if (tpcolor == rp) {
         if (pixel_count) {
           // TFT window is already clipped, so this is faster than pushImage()
-          _tft->setWindow(x - pixel_count, y, x, y);
+          _tft->setWindow(x - pixel_count, y, x - 1, y);
           _tft->pushPixels(sline_buffer, pixel_count);
           pixel_count = 0;
         }
@@ -452,7 +455,7 @@ bool TFT_eSprite::pushRotated(int16_t angle, uint32_t transp)
     } while (++x < max_x && (xs += _cosra) < xe && (ys += _sinra) < ye);
     if (pixel_count) {
       // TFT window is already clipped, so this is faster than pushImage()
-      _tft->setWindow(x - pixel_count, y, x, y);
+      _tft->setWindow(x - pixel_count, y, x - 1, y);
       _tft->pushPixels(sline_buffer, pixel_count);
     }
   }
@@ -883,7 +886,7 @@ bool TFT_eSprite::pushSprite(int32_t tx, int32_t ty, int32_t sx, int32_t sy, int
       _tft->startWrite();
       while (sh--)
       {
-        _tft->pushImage(tx, ty++, sw, 1, _img8 + (_bitwidth>>3) * _ys, (bool)false );
+        _tft->pushImage(tx, ty++, sw, 1, _img8 + (_bitwidth>>3) * _ys++, (bool)false );
       }
       _tft->endWrite();
     }
@@ -2529,19 +2532,24 @@ void TFT_eSprite::printToSprite(char *cbuffer, uint16_t len) //String string)
 
   uint16_t n = 0;
   bool newSprite = !_created;
+  int16_t  cursorX = _tft->cursor_x;
 
   if (newSprite)
   {
-    int16_t sWidth = 1;
+    int16_t sWidth = 0;
     uint16_t index = 0;
-
+    bool     first = true;
     while (n < len)
     {
       uint16_t unicode = decodeUTF8((uint8_t*)cbuffer, &n, len - n);
       if (getUnicodeIndex(unicode, &index))
       {
-        if (n == 0) sWidth -= gdX[index];
-        if (n == len-1) sWidth += ( gWidth[index] + gdX[index]);
+        if (first) {
+          first = false;
+          sWidth -= gdX[index];
+          cursorX += gdX[index];
+        }
+        if (n == len) sWidth += ( gWidth[index] + gdX[index]);
         else sWidth += gxAdvance[index];
       }
       else sWidth += gFont.spaceWidth + 1;
@@ -2564,7 +2572,7 @@ void TFT_eSprite::printToSprite(char *cbuffer, uint16_t len) //String string)
 
   if (newSprite)
   { // The sprite had to be created so place at TFT cursor
-    pushSprite(_tft->cursor_x, _tft->cursor_y);
+    pushSprite(cursorX, _tft->cursor_y);
     deleteSprite();
   }
 }

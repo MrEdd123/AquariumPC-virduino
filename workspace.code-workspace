@@ -2,6 +2,10 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"name": "BLE Buttonbox for Wheel",
+			"path": "..\\..\\Documents\\PlatformIO\\Projects\\BLE Buttonbox for Wheel"
 		}
 	],
 	"settings": {

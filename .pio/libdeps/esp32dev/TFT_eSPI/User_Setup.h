@@ -175,6 +175,8 @@
 // Overlap mode shares the ESP8266 FLASH SPI bus with the TFT so has a performance impact
 // but saves pins for other functions. It is best not to connect MISO as some displays
 // do not tristate that line when chip select is high!
+// Note: Only one SPI device can share the FLASH SPI lines, so a SPI touch controller
+// cannot be connected as well to the same SPI signals.
 // On NodeMCU 1.0 SD0=MISO, SD1=MOSI, CLK=SCLK to connect to TFT in overlap mode
 // On NodeMCU V3  S0 =MISO, S1 =MOSI, S2 =SCLK
 // In ESP8266 overlap mode the following must be defined
@@ -199,7 +201,7 @@
 #define TFT_CS   15  // Chip select control pin
 #define TFT_DC    2  // Data Command control pin
 #define TFT_RST   4  // Reset pin (could connect to RST pin)
-// #define TFT_RST  -1  // Set TFT_RST to -1 if display RESET is connected to ESP32 board RST
+//#define TFT_RST  -1  // Set TFT_RST to -1 if display RESET is connected to ESP32 board RST
 
 // For ESP32 Dev board (only tested with GC9A01 display)
 // The hardware SPI can be mapped to any pins
@@ -311,6 +313,15 @@
 //
 // ##################################################################################
 
+// For RP2040 processor and SPI displays, uncomment the following line to use the PIO interface.
+//#define RP2040_PIO_SPI // Leave commented out to use standard RP2040 SPI port interface
+
+// For the RP2040 processor define the SPI port channel used (default 0 if undefined)
+//#define TFT_SPI_PORT 1 // Set to 0 if SPI0 pins are used, or 1 if spi1 pins used
+
+// For the STM32 processor define the SPI port channel used (default 1 if undefined)
+//#define TFT_SPI_PORT 2 // Set to 1 for SPI port 1, or 2 for SPI port 2
+
 // Define the SPI clock frequency, this affects the graphics rendering speed. Too
 // fast and the TFT driver will not keep up and display corruption appears.
 // With an ILI9341 display 40MHz works OK, 80MHz sometimes fails
@@ -318,10 +329,10 @@
 // With an ILI9163 display 27 MHz works OK.
 
 // #define SPI_FREQUENCY   1000000
-//#define SPI_FREQUENCY   5000000
+// #define SPI_FREQUENCY   5000000
 // #define SPI_FREQUENCY  10000000
 // #define SPI_FREQUENCY  20000000
- #define SPI_FREQUENCY  27000000
+#define SPI_FREQUENCY  27000000
 // #define SPI_FREQUENCY  40000000
 // #define SPI_FREQUENCY  55000000 // STM32 SPI1 only (SPI2 maximum is 27MHz)
 // #define SPI_FREQUENCY  80000000
@@ -335,7 +346,7 @@
 // The ESP32 has 2 free SPI ports i.e. VSPI and HSPI, the VSPI is the default.
 // If the VSPI port is in use and pins are not accessible (e.g. TTGO T-Beam)
 // then uncomment the following line:
-// #define USE_HSPI_PORT
+//#define USE_HSPI_PORT
 
 // Comment out the following #define if "SPI Transactions" do not need to be
 // supported. When commented out the code size will be smaller and sketches will

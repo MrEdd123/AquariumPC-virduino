@@ -9,14 +9,14 @@
   The built-in fonts 4, 6, 7 and 8 are Run Length
   Encoded (RLE) to reduce the FLASH footprint.
 
-  Last review/edit by Bodmer: 21/04/21
+  Last review/edit by Bodmer: 05/01/22
  ****************************************************/
 
 // Stop fonts etc being loaded multiple times
 #ifndef _TFT_eSPIH_
 #define _TFT_eSPIH_
 
-#define TFT_ESPI_VERSION "2.3.70"
+#define TFT_ESPI_VERSION "2.4.25"
 
 // Bit level feature flags
 // Bit 0 set: viewport capability
@@ -317,15 +317,19 @@ int32_t esp;         // Processor code
 uint8_t trans;       // SPI transaction support
 uint8_t serial;      // Serial (SPI) or parallel
 uint8_t overlap;     // ESP8266 overlap mode
-
+/*
 #if defined (ESP32)  // TODO: make generic for other processors
   #if defined (USE_HSPI_PORT)
     uint8_t  port = HSPI;
   #else
-    uint8_t  port = VSPI;
+    #ifdef CONFIG_IDF_TARGET_ESP32
+      uint8_t  port = VSPI;
+    #else
+      uint8_t  port = FSPI;
+    #endif
   #endif
 #endif
-
+*/
 uint16_t tft_driver; // Hexadecimal code
 uint16_t tft_width;  // Rotation 0 width and height
 uint16_t tft_height;
@@ -454,6 +458,8 @@ class TFT_eSPI : public Print { friend class TFT_eSprite; // Sprite class has ac
            drawRoundRect(int32_t x, int32_t y, int32_t w, int32_t h, int32_t radius, uint32_t color),
            fillRoundRect(int32_t x, int32_t y, int32_t w, int32_t h, int32_t radius, uint32_t color);
 
+  void     fillRectVGradient(int16_t x, int16_t y, int16_t w, int16_t h, uint32_t color1, uint32_t color2);
+  void     fillRectHGradient(int16_t x, int16_t y, int16_t w, int16_t h, uint32_t color1, uint32_t color2);
 
   void     drawCircle(int32_t x, int32_t y, int32_t r, uint32_t color),
            drawCircleHelper(int32_t x, int32_t y, int32_t r, uint8_t cornername, uint32_t color),
@@ -651,6 +657,10 @@ class TFT_eSPI : public Print { friend class TFT_eSprite; // Sprite class has ac
            // in progress, this simplifies the sketch and helps avoid "gotchas".
   void     pushImageDMA(int32_t x, int32_t y, int32_t w, int32_t h, uint16_t* data, uint16_t* buffer = nullptr);
 
+#if defined (ESP32) // ESP32 only at the moment
+           // For case where pointer is a const and the image data must not be modified (clipped or byte swapped)
+  void     pushImageDMA(int32_t x, int32_t y, int32_t w, int32_t h, uint16_t const* data);
+#endif
            // Push a block of pixels into a window set up using setAddrWindow()
   void     pushPixelsDMA(uint16_t* image, uint32_t len);
 
@@ -716,6 +726,9 @@ class TFT_eSPI : public Print { friend class TFT_eSprite; // Sprite class has ac
   inline void begin_tft_read()  __attribute__((always_inline));
   inline void end_tft_read()    __attribute__((always_inline));
 
+           // Initialise the data bus GPIO and hardware interfaces
+  void     initBus(void);
+
            // Temporary  library development function  TODO: remove need for this
   void     pushSwapBytePixels(const void* data_in, uint32_t len);
 
@@ -752,6 +765,8 @@ class TFT_eSPI : public Print { friend class TFT_eSprite; // Sprite class has ac
 
   getColorCallback getColor = nullptr; // Smooth font callback function pointer
 
+  bool     locked, inTransaction, lockTransaction; // SPI transaction and mutex lock flags
+
  //-------------------------------------- protected ----------------------------------//
  protected:
 
@@ -783,7 +798,6 @@ class TFT_eSPI : public Print { friend class TFT_eSprite; // Sprite class has ac
   bool     isDigits;   // adjust bounding box for numbers to reduce visual jiggling
   bool     textwrapX, textwrapY;  // If set, 'wrap' text at right and optionally bottom edge of display
   bool     _swapBytes; // Swap the byte order for TFT pushImage()
-  bool     locked, inTransaction, lockTransaction; // SPI transaction and mutex lock flags
 
   bool     _booted;    // init() or begin() has already run once
   
