@@ -12,6 +12,10 @@
 #include "soc/spi_reg.h"
 #include "driver/spi_master.h"
 
+#if !defined(CONFIG_IDF_TARGET_ESP32C3) && !defined(CONFIG_IDF_TARGET_ESP32C2) && !defined(CONFIG_IDF_TARGET_ESP32)
+  #define CONFIG_IDF_TARGET_ESP32
+#endif
+
 // Fix IDF problems with ESP32C3
 #if CONFIG_IDF_TARGET_ESP32C3
   // Fix ESP32C3 IDF bug for missing definition
@@ -63,6 +67,8 @@ SPI3_HOST = 2
   #else
     #define SPI_PORT 3     //HSPI is port 3 on ESP32 S2
   #endif
+#elif defined(USE_FSPI_PORT)
+    #define SPI_PORT 2 //FSPI(ESP32 S2)
 #else
   #ifdef CONFIG_IDF_TARGET_ESP32
     #define SPI_PORT VSPI
@@ -368,7 +374,7 @@ SPI3_HOST = 2
                             GPIO.out_w1tc = clr_mask; GPIO.out_w1ts = set_mask((uint8_t) (((C) & 0x001F)<< 3)); WR_H
 
     // 18 bit color write with swapped bytes
-    #define tft_Write_16S(C) uint16_t Cswap = ((C) >>8 | (C) << 8); tft_Write_16(Cswap)
+    #define tft_Write_16S(C) Cswap = ((C) >>8 | (C) << 8); tft_Write_16(Cswap)
 
   #else
 
@@ -420,6 +426,10 @@ SPI3_HOST = 2
       #define RD_L
       #define RD_H
     #endif
+  #else
+    #define TFT_RD -1
+    #define RD_L
+    #define RD_H
   #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -548,6 +558,10 @@ SPI3_HOST = 2
   #define tft_Write_32D(C) TFT_WRITE_BITS((uint16_t)((C)<<8 | (C)>>8)<<16 | (uint16_t)((C)<<8 | (C)>>8), 32)
 
 //*/
+#endif
+
+#ifndef tft_Write_16N
+  #define tft_Write_16N tft_Write_16
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////

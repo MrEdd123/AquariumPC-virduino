@@ -79,8 +79,9 @@
 //#include <User_Setups/Setup51_LilyPi_ILI9481.h>    // Setup file for LilyGo LilyPi with ILI9481 display
 //#include <User_Setups/Setup52_LilyPi_ST7796.h>     // Setup file for LilyGo LilyPi with ST7796 display
 
-//#include <User_Setups/Setup60_RP2040_ILI9341.h>    // Setup file for Raspberry Pi Pico with SPI ILI9341
+//#include <User_Setups/Setup60_RP2040_ILI9341.h>    // Setup file for RP2040 with SPI ILI9341
 //#include <User_Setups/Setup61_RP2040_ILI9341_PIO_SPI.h>    // Setup file for RP2040 with PIO SPI ILI9341
+//#include <User_Setups/Setup62_RP2040_Nano_Connect_ILI9341.h>    // Setup file for RP2040 with SPI ILI9341
 
 //#include <User_Setups/Setup70_ESP32_S2_ILI9341.h>  // Setup file for ESP32 S2 with SPI ILI9341
 
@@ -96,6 +97,7 @@
 //#include <User_Setups/Setup135_ST7789.h>           // Setup file for ESP8266 and ST7789 135 x 240 TFT
 
 //#include <User_Setups/Setup136_LilyGo_TTV.h>       // Setup file for ESP32 and Lilygo TTV ST7789 SPI bus TFT  135x240
+//#include <User_Setups/Setup137_LilyGo_TDisplay_RP2040.h>  // Setup file for Lilygo T-Display RP2040 (ST7789 on SPI bus with 135x240 TFT)
 
 //#include <User_Setups/Setup200_GC9A01.h>           // Setup file for ESP32 and GC9A01 240 x 240 TFT
 
@@ -218,7 +220,6 @@
      #define  TFT_DRIVER 0x0000
 #else
      #define  TFT_DRIVER 0x0000
-     # error "####### NO TFT DRIVER DEFINED #######"
 #endif
 
 // These are the pins for ESP8266 boards

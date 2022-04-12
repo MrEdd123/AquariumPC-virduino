@@ -45,10 +45,10 @@ Preferences preferences;
 /***********  NeoPixel Einstellungen   ***********/
 
 #define PIN_STRIPE			13
-#define NUMLEDS				30
+#define NUMLEDS			    5
 
-NeoPixelBrightnessBus<NeoGrbFeature, NeoEsp32I2s0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE);
-
+NeoPixelBrightnessBus<NeoRgbFeature, NeoEsp32I2s0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE);
+//NeoEsp32I2s0800KbpsMethod
 /************ TFT Einstellungen ******************/
 
 TFT_eSPI tft = TFT_eSPI();
@@ -462,7 +462,7 @@ void setup()
 
 	strip1.Begin();
 	//strip1.GlearTo(0);
-	strip1.SetPixelColor(10, RgbColor(0, 0, 200));
+	strip1.SetPixelColor(1, RgbColor(0, 0, 200));
 	strip1.SetBrightness(250);
 	aktHell = maxHell;
 	strip1.Show();
@@ -549,32 +549,21 @@ void setup()
   {
 	  Powerledwert = Powerledmax;
 	  ledcWrite(PowerledKanal, Powerledwert);
-
+	/*
 	  redVal = 250;
 	  grnVal = 60;
 	  bluVal = 250;
 
-	  for (int i = 0; i < NUMLEDS; i++)
+	 for (int i = 0; i < NUMLEDS; i++)
 			{
 				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
-
-		strip1.SetPixelColor(5, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(8, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(11, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(13, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(16, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(20, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(23, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(25, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(3, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(7, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(10, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(12, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(15, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(18, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(21, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(27, 	RgbColor(0, 0, 200));
+	*/
+  		strip1.SetPixelColor(0, 	RgbColor(240, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(2, 	RgbColor(240, 0, 0));
+		strip1.SetPixelColor(3, 	RgbColor(220, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
 
 		strip1.SetBrightness(maxHell);
 		strip1.Show();	
@@ -592,8 +581,8 @@ void setup()
 
 	  for (int i = 0; i < NUMLEDS; i++)
 			{
-				//strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
-				strip1.SetPixelColor(i, RgbColor(0, 0, 10));
+				//strip1.SetPixelColor(i, RgbColor(redVal, bluVal, grnVal));
+				strip1.SetPixelColor(i, RgbColor(0, 50, 0));
 			}
 		strip1.SetBrightness(maxHell);
 		strip1.Show();
@@ -621,32 +610,23 @@ void setup()
   {
 		Powerledwert = Powerledmax;
 	  	ledcWrite(PowerledKanal, Powerledwert);
-
-	  	redVal = 250;
-	 	grnVal = 60;
-	  	bluVal = 180;
+		/*
+	  	redVal = 200;
+	 	grnVal = 20;
+	  	bluVal = 200;
 
 	  	for (int i = 0; i < NUMLEDS; i++)
 			{
 				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
+		*/
 
-		strip1.SetPixelColor(5, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(8, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(11, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(13, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(16, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(20, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(23, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(25, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(3, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(7, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(10, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(12, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(15, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(18, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(21, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(27, 	RgbColor(0, 0, 200));
+		strip1.SetPixelColor(0, 	RgbColor(240, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(2, 	RgbColor(240, 0, 0));
+		strip1.SetPixelColor(3, 	RgbColor(220, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+
 		strip1.SetBrightness(maxHell);
 		strip1.Show();		
 	  		

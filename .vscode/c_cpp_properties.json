@@ -15,6 +15,7 @@
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/ESPmDNS/src",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/Update/src",
+                "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/PubSubClient/src",
                 "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/VirtuinoCM",
                 "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/DallasTemperature",
                 "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/SimpleTimer",
@@ -120,6 +121,7 @@
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/ESPmDNS/src",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/Update/src",
+                    "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/PubSubClient/src",
                     "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/VirtuinoCM",
                     "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/DallasTemperature",
                     "C:/Users/andre/Repo/AquariumPC-virduino/.pio/libdeps/esp32dev/SimpleTimer",
@@ -217,7 +219,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=50204",
+                "PLATFORMIO=50205",
                 "ARDUINO_ESP32_DEV",
                 "CORE_DEBUG_LEVEL=0",
                 "ESP32",

@@ -1,31 +1,38 @@
 A ["Discussions"](https://github.com/Bodmer/TFT_eSPI/discussions) facility has been added for Q&A etc. Use the ["Issues"](https://github.com/Bodmer/TFT_eSPI/issues) tab only for problems with the library. Thanks!
 # News
-1. The RP2040 8 bit parallel interface uses the PIO. The PIO now manages the "setWindow" and "block fill" actions, releasing the processor for other tasks when areas of the screen are being filled with a colour. The PIO can optionally be used for SPI interface displays if #define RP2040_PIO_SPI is put in the setup file. Touch screens and pixel read operations are not supported when the PIO interface is used.
+1. New anti-aliased graphics functions to draw lines, wedge shaped lines, circles and rounded rectangles. [Examples are included](https://github.com/Bodmer/TFT_eSPI/tree/master/examples/Smooth%20Graphics). Examples have also been added to [display PNG compressed images](https://github.com/Bodmer/TFT_eSPI/tree/master/examples/PNG%20Images) (note: requires ~40kbytes RAM).
+
+2. Frank Boesing has created an extension library for TFT_eSPI that allows a large range of ready-built fonts to be used. Frank's library can be [downloaded here](https://github.com/FrankBoesing/TFT_eSPI_ext). More than 3300 additional Fonts are [available here](https://github.com/FrankBoesing/fonts/tree/master/ofl). The TFT_eSPI_ext library contains examples that demonstrate the use of the fonts.
+
+3. Users of PowerPoint experienced with running macros may be interested in the [pptm sketch generator here](https://github.com/Bodmer/PowerPoint_to_sketch), this converts graphics and tables drawn in PowerPoint slides into an Arduino sketch that renders the graphics on a 480x320 TFT. This is based on VB macros [created by Kris Kasprzak here](https://github.com/KrisKasprzak/Powerpoint-ILI9341_t3).
+
+4. The library contains two new functions for rectangles filled with a horizontal or vertical coloured gradient:
+
+      tft.fillRectHGradient(x, y, w, h, color1, color2);
+  
+      tft.fillRectVGradient(x, y, w, h, color1, color2);
+      
+      ![Gradient](https://i.imgur.com/atR0DmP.png)
+
+5. The RP2040 8 bit parallel interface uses the PIO. The PIO now manages the "setWindow" and "block fill" actions, releasing the processor for other tasks when areas of the screen are being filled with a colour. The PIO can optionally be used for SPI interface displays if #define RP2040_PIO_SPI is put in the setup file. Touch screens and pixel read operations are not supported when the PIO interface is used.
 The RP2040 PIO features only work with [Earle Philhower's board package](https://github.com/earlephilhower/arduino-pico), NOT the Arduino Mbed version.
 
 The use of PIO for SPI allows the RP2040 to be over-clocked (up to 250MHz works on my boards) in Earle's board package whilst still maintaining high SPI clock rates.
 
-2. DMA can now be used with the Raspberry Pi Pico (RP2040) when used with both 8 bit parallel and 16 bit colour SPI displays. See "Bouncy_Circles" sketch.
+6. DMA can now be used with the Raspberry Pi Pico (RP2040) when used with both 8 bit parallel and 16 bit colour SPI displays. See "Bouncy_Circles" sketch.
 
       ["Bouncing circles"](https://www.youtube.com/watch?v=njFXIzCTQ_Q&lc=UgymaUIwOIuihvYh-Qt4AaABAg)
 
-3. Support hase been added for the ESP32 S2 processor variant. A [new user setup](https://github.com/Bodmer/TFT_eSPI/blob/master/User_Setups/Setup70_ESP32_S2_ILI9341.h) file has been added as an example setup with an ILI9341 TFT. You will need to load ESP32 Arduino board package 2.0.0 or later to use the updated library with an ESP32.
+7. Support hase been added for the ESP32 S2 processor variant. A [new user setup](https://github.com/Bodmer/TFT_eSPI/blob/master/User_Setups/Setup70_ESP32_S2_ILI9341.h) file has been added as an example setup with an ILI9341 TFT.
 
-4. The library now supports the Raspberry Pi Pico with both the [official Arduino board package](https://github.com/arduino/ArduinoCore-mbed) and the one provided by [Earle Philhower](https://github.com/earlephilhower/arduino-pico). The setup file "Setup60_RP2040_ILI9341.h" has been used for tests with an ILI9341 display. At the moment only SPI interface displays have been tested. SPI port 0 is the default but SPI port 1 can be specifed in the setup file if those SPI pins are used.
+8. The library now supports the Raspberry Pi Pico with both the [official Arduino board package](https://github.com/arduino/ArduinoCore-mbed) and the one provided by [Earle Philhower](https://github.com/earlephilhower/arduino-pico). The setup file "Setup60_RP2040_ILI9341.h" has been used for tests with an ILI9341 display. At the moment only SPI interface displays have been tested. SPI port 0 is the default but SPI port 1 can be specifed in the setup file if those SPI pins are used.
 
       ["Rotating cube demo"](https://www.youtube.com/watch?v=4fPxEN9ImVE)
 
-5. Viewports can now be applied to sprites e.g. spr.setViewport(5, 5, 20, 20); so graphics can be restricted to a particular area of the sprite. This operates in the same way as the TFT viewports, see 5. below.
+9. The library now provides a "viewport" capability. See "Viewport_Demo" and "Viewport_graphicstest" examples. When a viewport is defined graphics will only appear within that window.  The coordinate datum by default moves to the top left corner of the viewport, but can optionally remain at top left corner of TFT. The GUIslice library will make use of this feature to speed up the rendering of GUI objects ([see #769](https://github.com/Bodmer/TFT_eSPI/issues/769)).
 
-6. The library now provides a "viewport" capability. See "Viewport_Demo" and "Viewport_graphicstest" examples. When a viewport is defined graphics will only appear within that window.  The coordinate datum by default moves to the top left corner of the viewport, but can optionally remain at top left corner of TFT. The GUIslice library will make use of this feature to speed up the rendering of GUI objects ([see #769](https://github.com/Bodmer/TFT_eSPI/issues/769)).
+10. The library now supports SSD1963 based screen, this has been tested on a [480x800 screen](https://www.buydisplay.com/7-tft-screen-touch-lcd-display-module-w-ssd1963-controller-board-mcu) with an ESP32. The interface is 8 bit parallel only as that controller does not support a SPI interface.
 
-7. The library now supports SSD1963 based screen, this has been tested on a [480x800 screen](https://www.buydisplay.com/7-tft-screen-touch-lcd-display-module-w-ssd1963-controller-board-mcu) with an ESP32. The interface is 8 bit parallel only as that controller does not support a SPI interface.
-
-8. A companion library [U8g2_for_TFT_eSPI](https://github.com/Bodmer/U8g2_for_TFT_eSPI) has been created to allow U8g2 library fonts to be used with TFT_eSPI.
-
-9. The library now supports SPI DMA transfers for both ESP32 and STM32 processors. The DMA Test examples now work on the ESP32 for SPI displays (excluding RPi type and ILI9488).
-
-10. A new option has been added for STM32 processors to optimise performance where Port A (or B) pins 0-7 are used for the 8 bit parallel interface data pins 0-7 to the TFT. This gives a dramatic 8 times better rendering performance for the lower clock rate STM32 processors such as the STM32F103 "Blue Pill" or STM411 "Black Pill" since no time consuming data bit manipulation is required. See setup file "User_Setups/Setup35_ILI9341_STM32_Port_Bus.h".
 
 # TFT_eSPI
 
@@ -47,8 +54,8 @@ Displays using the following controllers are supported:
 * ILI9163
 * ILI9225
 * ILI9341
-* ILI9481
-* ILI9486
+* ILI9481 (DMA not supported with SPI)
+* ILI9486 (DMA not supported with SPI)
 * ILI9488 (DMA not supported with SPI)
 * HX8357D
 * S6D02A1

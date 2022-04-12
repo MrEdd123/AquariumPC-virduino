@@ -222,22 +222,14 @@ void SonneAuf(void)
 		Durchlauf = 1;
 		SonneIndex = 0;
 		//AblaufX = 1;
-		strip1.SetPixelColor(5, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(8, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(11, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(13, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(16, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(20, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(23, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(25, 	RgbColor(200, 0, 0));
-		strip1.SetPixelColor(3, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(7, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(10, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(12, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(15, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(18, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(21, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(27, 	RgbColor(0, 0, 200));
+		
+		strip1.SetPixelColor(0, 	RgbColor(240, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(2, 	RgbColor(240, 0, 0));
+		strip1.SetPixelColor(3, 	RgbColor(220, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+		
+	
 		break;
 	}
 }
@@ -290,8 +282,8 @@ void SonneUn(void)
 			strip1.Show();
 		}
 	
-		strip1.SetPixelColor(15, RgbColor(0, 0, 200));
-		strip1.SetPixelColor(16, RgbColor(0, 0, 200));
+		strip1.SetPixelColor(3, RgbColor(0, 50, 0));
+		
 
 		strip1.Show();
 		Durchlauf++;
