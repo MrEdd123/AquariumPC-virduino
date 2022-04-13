@@ -226,7 +226,7 @@ void SonneAuf(void)
 		strip1.SetPixelColor(0, 	RgbColor(240, 0, 0));
 		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(2, 	RgbColor(240, 0, 0));
-		strip1.SetPixelColor(3, 	RgbColor(220, 0, 0));
+		strip1.SetPixelColor(3, 	RgbColor(240, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
 		
 	
@@ -275,15 +275,18 @@ void SonneUn(void)
 		crossFade(SonUn7);
 		break;
 	case 9:
-		
+		/*
 		for (int i = 0; i < NUMLEDS; i++)
 		{
 			strip1.SetPixelColor(i, RgbColor(0, 0, 0));	
 			strip1.Show();
 		}
-	
-		strip1.SetPixelColor(3, RgbColor(0, 50, 0));
-		
+		*/
+		strip1.SetPixelColor(0, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 200));
+		strip1.SetPixelColor(3, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
 
 		strip1.Show();
 		Durchlauf++;
