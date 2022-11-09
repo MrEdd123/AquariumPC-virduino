@@ -219,15 +219,17 @@ void SonneAuf(void)
 
 	case 9:
 		//Serial.println("Case9 Ende");
+		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+
 		Durchlauf = 1;
 		SonneIndex = 0;
 		//AblaufX = 1;
 		
-		strip1.SetPixelColor(0, 	RgbColor(240, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
-		strip1.SetPixelColor(2, 	RgbColor(240, 0, 0));
-		strip1.SetPixelColor(3, 	RgbColor(240, 0, 0));
-		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+		
 		
 	
 		break;

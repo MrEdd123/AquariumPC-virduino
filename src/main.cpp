@@ -7,6 +7,7 @@
 
 #include <NeoPixelBrightnessBus.h>
 #include <OneWire.h>
+//#include <OneWireNg.h>
 #include <Preferences.h>
 #include <SimpleTimer.h>
 #include <WiFi.h>
@@ -57,7 +58,8 @@ TFT_eSPI tft = TFT_eSPI();
 
 /************* One Wire (Tempfühler) **************/
 
-#define ONE_WIRE_BUS			26				// Anschlusspin für OneWire			
+#define ONE_WIRE_BUS	 26				// Anschlusspin für OneWire			
+
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature Tempfueh(&oneWire);
 //#define REQUIRESNEW true
@@ -153,7 +155,7 @@ int SonAu3[3] = { 150, 	15,  30 };
 int SonAu4[3] = { 180, 	25,  50 };
 int SonAu5[3] = { 200, 	25,  70 };
 int SonAu6[3] = { 230, 	35,  90 };
-int SonAu7[3] = { 250, 	50, 230 };
+int SonAu7[3] = { 250, 	50, 240 };
 
 // Sonnenuntergang Color Array
 //				{   R,  G,   B };
@@ -559,10 +561,10 @@ void setup()
 				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
 	*/
-  		strip1.SetPixelColor(0, 	RgbColor(240, 0, 0));
+  		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
-		strip1.SetPixelColor(2, 	RgbColor(240, 0, 0));
-		strip1.SetPixelColor(3, 	RgbColor(220, 0, 0));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
 
 		strip1.SetBrightness(maxHell);
@@ -621,10 +623,10 @@ void setup()
 			}
 		*/
 
-		strip1.SetPixelColor(0, 	RgbColor(240, 0, 0));
+		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
-		strip1.SetPixelColor(2, 	RgbColor(240, 0, 0));
-		strip1.SetPixelColor(3, 	RgbColor(220, 0, 0));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
 
 		strip1.SetBrightness(maxHell);

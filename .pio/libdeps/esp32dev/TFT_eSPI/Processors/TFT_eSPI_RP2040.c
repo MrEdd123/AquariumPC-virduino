@@ -21,9 +21,19 @@
 #else // PIO interface used (8 bit parallel or SPI)
 
   #ifdef RP2040_PIO_SPI
-    #include "pio_SPI.pio.h"
-  #else
+    #if  defined (SPI_18BIT_DRIVER)
+      // SPI PIO code for 18 bit colour transmit
+      #include "pio_SPI_18bit.pio.h"
+    #else
+      // SPI PIO code for 16 bit colour transmit
+      #include "pio_SPI.pio.h"
+    #endif
+  #elif defined (TFT_PARALLEL_8_BIT)
+    // SPI PIO code for 8 bit parallel interface (16 bit colour)
     #include "pio_8bit_parallel.pio.h"
+  #else // must be TFT_PARALLEL_16_BIT
+    // SPI PIO code for 16 bit parallel interface (16 bit colour)
+    #include "pio_16bit_parallel.pio.h"
   #endif
 
   // Board package specific differences
@@ -166,7 +176,7 @@ void pioinit(uint32_t clock_freq) {
   // The OSR register shifts to the left, sm designed to send MS byte of a colour first, autopull off
   sm_config_set_out_shift(&c, false, false, 0);
   // Now load the configuration
-  pio_sm_init(tft_pio, pio_sm, program_offset + tft_io_offset_start_16, &c);
+  pio_sm_init(tft_pio, pio_sm, program_offset + tft_io_offset_start_tx, &c);
 
   // Start the state machine.
   pio_sm_set_enabled(tft_pio, pio_sm, true);
@@ -182,7 +192,7 @@ void pioinit(uint32_t clock_freq) {
   pio_instr_set_dc = pio_encode_set((pio_src_dest)0, 1);
   pio_instr_clr_dc = pio_encode_set((pio_src_dest)0, 0);
 }
-#else
+#else // 8 or 16 bit parallel
 void pioinit(uint16_t clock_div, uint16_t fract_div) {
 
   // Find a free SM on one of the PIO's
@@ -205,21 +215,27 @@ void pioinit(uint16_t clock_div, uint16_t fract_div) {
     }
   }
 */
-
+  #if defined (TFT_PARALLEL_8_BIT)
+    uint8_t bits = 8;
+  #else // must be TFT_PARALLEL_16_BIT
+    uint8_t bits = 16;
+  #endif
+  
   // Load the PIO program
   program_offset = pio_add_program(tft_pio, &tft_io_program);
 
   // Associate pins with the PIO
   pio_gpio_init(tft_pio, TFT_DC);
   pio_gpio_init(tft_pio, TFT_WR);
-  for (int i = 0; i < 8; i++) {
+
+  for (int i = 0; i < bits; i++) {
     pio_gpio_init(tft_pio, TFT_D0 + i);
   }
 
   // Configure the pins to be outputs
   pio_sm_set_consecutive_pindirs(tft_pio, pio_sm, TFT_DC, 1, true);
   pio_sm_set_consecutive_pindirs(tft_pio, pio_sm, TFT_WR, 1, true);
-  pio_sm_set_consecutive_pindirs(tft_pio, pio_sm, TFT_D0, 8, true);
+  pio_sm_set_consecutive_pindirs(tft_pio, pio_sm, TFT_D0, bits, true);
 
   // Configure the state machine
   pio_sm_config c = tft_io_program_get_default_config(program_offset);
@@ -227,8 +243,8 @@ void pioinit(uint16_t clock_div, uint16_t fract_div) {
   sm_config_set_set_pins(&c, TFT_DC, 1);
   // Define the single side-set pin
   sm_config_set_sideset_pins(&c, TFT_WR);
-  // Define the 8 consecutive pins that are used for data output
-  sm_config_set_out_pins(&c, TFT_D0, 8);
+  // Define the consecutive pins that are used for data output
+  sm_config_set_out_pins(&c, TFT_D0, bits);
   // Set clock divider and fractional divider
   sm_config_set_clkdiv_int_frac(&c, clock_div, fract_div);
   // Make a single 8 words FIFO from the 4 words TX and RX FIFOs
@@ -236,7 +252,7 @@ void pioinit(uint16_t clock_div, uint16_t fract_div) {
   // The OSR register shifts to the left, sm designed to send MS byte of a colour first
   sm_config_set_out_shift(&c, false, false, 0);
   // Now load the configuration
-  pio_sm_init(tft_pio, pio_sm, program_offset + tft_io_offset_start_16, &c);
+  pio_sm_init(tft_pio, pio_sm, program_offset + tft_io_offset_start_tx, &c);
 
   // Start the state machine.
   pio_sm_set_enabled(tft_pio, pio_sm, true);
@@ -263,6 +279,16 @@ void pioinit(uint16_t clock_div, uint16_t fract_div) {
 // PIO handles pixel block fill writes
 void TFT_eSPI::pushBlock(uint16_t color, uint32_t len)
 {
+#if  defined (SPI_18BIT_DRIVER)
+  uint32_t col = ((color & 0xF800)<<8) | ((color & 0x07E0)<<5) | ((color & 0x001F)<<3);
+  if (len) {
+    WAIT_FOR_STALL;
+    tft_pio->sm[pio_sm].instr = pio_instr_fill;
+
+    TX_FIFO = col;
+    TX_FIFO = --len; // Decrement first as PIO sends n+1
+  }
+#else
   if (len) {
     WAIT_FOR_STALL;
     tft_pio->sm[pio_sm].instr = pio_instr_fill;
@@ -270,6 +296,7 @@ void TFT_eSPI::pushBlock(uint16_t color, uint32_t len)
     TX_FIFO = color;
     TX_FIFO = --len; // Decrement first as PIO sends n+1
   }
+#endif
 }
 
 #else
@@ -300,7 +327,21 @@ void TFT_eSPI::pushBlock(uint16_t color, uint32_t len){
 ** Description:             Write a sequence of pixels
 ***************************************************************************************/
 void TFT_eSPI::pushPixels(const void* data_in, uint32_t len){
-
+#if  defined (SPI_18BIT_DRIVER)
+  uint16_t *data = (uint16_t*)data_in;
+  if (_swapBytes) {
+    while ( len-- ) {
+      uint32_t col = *data++;
+      tft_Write_16(col);
+    }
+  }
+  else {
+    while ( len-- ) {
+      uint32_t col = *data++;
+      tft_Write_16S(col);
+    }
+  }
+#else
   const uint16_t *data = (uint16_t*)data_in;
 
   // PIO sends MS byte first, so bytes are already swapped on transmit
@@ -341,6 +382,7 @@ void TFT_eSPI::pushPixels(const void* data_in, uint32_t len){
       }
     }
   }
+#endif
 }
 
 /***************************************************************************************
