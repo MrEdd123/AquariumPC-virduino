@@ -5,33 +5,21 @@
 // This makes selecting between hardware setups easy by "uncommenting" one line.
 
 // The advantage of this hardware configuration method is that the examples provided
-// with the library should work with different setups immediately without any other
-// changes being needed. It also improves the portability of users sketches to other
-// hardware configurations and compatible libraries.
+// with the library should work with immediately without any other changes being
+// needed. It also improves the portability of users sketches to other hardware
+// configurations and compatible libraries.
 //
 // Create a shortcut to this file on your desktop to permit quick access for editing.
 // Re-compile and upload after making and saving any changes to this file.
 
 // Customised User_Setup files are stored in the "User_Setups" folder.
 
-// The following lines allow the user setup to be included in the sketch, see
-// "Sketch_with_tft_setup" generic example. Do not edit lines 19 to 32!
-#if !defined __has_include
-  #if !defined(DISABLE_ALL_LIBRARY_WARNINGS)
-    #warning Compiler does not support __has_include, so sketches cannot define the setup
-  #endif
-#endif
-
-#if __has_include(<tft_setup.h>)
-  #include <tft_setup.h>
-  #ifndef USER_SETUP_LOADED
-    #define USER_SETUP_LOADED
-  #endif
-#endif
+// It is also possible for the user tft settings to be included with the sketch, see
+// the "Sketch_with_tft_setup" generic example. This may be more convenient for
+// multiple projects.
 
 #ifndef USER_SETUP_LOADED //  Lets PlatformIO users define settings in
                           //  platformio.ini, see notes in "Tools" folder.
-
 
 ///////////////////////////////////////////////////////
 //   User configuration selection lines are below    //
@@ -128,6 +116,8 @@
 //#include <User_Setups/Setup136_LilyGo_TTV.h>       // Setup file for ESP32 and Lilygo TTV ST7789 SPI bus TFT  135x240
 //#include <User_Setups/Setup137_LilyGo_TDisplay_RP2040.h>  // Setup file for Lilygo T-Display RP2040 (ST7789 on SPI bus with 135x240 TFT)
 
+//#include <User_Setups/Setup138_Pico_Explorer_Base_RP2040_ST7789.h> // Setup file for Pico Explorer Base by Pimoroni for RP2040 (ST7789 on SPI bus with 240x240 TFT)
+
 //#include <User_Setups/Setup200_GC9A01.h>           // Setup file for ESP32 and GC9A01 240 x 240 TFT
 
 //#include <User_Setups/Setup201_WT32_SC01.h>        // Setup file for ESP32 based WT32_SC01 from Seeed
@@ -139,6 +129,15 @@
 //#include <User_Setups/Setup204_ESP32_TouchDown.h>     // Setup file for the ESP32 TouchDown based on ILI9488 480 x 320 TFT 
 
 //#include <User_Setups/Setup205_ESP32_TouchDown_S3.h>     // Setup file for the ESP32 TouchDown S3 based on ILI9488 480 x 320 TFT 
+
+//#include <User_Setups/Setup206_LilyGo_T_Display_S3.h>
+//#include <User_Setups/Setup207_LilyGo_T_HMI.h>
+
+//#include <User_Setups/Setup208_ESP32_S3_Box_Lite.h>      // For the ESP32 S3 Box Lite (may also work with ESP32 S3 Box)
+
+//#include <User_Setups/Setup209_LilyGo_T_Dongle_S3.h>      // For the LilyGo T-Dongle S3 based ESP32 with ST7735 80 x 160 TFT
+
+//#include <User_Setups/Setup301_BW16_ST7735.h>            // Setup file for Bw16-based boards with ST7735 160 x 80 TFT
 
 //#include <User_Setups/SetupX_Template.h>     // Template file for a setup
 
