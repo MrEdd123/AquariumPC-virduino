@@ -1,4 +1,4 @@
 .pio/build/esp32dev/FrameworkArduino/USB.cpp.o: \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/USB.cpp \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/USB.h \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/dio_qspi/include/sdkconfig.h
+ /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/cores/esp32/USB.cpp \
+ /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/cores/esp32/USB.h \
+ /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/dio_qspi/include/sdkconfig.h
