@@ -307,7 +307,7 @@ void SonneMitAn(void)
 {
 	LichtZustand = 3;
 	preferences.putUInt("LichtZu", LichtZustand);
-	strip1.SetBrightness(mittagHell);
+	//strip1.SetBrightness(mittagHell);
 	delay(1);
 	strip1.Show();
 	aktHell = mittagHell;
@@ -321,7 +321,7 @@ void SonneMitAus(void)
 {
 	LichtZustand = 4;
 	preferences.putUInt("LichtZu", LichtZustand);
-	strip1.SetBrightness(maxHell);
+	//strip1.SetBrightness(maxHell);
 	delay(1);
 	strip1.Show();
 	aktHell = maxHell;

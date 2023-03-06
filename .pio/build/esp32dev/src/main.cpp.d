@@ -135,7 +135,7 @@
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-spi.h \
  .pio/libdeps/esp32dev/TFT_eSPI/User_Setup_Select.h \
  .pio/libdeps/esp32dev/TFT_eSPI/User_Setup.h \
- .pio/libdeps/esp32dev/TFT_eSPI/TFT_Drivers/ST7735_Defines.h \
+ .pio/libdeps/esp32dev/TFT_eSPI/TFT_Drivers/ILI9341_Defines.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Processors/TFT_eSPI_ESP32.h \
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/spi_reg.h \
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/driver/include/driver/spi_master.h \
@@ -224,7 +224,6 @@
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Button.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Sprite.h include/bitmaps.h \
  .pio/libdeps/esp32dev/Time/TimeLib.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/NeoPixelBrightnessBus.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/NeoPixelBus.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoUtil.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoHueBlend.h \
@@ -280,6 +279,7 @@
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/rmt_types.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEspBitBangMethod.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/DotStarEsp32DmaSpiMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEsp32I2sXMethod.h \
  .pio/libdeps/esp32dev/OneWire/OneWire.h \
  .pio/libdeps/esp32dev/OneWire/util/OneWire_direct_regtype.h \
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/libraries/Preferences/src/Preferences.h \

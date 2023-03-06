@@ -200,4 +200,5 @@
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/sdmmc_pins.h \
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/spi_reg.h \
  /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/spi_struct.h \
- /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/spi_types.h
+ /home/AndreReichl/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/spi_types.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEsp32I2sXMethod.h

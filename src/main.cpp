@@ -5,7 +5,7 @@
 #include "bitmaps.h"
 #include <TimeLib.h>
 
-#include <NeoPixelBrightnessBus.h>
+#include <NeoPixelBus.h>
 #include <OneWire.h>
 //#include <OneWireNg.h>
 #include <Preferences.h>
@@ -48,7 +48,7 @@ Preferences preferences;
 #define PIN_STRIPE			13
 #define NUMLEDS			    5
 
-NeoPixelBrightnessBus<NeoRgbFeature, NeoEsp32I2s0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE);
+NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE);
 //NeoEsp32I2s0800KbpsMethod
 /************ TFT Einstellungen ******************/
 
@@ -465,7 +465,7 @@ void setup()
 	strip1.Begin();
 	//strip1.GlearTo(0);
 	strip1.SetPixelColor(1, RgbColor(0, 0, 200));
-	strip1.SetBrightness(250);
+	//strip1.SetBrightness(250);
 	aktHell = maxHell;
 	strip1.Show();
 
@@ -567,7 +567,7 @@ void setup()
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
 
-		strip1.SetBrightness(maxHell);
+		//strip1.SetBrightness(maxHell);
 		strip1.Show();	
   }
 
@@ -586,7 +586,7 @@ void setup()
 				//strip1.SetPixelColor(i, RgbColor(redVal, bluVal, grnVal));
 				strip1.SetPixelColor(i, RgbColor(0, 50, 0));
 			}
-		strip1.SetBrightness(maxHell);
+		//strip1.SetBrightness(maxHell);
 		strip1.Show();
   }
 
@@ -604,7 +604,7 @@ void setup()
 				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
 
-		strip1.SetBrightness(mittagHell);
+		//strip1.SetBrightness(mittagHell);
 		strip1.Show();		
   }
 
@@ -629,7 +629,7 @@ void setup()
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
 
-		strip1.SetBrightness(maxHell);
+		//strip1.SetBrightness(maxHell);
 		strip1.Show();		
 	  		
   }
@@ -648,7 +648,7 @@ void setup()
 			{
 				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 			}
-		strip1.SetBrightness(maxHell);
+		//strip1.SetBrightness(maxHell);
 		strip1.Show();
   }
 
