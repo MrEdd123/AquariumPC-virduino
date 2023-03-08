@@ -1,11 +1,10 @@
 ﻿
 #include <Arduino.h>
-//#include <SPI.h>
 #include <TFT_eSPI.h>
+#include <SPI.h>
 #include "bitmaps.h"
 #include <TimeLib.h>
-
-#include <NeoPixelBus.h>
+#include <NeoPixelBusLg.h>
 #include <OneWire.h>
 //#include <OneWireNg.h>
 #include <Preferences.h>
@@ -48,8 +47,8 @@ Preferences preferences;
 #define PIN_STRIPE			13
 #define NUMLEDS			    5
 
-NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE);
-//NeoEsp32I2s0800KbpsMethod
+//NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
+NeoPixelBusLg<NeoRgbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
 /************ TFT Einstellungen ******************/
 
 TFT_eSPI tft = TFT_eSPI();
@@ -148,24 +147,24 @@ unsigned long FutterMillis = 0;
 
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
-//				{   R,  G,   B };
-int SonAu1[3] = {  50, 	 3,   0 };
-int SonAu2[3] = { 100,	8,  10 };
-int SonAu3[3] = { 150, 	15,  30 };
-int SonAu4[3] = { 180, 	25,  50 };
-int SonAu5[3] = { 200, 	25,  70 };
-int SonAu6[3] = { 230, 	35,  90 };
-int SonAu7[3] = { 250, 	50, 240 };
+//				{   G,  R,   B };
+int SonAu1[3] = { 3, 	 50,   0 };
+int SonAu2[3] = { 8,	100,  10 };
+int SonAu3[3] = { 15, 	150,  30 };
+int SonAu4[3] = { 25, 	180,  50 };
+int SonAu5[3] = { 25, 	200,  70 };
+int SonAu6[3] = { 35, 	230,  90 };
+int SonAu7[3] = { 50, 	250, 240 };
 
 // Sonnenuntergang Color Array
 //				{   R,  G,   B };
-int SonUn1[3] = { 250, 60,  80};
-int SonUn2[3] = { 240, 50,  60 };
-int SonUn3[3] = { 230, 40,  30 };
-int SonUn4[3] = { 220, 20,  15 };
-int SonUn5[3] = { 200, 10,   8 };
-int SonUn6[3] = { 100,  5,   8 };
-int SonUn7[3] = {   0,  0,  10 };
+int SonUn1[3] = { 60, 250,  80};
+int SonUn2[3] = { 50, 240,  60 };
+int SonUn3[3] = { 40, 230,  30 };
+int SonUn4[3] = { 20, 220,  15 };
+int SonUn5[3] = { 10, 200,   8 };
+int SonUn6[3] = {  5, 100,   8 };
+int SonUn7[3] = {  0,   0,  20 };
 
 //Nachtlicht AUS Color Array
 //					 { R, G, B };
@@ -463,9 +462,7 @@ void setup()
 	/*********** Neopixel Starten ***************/
 
 	strip1.Begin();
-	//strip1.GlearTo(0);
-	strip1.SetPixelColor(1, RgbColor(0, 0, 200));
-	//strip1.SetBrightness(250);
+	strip1.SetPixelColor(3, RgbColor(0, 0, 200));
 	aktHell = maxHell;
 	strip1.Show();
 
@@ -548,109 +545,76 @@ void setup()
 /****************** Lichtzustand bei Neustart *****************/
 
   	if (LichtZustand == 1) 	//Sonnenaufgang
-  {
-	  Powerledwert = Powerledmax;
-	  ledcWrite(PowerledKanal, Powerledwert);
-	/*
-	  redVal = 250;
-	  grnVal = 60;
-	  bluVal = 250;
 
-	 for (int i = 0; i < NUMLEDS; i++)
-			{
-				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
-			}
-	*/
+  		{
+	  	Powerledwert = Powerledmax;
+	  	ledcWrite(PowerledKanal, Powerledwert);
+
   		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
-
-		//strip1.SetBrightness(maxHell);
 		strip1.Show();	
-  }
+  		}
 
    if (LichtZustand == 2)	//Sonnenauntergang
-  {
-	  Powerledwert = 0;
-	  ledcWrite(BacklightKanalTFT, BacklightwertNacht);
-	  ledcWrite(PowerledKanal, Powerledwert);
 
-	  redVal = 1;
-	  grnVal = 0;
-	  bluVal = 10;
+  		{
+	  	Powerledwert = 0;
+	  	ledcWrite(BacklightKanalTFT, BacklightwertNacht);
+	  	ledcWrite(PowerledKanal, Powerledwert);
 
-	  for (int i = 0; i < NUMLEDS; i++)
-			{
-				//strip1.SetPixelColor(i, RgbColor(redVal, bluVal, grnVal));
-				strip1.SetPixelColor(i, RgbColor(0, 50, 0));
-			}
-		//strip1.SetBrightness(maxHell);
+		strip1.SetPixelColor(0, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 150));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 200));
+		strip1.SetPixelColor(3, 	RgbColor(0, 0, 150));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
 		strip1.Show();
-  }
+  		}
 
 	if (LichtZustand == 3)	//Sonnen Mittag AN
-  {
-	  Powerledwert = mittagHell;
-	  ledcWrite(PowerledKanal, Powerledwert);
 
-	  redVal = 250;
-	  grnVal = 60;
-	  bluVal = 180;
+  		{
+	  	Powerledwert = mittagHell;
+	  	ledcWrite(PowerledKanal, Powerledwert);
 
-	  for (int i = 0; i < NUMLEDS; i++)
-			{
-				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
-			}
-
-		//strip1.SetBrightness(mittagHell);
-		strip1.Show();		
-  }
+	  	strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+		strip1.Show();	
+  		}
 
   	if (LichtZustand == 4)	//Sonnen Mittag AUS
-  {
+
+  		{
 		Powerledwert = Powerledmax;
 	  	ledcWrite(PowerledKanal, Powerledwert);
-		/*
-	  	redVal = 200;
-	 	grnVal = 20;
-	  	bluVal = 200;
-
-	  	for (int i = 0; i < NUMLEDS; i++)
-			{
-				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
-			}
-		*/
 
 		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
-
-		//strip1.SetBrightness(maxHell);
-		strip1.Show();		
-	  		
-  }
+		strip1.Show();		 		
+ 		}
 
 
    if (LichtZustand == 5)	//Nachtlicht AUS
-  {
+  		
+		{
 	  	ledcWrite(BacklightKanalTFT, BacklightwertNacht);
 	  	ledcWrite(PowerledKanal, 0);
 
-		redVal = 0;
-	 	grnVal = 0;
-	  	bluVal = 0;
-
-	  	for (int i = 0; i < NUMLEDS; i++)
-			{
-				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
-			}
-		//strip1.SetBrightness(maxHell);
+		strip1.SetPixelColor(0, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(3, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
 		strip1.Show();
-  }
+  		}
 
 }
 

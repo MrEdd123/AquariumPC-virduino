@@ -142,7 +142,7 @@ void crossFade(int color[3])
 			
 			for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
+				strip1.SetPixelColor(i, RgbColor(grnVal, redVal, bluVal));
 				/*
 				Serial.print ("R:");
 				Serial.println (redVal);
@@ -224,7 +224,8 @@ void SonneAuf(void)
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
-
+		delayMicroseconds(20);
+		strip1.Show();	
 		Durchlauf = 1;
 		SonneIndex = 0;
 		//AblaufX = 1;
@@ -285,11 +286,11 @@ void SonneUn(void)
 		}
 		*/
 		strip1.SetPixelColor(0, 	RgbColor(0, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 150));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(3, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(3, 	RgbColor(0, 0, 150));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
-
+		delayMicroseconds(20);
 		strip1.Show();
 		Durchlauf++;
 		break;
@@ -307,8 +308,13 @@ void SonneMitAn(void)
 {
 	LichtZustand = 3;
 	preferences.putUInt("LichtZu", LichtZustand);
-	//strip1.SetBrightness(mittagHell);
-	delay(1);
+
+	strip1.SetPixelColor(0, 	RgbColor(150, 0, 0));
+	strip1.SetPixelColor(1, 	RgbColor(0, 0, 140));
+	strip1.SetPixelColor(2, 	RgbColor(0, 0, 140));
+	strip1.SetPixelColor(3, 	RgbColor(150, 0, 0));
+	strip1.SetPixelColor(4, 	RgbColor(0, 0, 140));
+	delayMicroseconds(20);
 	strip1.Show();
 	aktHell = mittagHell;
 	Powerledwert = mittagHell;
@@ -321,9 +327,15 @@ void SonneMitAus(void)
 {
 	LichtZustand = 4;
 	preferences.putUInt("LichtZu", LichtZustand);
-	//strip1.SetBrightness(maxHell);
-	delay(1);
+
+	strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
+	strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+	strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
+	strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
+	strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+	delayMicroseconds(20);
 	strip1.Show();
+
 	aktHell = maxHell;
 	Powerledwert = Powerledmax;
 	ledcWrite(PowerledKanal, Powerledwert);
