@@ -148,23 +148,23 @@ unsigned long FutterMillis = 0;
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
 //				{   G,  R,   B };
-int SonAu1[3] = { 3, 	 50,   0 };
-int SonAu2[3] = { 8,	100,  10 };
+int SonAu1[3] = { 9, 	 50,   0 };
+int SonAu2[3] = { 12,	100,  10 };
 int SonAu3[3] = { 15, 	150,  30 };
 int SonAu4[3] = { 25, 	180,  50 };
 int SonAu5[3] = { 25, 	200,  70 };
 int SonAu6[3] = { 35, 	230,  90 };
-int SonAu7[3] = { 50, 	250, 240 };
+int SonAu7[3] = { 10, 	250, 240 };
 
 // Sonnenuntergang Color Array
-//				{   R,  G,   B };
+//				{   G,  R,   B };
 int SonUn1[3] = { 60, 250,  80};
 int SonUn2[3] = { 50, 240,  60 };
 int SonUn3[3] = { 40, 230,  30 };
 int SonUn4[3] = { 20, 220,  15 };
 int SonUn5[3] = { 10, 200,   8 };
-int SonUn6[3] = {  5, 100,   8 };
-int SonUn7[3] = {  0,   0,  20 };
+int SonUn6[3] = {  5, 100,  30 };
+int SonUn7[3] = {  0,   0,  80 };
 
 //Nachtlicht AUS Color Array
 //					 { R, G, B };
@@ -550,11 +550,12 @@ void setup()
 	  	Powerledwert = Powerledmax;
 	  	ledcWrite(PowerledKanal, Powerledwert);
 
-  		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+  		strip1.SetPixelColor(0, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(1, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+		delayMicroseconds(20);
 		strip1.Show();	
   		}
 
@@ -566,10 +567,11 @@ void setup()
 	  	ledcWrite(PowerledKanal, Powerledwert);
 
 		strip1.SetPixelColor(0, 	RgbColor(0, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 150));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 100));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(3, 	RgbColor(0, 0, 150));
+		strip1.SetPixelColor(3, 	RgbColor(0, 0, 100));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
+		delayMicroseconds(20);
 		strip1.Show();
   		}
 
@@ -579,11 +581,12 @@ void setup()
 	  	Powerledwert = mittagHell;
 	  	ledcWrite(PowerledKanal, Powerledwert);
 
-	  	strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+	  	strip1.SetPixelColor(0, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(1, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+		delayMicroseconds(29);
 		strip1.Show();	
   		}
 
@@ -593,11 +596,12 @@ void setup()
 		Powerledwert = Powerledmax;
 	  	ledcWrite(PowerledKanal, Powerledwert);
 
-		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(0, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(1, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
+		delayMicroseconds(20);
 		strip1.Show();		 		
  		}
 
@@ -613,6 +617,7 @@ void setup()
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 0));
 		strip1.SetPixelColor(3, 	RgbColor(0, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
+		delayMicroseconds(20);
 		strip1.Show();
   		}
 

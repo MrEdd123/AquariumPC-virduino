@@ -219,8 +219,8 @@ void SonneAuf(void)
 
 	case 9:
 		//Serial.println("Case9 Ende");
-		strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(0, 	RgbColor(0, 0, 240));
+		strip1.SetPixelColor(1, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
@@ -286,9 +286,9 @@ void SonneUn(void)
 		}
 		*/
 		strip1.SetPixelColor(0, 	RgbColor(0, 0, 0));
-		strip1.SetPixelColor(1, 	RgbColor(0, 0, 150));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 100));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 200));
-		strip1.SetPixelColor(3, 	RgbColor(0, 0, 150));
+		strip1.SetPixelColor(3, 	RgbColor(0, 0, 100));
 		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
 		delayMicroseconds(20);
 		strip1.Show();
@@ -309,13 +309,14 @@ void SonneMitAn(void)
 	LichtZustand = 3;
 	preferences.putUInt("LichtZu", LichtZustand);
 
-	strip1.SetPixelColor(0, 	RgbColor(150, 0, 0));
-	strip1.SetPixelColor(1, 	RgbColor(0, 0, 140));
-	strip1.SetPixelColor(2, 	RgbColor(0, 0, 140));
-	strip1.SetPixelColor(3, 	RgbColor(150, 0, 0));
-	strip1.SetPixelColor(4, 	RgbColor(0, 0, 140));
+	strip1.SetPixelColor(0, 	RgbColor(0, 0, 100));
+	strip1.SetPixelColor(1, 	RgbColor(100, 0, 0));
+	strip1.SetPixelColor(2, 	RgbColor(0, 0, 100));
+	strip1.SetPixelColor(3, 	RgbColor(100, 0, 0));
+	strip1.SetPixelColor(4, 	RgbColor(0, 0, 100));
 	delayMicroseconds(20);
 	strip1.Show();
+
 	aktHell = mittagHell;
 	Powerledwert = mittagHell;
 	ledcWrite(PowerledKanal, Powerledwert);
@@ -328,8 +329,8 @@ void SonneMitAus(void)
 	LichtZustand = 4;
 	preferences.putUInt("LichtZu", LichtZustand);
 
-	strip1.SetPixelColor(0, 	RgbColor(250, 0, 0));
-	strip1.SetPixelColor(1, 	RgbColor(0, 0, 240));
+	strip1.SetPixelColor(0, 	RgbColor(0, 0, 240));
+	strip1.SetPixelColor(1, 	RgbColor(250, 0, 0));
 	strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
 	strip1.SetPixelColor(3, 	RgbColor(250, 0, 0));
 	strip1.SetPixelColor(4, 	RgbColor(0, 0, 240));
