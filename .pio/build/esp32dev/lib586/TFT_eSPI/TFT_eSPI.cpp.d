@@ -221,12 +221,14 @@
  .pio/libdeps/esp32dev/TFT_eSPI/Fonts/Custom/Roboto_Thin_24.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Fonts/Custom/Satisfy_24.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Fonts/Custom/Yellowtail_32.h \
+ .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Touch.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Smooth_font.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Button.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Sprite.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Processors/TFT_eSPI_ESP32.c \
  .pio/libdeps/esp32dev/TFT_eSPI/TFT_Drivers/ST7735_Init.h \
  .pio/libdeps/esp32dev/TFT_eSPI/TFT_Drivers/ST7735_Rotation.h \
+ .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Touch.cpp \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Button.cpp \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Sprite.cpp \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Smooth_font.cpp

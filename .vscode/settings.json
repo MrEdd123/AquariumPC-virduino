@@ -26,5 +26,6 @@
         "unordered_map": "cpp",
         "unordered_set": "cpp",
         "vector": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/.pio/libdeps/esp32dev/TFT_eSPI"
 }

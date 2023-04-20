@@ -220,6 +220,7 @@
  .pio/libdeps/esp32dev/TFT_eSPI/Fonts/Custom/Roboto_Thin_24.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Fonts/Custom/Satisfy_24.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Fonts/Custom/Yellowtail_32.h \
+ .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Touch.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Smooth_font.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Button.h \
  .pio/libdeps/esp32dev/TFT_eSPI/Extensions/Sprite.h include/bitmaps.h \
@@ -227,60 +228,114 @@
  .pio/libdeps/esp32dev/NeoPixelBus/src/NeoPixelBusLg.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/NeoPixelBus.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoUtil.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoHueBlend.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/animations/NeoEase.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoSettings.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/RgbColor.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/RgbColorBase.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Rgb16Color.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Rgb48Color.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/HslColor.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/HsbColor.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/HtmlColor.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/RgbwColor.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Rgbw64Color.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/SegmentDigit.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoColors.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoHueBlend.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/RgbColorBase.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/RgbColor.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/Rgb16Color.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/Rgb48Color.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/HslColor.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/HsbColor.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/HtmlColor.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/RgbwColor.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/Rgbw64Color.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/SegmentDigit.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGamma.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGammaEquationMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGammaCieLabEquationMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGammaTableMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGammaDynamicTableMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGammaNullMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGammaInvertMethod.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoTm1814ColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoTm1914ColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoSm168xxColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/DotStarColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Lpd8806ColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Lpd6803ColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/P9813ColorFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoSegmentFeatures.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Layouts.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoTopology.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoRingTopology.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoTiles.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoMosaic.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoBufferContext.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoBufferMethods.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoBuffer.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoSpriteSheet.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoDib.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoBitmapFile.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEase.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoGamma.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo2ByteElements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo3ByteElements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo4ByteElements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo6ByteElements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo6Byte4xxElements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo8ByteElements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoBgrFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoBrgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoGrb48Feature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoGrbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoGrbwFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRbgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgb48Feature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbw64Feature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbwFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbwxxFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoSm168xxColorFeatures.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoTm1814ColorFeatures.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoTm1914ColorFeatures.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStar3Elements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStar4Elements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarBgrFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarBrgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarGbrFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarGrbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarLbgrFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarLbrgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarLgbrFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarLgrbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarLrbgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarLrgbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarRbgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarRgbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Lpd8806BrgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Lpd8806GrbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Lpd6803BrgFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Lpd6803GrbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Lpd6803GbrFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Lpd6803RgbFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/P9813BgrFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo9ByteElements.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoAbcdefgpsSegmentFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoBacedfpgsSegmentFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoTopologies.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/ColumnMajorAlternatingLayout.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/ColumnMajorLayout.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/RowMajorAlternatingLayout.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/RowMajorLayout.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/NeoTopology.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/NeoRingTopology.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/NeoTiles.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/topologies/NeoMosaic.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoBuffers.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/LayoutMapCallback.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoShaderNop.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoShaderBase.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoBufferContext.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoBuffer.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoBufferMethods.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoBufferProgmemMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoDib.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoBitmapFile.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/buffers/NeoVerticalSpriteSheet.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoBusChannel.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/DotStarGenericMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/TwoWireBitBangImple.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/TwoWireSpiImple.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/TwoWireHspiImple.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Lpd8806GenericMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Lpd6803GenericMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Ws2801GenericMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/P9813GenericMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Tlc5947GenericMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEsp32I2sMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/Esp32_i2s.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEsp32RmtMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoMethods.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/DotStarGenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/TwoWireBitBangImple.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/TwoWireSpiImple.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/TwoWireHspiImple.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Lpd8806GenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Lpd6803GenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Ws2801GenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/P9813GenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Tlc5947GenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Sm16716GenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEsp32I2sMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Esp32_i2s.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEsp32RmtMethod.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/driver/include/driver/rmt.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_ringbuf/include/freertos/ringbuf.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/rmt_struct.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/rmt_types.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEspBitBangMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/DotStarEsp32DmaSpiMethod.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/NeoEsp32I2sXMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEspBitBangMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/DotStarEsp32DmaSpiMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEsp32I2sXMethod.h \
  .pio/libdeps/esp32dev/OneWire/OneWire.h \
  .pio/libdeps/esp32dev/OneWire/util/OneWire_direct_regtype.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/Preferences/src/Preferences.h \

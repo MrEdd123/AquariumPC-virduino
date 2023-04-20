@@ -6,7 +6,6 @@
 #include <TimeLib.h>
 #include <NeoPixelBusLg.h>
 #include <OneWire.h>
-//#include <OneWireNg.h>
 #include <Preferences.h>
 #include <SimpleTimer.h>
 #include <WiFi.h>
@@ -23,8 +22,9 @@ SimpleTimer timer;
 
 const char* ssid = "Andre+Janina";            	// WIFI network SSID
 const char* password = "sommer12";            	// WIFI network PASSWORD
+const char* hostname = "AquariumPC";
 WiFiServer server(8000);               		    // Server port
-IPAddress ip(192, 168, 178, 29);         		// where 150 is the desired IP Address. The first three numbers must be the same as the router IP
+IPAddress ip(192, 168, 178, 32);         		// where 150 is the desired IP Address.
 IPAddress gateway(192, 168, 178, 1);         	// set gateway to match your network. Replace with your router IP
 
 
@@ -120,7 +120,7 @@ uint16_t Powerledfreq = 2000;
 uint8_t PowerledKanal = 1;
 uint8_t PowerledBit = 8;
 uint8_t Powerledwert = 0;
-uint8_t Powerledwert_virtuell = 0;
+uint8_t PowerledwertManu = 0;
 uint8_t Powerledmax = 190;
 uint8_t Powerledmin = 0;
 
@@ -351,8 +351,9 @@ void setup()
    	// If you don't want to config IP manually disable the next two lines
    	IPAddress subnet(255, 255, 255, 0);        // set subnet mask to match your network
  	//WiFi.config(ip, gateway, subnet);          // If you don't want to config IP manually disable this line
-	//WiFi.mode(WIFI_STA);                       // Config module as station only.
-  	WiFi.begin(ssid, password);
+	WiFi.mode(WIFI_STA);                       // Config module as station only.
+  	WiFi.setHostname(hostname);
+	WiFi.begin(ssid,password);
   	delay(1000);
   	tft.drawBitmap(140, 0, wlan, 20, 20, TFT_GREEN);
   
@@ -444,6 +445,7 @@ void setup()
 	V[18] = Futterdauerhelp;
 	V[19] = Futtergesch;
 	V[20] = Hysterese;
+	V[21] = PowerledwertManu;
 	
 	
 	/*********** GPIO´s definieren ****************/
@@ -638,10 +640,10 @@ void loop()
 		  Serial.println(wifi_retry);
 		  }
       	WiFi.disconnect();
-      	WiFi.mode(WIFI_OFF);
+      	//WiFi.mode(WIFI_OFF);
       	WiFi.mode(WIFI_STA);
 		WiFi.begin(ssid, password);
-      	delay(500);
+      	delay(1000);
   		}
 		  
   	if(wifi_retry >= 10) 
@@ -667,7 +669,7 @@ void loop()
 
 	//strip1.SetBrightness(aktHell);
 	//strip1.Show();
-	//ledcWrite(PowerledKanal, Powerledwert);
+	ledcWrite(PowerledKanal, PowerledwertManu);
 
 	/************* Uhr im Display aktualisieren ********/
 
