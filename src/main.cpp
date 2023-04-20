@@ -23,8 +23,8 @@ SimpleTimer timer;
 
 const char* ssid = "Andre+Janina";            	// WIFI network SSID
 const char* password = "sommer12";            	// WIFI network PASSWORD
-WiFiServer server(8000);                      	// Server port
-IPAddress ip(192, 168, 178, 23);         		// where 150 is the desired IP Address. The first three numbers must be the same as the router IP
+WiFiServer server(8000);               		    // Server port
+IPAddress ip(192, 168, 178, 29);         		// where 150 is the desired IP Address. The first three numbers must be the same as the router IP
 IPAddress gateway(192, 168, 178, 1);         	// set gateway to match your network. Replace with your router IP
 
 
