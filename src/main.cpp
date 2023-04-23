@@ -1,4 +1,5 @@
 ﻿
+
 #include <Arduino.h>
 #include <TFT_eSPI.h>
 #include <SPI.h>
@@ -9,7 +10,7 @@
 #include <Preferences.h>
 #include <SimpleTimer.h>
 #include <WiFi.h>
-//#include <WiFiUdp.h>
+#include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <DallasTemperature.h>
 
@@ -333,6 +334,7 @@ String onRequested(char variableType, uint8_t variableIndex)
 
 void setup() 
 {
+
 		Serial.begin(115200);
 	  if (debug) 
 	  {
@@ -347,28 +349,27 @@ void setup()
  	virtuino.begin(onReceived,onRequested,512);  //Start Virtuino. Set the buffer to 512. With this buffer Virtuino can control about 50 pins (1 command >= 9bytes) The T(text) commands with 20 characters need 20+6 bytes
   	virtuino.key="4593";                       //This is the Virtuino password. Only requests the start with this key are accepted from the library
 
-    if (debug) Serial.println("Connecting to "+String(ssid));
+    //if (debug) Serial.println("Connecting to "+String(ssid));
    	// If you don't want to config IP manually disable the next two lines
-   	IPAddress subnet(255, 255, 255, 0);        // set subnet mask to match your network
+   	//IPAddress subnet(255, 255, 255, 0);        // set subnet mask to match your network
  	//WiFi.config(ip, gateway, subnet);          // If you don't want to config IP manually disable this line
-	WiFi.mode(WIFI_STA);                       // Config module as station only.
-  	WiFi.setHostname(hostname);
+	//WiFi.mode(WIFI_STA);                       // Config module as station only.
+  	//WiFi.setHostname(hostname);
+
 	WiFi.begin(ssid,password);
-  	delay(1000);
+  	//delay(1000);
+
+		while ( WiFi.status() != WL_CONNECTED ) 
+  		{
+		tft.drawBitmap(140, 0, wlan, 20, 20, TFT_WHITE);	
+    	delay (500);
+		tft.drawBitmap(140, 0, wlan, 20, 20, TFT_VIOLET);
+		delay (500);
+    	Serial.print ( "." );
+  		}
+
   	tft.drawBitmap(140, 0, wlan, 20, 20, TFT_GREEN);
   
-  /* while (WiFi.status() != WL_CONNECTED) {
-	 tft.drawBitmap(140, 0, wlan, 20, 20, TFT_RED);  
-     delay(500);
-     Serial.print(".");
-	 ESP.restart();
-    }*/
-	if (debug)
-	{
-   	Serial.println("");
-   	Serial.println("WiFi connected");
-   	Serial.println(WiFi.localIP());
-	}
   server.begin();
 
 	/************** EEPROM auslesen ***************/
@@ -494,7 +495,7 @@ void setup()
 
 	Udp.begin(localPort);
 	setSyncProvider(getNtpTime);
-	setSyncInterval(300);
+	setSyncInterval(3600);
 	digitalClockDisplay();
 
 
@@ -627,32 +628,40 @@ void setup()
 
 void loop() 
 {	
+	
 	/************** WIFI Satus ueberpruefen *************/
 
-	uint8_t wifi_retry = 0;
-	while(WiFi.status() != WL_CONNECTED && wifi_retry < 10 ) 
-		{
-		tft.drawBitmap(140, 0, wlan, 20, 20, TFT_BLUE);	
-      	wifi_retry++;
-      	if (debug)
-		  {
-		  Serial.println("WiFi not connected. Try to reconnect");
-		  Serial.println(wifi_retry);
-		  }
-      	WiFi.disconnect();
+	//uint8_t wifi_retry = 0;
+	//while(WiFi.status() != WL_CONNECTED && wifi_retry < 10 ) 
+	//	{
+	//	tft.drawBitmap(140, 0, wlan, 20, 20, TFT_BLUE);	
+    //  	wifi_retry++;
+
+      		/*
+			if (debug)
+		  	{
+		  	Serial.println("WiFi not connected. Try to reconnect");
+		  	Serial.println(wifi_retry);
+		  	}
+			*/
+
+      	//WiFi.disconnect();
       	//WiFi.mode(WIFI_OFF);
-      	WiFi.mode(WIFI_STA);
-		WiFi.begin(ssid, password);
-      	delay(1000);
-  		}
+    //  	WiFi.mode(WIFI_STA);
+	//	WiFi.begin(ssid, password);
+    //  	delay(1000);
+
+	//		if(wifi_retry >= 10) 
+  	//		{
+    //  		if (debug) Serial.println("\nReboot");
+    //  		ESP.restart();
+  	//		}
+  	//	}
+
+
+
+
 		  
-  	if(wifi_retry >= 10) 
-  		{
-      	if (debug) Serial.println("\nReboot");
-      	ESP.restart();
-  		}
-		
-	
 	/************** OTA ********************************/
 
 	ArduinoOTA.handle();
@@ -669,7 +678,7 @@ void loop()
 
 	//strip1.SetBrightness(aktHell);
 	//strip1.Show();
-	ledcWrite(PowerledKanal, PowerledwertManu);
+	//ledcWrite(PowerledKanal, PowerledwertManu);
 
 	/************* Uhr im Display aktualisieren ********/
 
