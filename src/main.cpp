@@ -48,8 +48,12 @@ Preferences preferences;
 #define PIN_STRIPE			13
 #define NUMLEDS			    5
 
-//NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
-NeoPixelBusLg<NeoRgbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
+xSemaphoreHandle semaphore = NULL;
+TaskHandle_t commit_task;
+
+NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
+//NeoPixelBusLg<NeoGrbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
+
 /************ TFT Einstellungen ******************/
 
 TFT_eSPI tft = TFT_eSPI();
@@ -148,23 +152,23 @@ unsigned long FutterMillis = 0;
 
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
-//				{   G,  R,   B };
-int SonAu1[3] = { 9, 	 50,   0 };
-int SonAu2[3] = { 12,	100,  10 };
-int SonAu3[3] = { 15, 	150,  30 };
-int SonAu4[3] = { 25, 	180,  50 };
-int SonAu5[3] = { 25, 	200,  70 };
-int SonAu6[3] = { 35, 	230,  90 };
-int SonAu7[3] = { 10, 	250, 240 };
+//				{   R,  G,   B };
+int SonAu1[3] = { 50, 	 9,   0 };
+int SonAu2[3] = { 100,	12,  10 };
+int SonAu3[3] = { 150, 	15,  30 };
+int SonAu4[3] = { 180, 	25,  50 };
+int SonAu5[3] = { 200, 	25,  70 };
+int SonAu6[3] = { 230, 	35,  90 };
+int SonAu7[3] = { 250, 	10, 240 };
 
 // Sonnenuntergang Color Array
-//				{   G,  R,   B };
-int SonUn1[3] = { 60, 250,  80};
-int SonUn2[3] = { 50, 240,  60 };
-int SonUn3[3] = { 40, 230,  30 };
-int SonUn4[3] = { 20, 220,  15 };
-int SonUn5[3] = { 10, 200,   8 };
-int SonUn6[3] = {  5, 100,  30 };
+//				{   R,  G,   B };
+int SonUn1[3] = { 250, 60,  80 };
+int SonUn2[3] = { 240, 50,  60 };
+int SonUn3[3] = { 230, 40,  30 };
+int SonUn4[3] = { 220, 20,  15 };
+int SonUn5[3] = { 200, 10,   8 };
+int SonUn6[3] = { 100, 5,   30 };
 int SonUn7[3] = {  0,   0,  80 };
 
 //Nachtlicht AUS Color Array
@@ -334,6 +338,7 @@ String onRequested(char variableType, uint8_t variableIndex)
 
 void setup() 
 {
+
 
 		Serial.begin(115200);
 	  if (debug) 
@@ -629,39 +634,6 @@ void setup()
 void loop() 
 {	
 	
-	/************** WIFI Satus ueberpruefen *************/
-
-	//uint8_t wifi_retry = 0;
-	//while(WiFi.status() != WL_CONNECTED && wifi_retry < 10 ) 
-	//	{
-	//	tft.drawBitmap(140, 0, wlan, 20, 20, TFT_BLUE);	
-    //  	wifi_retry++;
-
-      		/*
-			if (debug)
-		  	{
-		  	Serial.println("WiFi not connected. Try to reconnect");
-		  	Serial.println(wifi_retry);
-		  	}
-			*/
-
-      	//WiFi.disconnect();
-      	//WiFi.mode(WIFI_OFF);
-    //  	WiFi.mode(WIFI_STA);
-	//	WiFi.begin(ssid, password);
-    //  	delay(1000);
-
-	//		if(wifi_retry >= 10) 
-  	//		{
-    //  		if (debug) Serial.println("\nReboot");
-    //  		ESP.restart();
-  	//		}
-  	//	}
-
-
-
-
-		  
 	/************** OTA ********************************/
 
 	ArduinoOTA.handle();
@@ -676,8 +648,6 @@ void loop()
 
 	/************** Stripe helligkeit ändern ************/
 
-	//strip1.SetBrightness(aktHell);
-	//strip1.Show();
 	//ledcWrite(PowerledKanal, PowerledwertManu);
 
 	/************* Uhr im Display aktualisieren ********/

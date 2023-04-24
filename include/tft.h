@@ -165,7 +165,6 @@ void FutterTimer()
 	tft.print(FutterMin);
 }
 
-
 void WIFI_TFT() 
 {
 	while (WiFi.status() != WL_CONNECTED) {

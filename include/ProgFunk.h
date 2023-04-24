@@ -142,7 +142,7 @@ void crossFade(int color[3])
 			
 			for (int i = 0; i < NUMLEDS; i++)
 			{
-				strip1.SetPixelColor(i, RgbColor(grnVal, redVal, bluVal));
+				strip1.SetPixelColor(i, RgbColor(redVal, grnVal, bluVal));
 				/*
 				Serial.print ("R:");
 				Serial.println (redVal);
@@ -158,7 +158,8 @@ void crossFade(int color[3])
 			prevG = grnVal;
 			prevB = bluVal;
 
-			delay(1);
+			//delay(1);
+			delayMicroseconds(20);
 			strip1.Show();
 
 		}
@@ -242,6 +243,14 @@ void SonneUn(void)
 	LichtZustand = 2;
 	preferences.putUInt("LichtZu", LichtZustand);
 	ledcWrite(BacklightKanalTFT, BacklightwertNacht);
+
+	strip1.SetPixelColor(0, 	RgbColor(250, 10, 240));
+	strip1.SetPixelColor(1, 	RgbColor(250, 10, 240));
+	strip1.SetPixelColor(2, 	RgbColor(250, 10, 240));
+	strip1.SetPixelColor(3, 	RgbColor(250, 10, 240));
+	strip1.SetPixelColor(4, 	RgbColor(250, 10, 240));
+	delayMicroseconds(20);
+	strip1.Show();	
 
 	switch (Durchlauf)
 	{
@@ -352,7 +361,14 @@ void SonneNaAus(void)
 	switch (Durchlauf)
 	{
 	case 1:
-		crossFade(Nachtlicht1);
+		//crossFade(Nachtlicht1);
+		strip1.SetPixelColor(0, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(1, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(2, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(3, 	RgbColor(0, 0, 0));
+		strip1.SetPixelColor(4, 	RgbColor(0, 0, 0));
+		delayMicroseconds(20);
+		strip1.Show();
 		break;
 
 	case 2:
@@ -466,8 +482,6 @@ void sendNTPpacket(IPAddress &address)
 }
 
 // returns the current date/time as UNIX timestamp, incl. timezone, including daylightsaving
-
-
 
 // calculates the daylight saving time for middle Europe. Input: Unixtime in UTC (!)
 boolean isDayLightSaving(uint32_t local_t)
