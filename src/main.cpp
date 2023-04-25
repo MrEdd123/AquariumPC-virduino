@@ -15,7 +15,7 @@
 #include <DallasTemperature.h>
 
 
-boolean debug = false;              			// set this variable to false on the finale code to decrease the request time.
+boolean debug = false;              			// HIER AUF "TRUE" SETZTEN WENN SERIAL DEBUG AUSGABE SEIN SOLL.
 
 SimpleTimer timer;
 
@@ -53,6 +53,8 @@ TaskHandle_t commit_task;
 
 NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
 //NeoPixelBusLg<NeoGrbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
+//NeoPixelBus<NeoGrbwFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
+//NeoPixelBusLg<NeoGrbwFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
 
 /************ TFT Einstellungen ******************/
 
@@ -679,7 +681,6 @@ void loop()
 		SonneNaAus();
 		break;
 	}
-
 
 	switch (FutterIndex)
 	{
