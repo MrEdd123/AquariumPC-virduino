@@ -180,46 +180,42 @@ void SonneAuf(void)
 	switch (Durchlauf)
 	{
 	case 1:
-		//Serial.println("Case1");
+		if (debug) Serial.println("Case1");
 		crossFade(SonAu1);
 		break;
 	case 2:
-		//Serial.println("Case2");
+		if (debug) Serial.println("Case2");
 		crossFade(SonAu2);
 		break;
 	case 3:
-		//Serial.println("Case3");
+		if (debug) Serial.println("Case3");
 		crossFade(SonAu3);
 		break;
 	case 4:
-		//Serial.println("Case4");
+		if (debug) Serial.println("Case4");
 		crossFade(SonAu4);
 		break;
 	case 5:
-		//Serial.println("Case5");
+		if (debug) Serial.println("Case5");
 		crossFade(SonAu5);
 		break;
 	case 6:
-		//Serial.println("Case6");
+		if (debug) Serial.println("Case6");
 		crossFade(SonAu6);
 		break;
 	case 7:
-		//Serial.println("Case7");
+		if (debug) Serial.println("Case7");
 		crossFade(SonAu7);
 		break;
 	case 8:
-		/*
-		for (int i = 0; i < NUMLEDS; i++)
-		{
-		strip1.SetPixelColor(i, RgbColor(250, 60, 230));
-		}
-		//Serial.println("Case8 PowerLED");
-		*/
+		
+		if (debug) Serial.println("Case8 PowerLED");
+		
 		PowerLEDplus();
 		break;
 
 	case 9:
-		//Serial.println("Case9 Ende");
+		if (debug) Serial.println("Case9 Ende");
 		strip1.SetPixelColor(0, 	RgbColor(0, 0, 240));
 		strip1.SetPixelColor(1, 	RgbColor(250, 0, 0));
 		strip1.SetPixelColor(2, 	RgbColor(0, 0, 240));
@@ -244,46 +240,49 @@ void SonneUn(void)
 	preferences.putUInt("LichtZu", LichtZustand);
 	ledcWrite(BacklightKanalTFT, BacklightwertNacht);
 
-	strip1.SetPixelColor(0, 	RgbColor(250, 10, 240));
-	strip1.SetPixelColor(1, 	RgbColor(250, 10, 240));
-	strip1.SetPixelColor(2, 	RgbColor(250, 10, 240));
-	strip1.SetPixelColor(3, 	RgbColor(250, 10, 240));
-	strip1.SetPixelColor(4, 	RgbColor(250, 10, 240));
-	delayMicroseconds(20);
-	strip1.Show();	
+		
 
 	switch (Durchlauf)
 	{
 
 	case 1:
+		strip1.SetPixelColor(0, 	RgbColor(250, 10, 240));
+		strip1.SetPixelColor(1, 	RgbColor(250, 10, 240));
+		strip1.SetPixelColor(2, 	RgbColor(250, 10, 240));
+		strip1.SetPixelColor(3, 	RgbColor(250, 10, 240));
+		strip1.SetPixelColor(4, 	RgbColor(250, 10, 240));
+		delayMicroseconds(20);
+		strip1.Show();
+
 		PowerLEDminus();
+		if (debug) Serial.println("PowerLED-Minus");	
 		break;
 	case 2:
-	//Serial.println("SonUn1");
+	if (debug) Serial.println("SonUn1");
 		crossFade(SonUn1);
 		break;
 	case 3:
-	//Serial.println("SonUn2");
+	if (debug) Serial.println("SonUn2");
 		crossFade(SonUn2);
 		break;
 	case 4:
-	//Serial.println("SonUn3");
+	Serial.println("SonUn3");
 		crossFade(SonUn3);
 		break;
 	case 5:
-	//Serial.println("SonUn4");
+	if (debug) Serial.println("SonUn4");
 		crossFade(SonUn4);
 		break;
 	case 6:
-	//Serial.println("SonUn5");
+	if (debug) Serial.println("SonUn5");
 		crossFade(SonUn5);
 		break;
 	case 7:
-	//Serial.println("SonUn6");
+	if (debug) Serial.println("SonUn6");
 		crossFade(SonUn6);
 		break;
 	case 8:
-	//Serial.println("SonUn7");
+	if (debug) Serial.println("SonUn7");
 		crossFade(SonUn7);
 		break;
 	case 9:
@@ -302,6 +301,7 @@ void SonneUn(void)
 		delayMicroseconds(20);
 		strip1.Show();
 		Durchlauf++;
+		if (debug) Serial.println("SonUn-Fertig!");
 		break;
 
 	case 10:

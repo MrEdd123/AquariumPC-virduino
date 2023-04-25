@@ -9,7 +9,7 @@
 //   Note that some sketches are designed for a particular TFT pixel width/height
 
 // User defined information reported by "Read_User_Setup" test & diagnostics example
-#define USER_SETUP_INFO "User_Setup"
+#define USER_SETUP_INFO "Mein_Setup"
 
 // Define to disable all #warnings in library (can be put in User_Setup_Select.h)
 //#define DISABLE_ALL_LIBRARY_WARNINGS
@@ -99,7 +99,7 @@
 // this User_Setup file, then rebuild and upload the sketch to the board again:
 
 // #define ST7735_INITB
-// #define ST7735_GREENTAB
+ #define ST7735_GREENTAB
 // #define ST7735_GREENTAB2
 // #define ST7735_GREENTAB3
 // #define ST7735_GREENTAB128    // For 128 x 128 display
@@ -364,12 +364,12 @@
 #define SPI_READ_FREQUENCY  20000000
 
 // The XPT2046 requires a lower SPI clock rate of 2.5MHz so we define that here:
-#define SPI_TOUCH_FREQUENCY  2500000
+// #define SPI_TOUCH_FREQUENCY  2500000
 
 // The ESP32 has 2 free SPI ports i.e. VSPI and HSPI, the VSPI is the default.
 // If the VSPI port is in use and pins are not accessible (e.g. TTGO T-Beam)
 // then uncomment the following line:
-//#define USE_HSPI_PORT
+#define USE_HSPI_PORT
 
 // Comment out the following #define if "SPI Transactions" do not need to be
 // supported. When commented out the code size will be smaller and sketches will
@@ -381,4 +381,4 @@
 // Transactions are automatically enabled by the library for an ESP32 (to use HAL mutex)
 // so changing it here has no effect
 
-// #define SUPPORT_TRANSACTIONS
+#define SUPPORT_TRANSACTIONS
