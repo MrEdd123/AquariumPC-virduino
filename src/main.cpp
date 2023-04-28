@@ -145,6 +145,9 @@ float V10Futter;
 
 unsigned long PowerLEDMillis = 0;
 unsigned long FutterMillis = 0;
+/***************** Millis für WLAN Reconnect *****/
+unsigned long previousMillis = 0;
+unsigned long interval = 30000;		//30 sec dann Abfrage ob WLAN ja/nein
 
 /**************** Pin Belegung *******************/
 
@@ -635,7 +638,25 @@ void setup()
 
 void loop() 
 {	
-	
+	/************** WLAN Reconnect **********************/
+
+	unsigned long currentMillis = millis();
+  	// if WiFi is down, try reconnecting every CHECK_WIFI_TIME seconds
+  		if ((WiFi.status() != WL_CONNECTED) && (currentMillis - previousMillis >=interval))
+		{
+    		if (debug) Serial.print(millis());
+    		if (debug) Serial.println("Reconnecting to WiFi...");
+				tft.drawBitmap(140, 0, wlan, 20, 20, TFT_WHITE);	
+    			delay (500);
+				tft.drawBitmap(140, 0, wlan, 20, 20, TFT_VIOLET);
+				delay (500);
+    		if (debug) Serial.print ( "." );
+    		WiFi.disconnect();
+    		WiFi.reconnect();
+   			previousMillis = currentMillis;
+  		}
+
+
 	/************** OTA ********************************/
 
 	ArduinoOTA.handle();
