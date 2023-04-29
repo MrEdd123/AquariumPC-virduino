@@ -646,9 +646,9 @@ void loop()
 		{
     		if (debug) Serial.print(millis());
     		if (debug) Serial.println("Reconnecting to WiFi...");
-				tft.drawBitmap(140, 0, wlan, 20, 20, TFT_WHITE);	
-    			delay (500);
-				tft.drawBitmap(140, 0, wlan, 20, 20, TFT_VIOLET);
+				tft.drawBitmap(140, 0, wlan, 20, 20, TFT_RED);
+				delay (500);
+				tft.drawBitmap(140, 0, wlan, 20, 20, TFT_GREEN);
 				delay (500);
     		if (debug) Serial.print ( "." );
     		WiFi.disconnect();
