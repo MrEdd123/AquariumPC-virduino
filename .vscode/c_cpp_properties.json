@@ -219,6 +219,7 @@
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/dio_qspi/include",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/variants/esp32",
+                "C:/Users/andre/OneDrive/Documents/AquariumPC-virduino/.pio/libdeps/esp32dev/Unity/src",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
                 "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
@@ -458,6 +459,7 @@
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/dio_qspi/include",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/variants/esp32",
+                    "C:/Users/andre/OneDrive/Documents/AquariumPC-virduino/.pio/libdeps/esp32dev/Unity/src",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
                     "C:/Users/andre/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
@@ -485,7 +487,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60106",
+                "PLATFORMIO=60107",
                 "ARDUINO_ESP32_DEV",
                 "CORE_DEBUG_LEVEL=0",
                 "HAVE_CONFIG_H",

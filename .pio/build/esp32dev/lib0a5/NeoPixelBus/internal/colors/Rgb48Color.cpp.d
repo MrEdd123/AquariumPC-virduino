@@ -136,4 +136,6 @@
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/Rgb48Color.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/HslColor.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/HsbColor.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/HtmlColor.h
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/HtmlColor.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/RgbwColor.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/Rgbw64Color.h
