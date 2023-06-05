@@ -212,8 +212,6 @@ void virduino()
 		
 	}
 
-
-
 	if (V[15] != BacklightwertTag)
 	{
 		
@@ -278,14 +276,13 @@ void virduino()
 		
 	}
 
-	/*	if (V[21])
+/************** Manuelle Funktionen *****************/
+
+	if (V[21] == 1)		//Powerled Helligkeit setzten
 	{
 		Powerledwert = V[21];
-		ledcWrite(PowerledKanal, Powerledwert);
+		ledcWrite(PowerledKanal, Powerledmax);
 	}
-	*/
-
-	/************** Manuelle Funktionen *****************/
 
 	if (V[30] == 1)		//Sonnenaufgang
 	{

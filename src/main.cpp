@@ -51,8 +51,8 @@ Preferences preferences;
 xSemaphoreHandle semaphore = NULL;
 TaskHandle_t commit_task;
 
-NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
-//NeoPixelBusLg<NeoGrbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
+//NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
+NeoPixelBusLg<NeoRgbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
 //NeoPixelBus<NeoGrbwFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
 //NeoPixelBusLg<NeoGrbwFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
 
