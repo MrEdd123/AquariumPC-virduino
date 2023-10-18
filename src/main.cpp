@@ -51,10 +51,42 @@ Preferences preferences;
 xSemaphoreHandle semaphore = NULL;
 TaskHandle_t commit_task;
 
-//NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
-NeoPixelBusLg<NeoRgbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
-//NeoPixelBus<NeoGrbwFeature, NeoEsp32Rmt0800KbpsMethod> strip1(NUMLEDS, PIN_STRIPE); 
-//NeoPixelBusLg<NeoGrbwFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
+NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE); 
+//NeoPixelBusLg<NeoRgbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
+void commitTaskProcedure(void *arg)
+{
+    while (true)
+    {
+        while (ulTaskNotifyTake(pdTRUE, portMAX_DELAY) != 1)
+            ;
+        strip1.Show();
+        while (!strip1.CanShow())
+            ;
+        xSemaphoreGive(semaphore);
+    }
+}
+
+void commit()
+{
+    xTaskNotifyGive(commit_task);
+    while (xSemaphoreTake(semaphore, portMAX_DELAY) != pdTRUE)
+        ;
+}
+
+void init_task()
+{
+    commit_task = NULL;
+    semaphore = xSemaphoreCreateBinary();
+
+    xTaskCreatePinnedToCore(
+        commitTaskProcedure,         /* Task function. */
+        "ShowRunnerTask",            /* name of task. */
+        10000,                       /* Stack size of task */
+        NULL,                        /* parameter of the task */
+        4,                           /* priority of the task */
+        &commit_task,                /* Task handle to keep track of created task */
+        1);                          /* pin task to core core_id */
+}
 
 /************ TFT Einstellungen ******************/
 
@@ -158,13 +190,13 @@ unsigned long interval = 30000;		//30 sec dann Abfrage ob WLAN ja/nein
 /**************** NeoPixel Init ******************/
 // Sonnenaufgang Color Array
 //				{   R,  G,   B };
-int SonAu1[3] = { 50, 	 9,   0 };
-int SonAu2[3] = { 100,	12,  10 };
-int SonAu3[3] = { 150, 	15,  30 };
-int SonAu4[3] = { 180, 	25,  50 };
+int SonAu1[3] = { 50, 	 0,   0 };
+int SonAu2[3] = { 100,	 9,  10 };
+int SonAu3[3] = { 150, 	12,  30 };
+int SonAu4[3] = { 180, 	20,  50 };
 int SonAu5[3] = { 200, 	25,  70 };
 int SonAu6[3] = { 230, 	35,  90 };
-int SonAu7[3] = { 250, 	10, 240 };
+int SonAu7[3] = { 250, 	35, 240 };
 
 // Sonnenuntergang Color Array
 //				{   R,  G,   B };
@@ -475,6 +507,7 @@ void setup()
 	/*********** Neopixel Starten ***************/
 
 	strip1.Begin();
+	init_task();
 	strip1.SetPixelColor(3, RgbColor(0, 0, 200));
 	aktHell = maxHell;
 	strip1.Show();
@@ -671,6 +704,9 @@ void loop()
 
 	/************** Stripe helligkeit ändern ************/
 
+
+	commit();
+    delay(10);
 	//ledcWrite(PowerledKanal, PowerledwertManu);
 
 	/************* Uhr im Display aktualisieren ********/
