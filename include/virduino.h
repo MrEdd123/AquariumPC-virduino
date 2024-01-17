@@ -278,7 +278,7 @@ void virduino()
 
 /************** Manuelle Funktionen *****************/
 
-	if (V[21] == 1)		//Powerled Helligkeit setzten
+	if (V[22] == 1)		//Powerled Helligkeit setzten
 	{
 		Powerledwert = V[21];
 		ledcWrite(PowerledKanal, Powerledmax);

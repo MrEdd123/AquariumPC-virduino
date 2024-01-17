@@ -246,13 +246,13 @@ void SonneUn(void)
 	{
 
 	case 1:
-		strip1.SetPixelColor(0, 	RgbColor(250, 10, 240));
-		strip1.SetPixelColor(1, 	RgbColor(250, 10, 240));
-		strip1.SetPixelColor(2, 	RgbColor(250, 10, 240));
-		strip1.SetPixelColor(3, 	RgbColor(250, 10, 240));
-		strip1.SetPixelColor(4, 	RgbColor(250, 10, 240));
-		delayMicroseconds(20);
+		strip1.SetPixelColor(0, 	RgbColor(250, 50, 240));
+		strip1.SetPixelColor(1, 	RgbColor(250, 50, 240));
+		strip1.SetPixelColor(2, 	RgbColor(250, 50, 240));
+		strip1.SetPixelColor(3, 	RgbColor(250, 50, 240));
+		strip1.SetPixelColor(4, 	RgbColor(250, 50, 240));
 		strip1.Show();
+		delayMicroseconds(200);
 
 		PowerLEDminus();
 		if (debug) Serial.println("PowerLED-Minus");	
@@ -445,7 +445,7 @@ void Futterautomat(void)
 		ledcWrite(FutterKanal, Futtergesch);
 		Serial.println(i);
 		//if (i > Futterdauer)
-		if (i > Futterdauer && i < (Futterdauer + 5 ))
+		if (i > Futterdauer && i < (Futterdauer + 4 ))
 		{
 			Serial.print("Stop");
 			Serial.println(i);

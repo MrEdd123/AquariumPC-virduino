@@ -53,40 +53,6 @@ TaskHandle_t commit_task;
 
 NeoPixelBus<NeoRgbFeature, NeoEsp32Rmt0Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE); 
 //NeoPixelBusLg<NeoRgbFeature, NeoEsp32I2s1X8Ws2812xMethod> strip1(NUMLEDS, PIN_STRIPE);
-void commitTaskProcedure(void *arg)
-{
-    while (true)
-    {
-        while (ulTaskNotifyTake(pdTRUE, portMAX_DELAY) != 1)
-            ;
-        strip1.Show();
-        while (!strip1.CanShow())
-            ;
-        xSemaphoreGive(semaphore);
-    }
-}
-
-void commit()
-{
-    xTaskNotifyGive(commit_task);
-    while (xSemaphoreTake(semaphore, portMAX_DELAY) != pdTRUE)
-        ;
-}
-
-void init_task()
-{
-    commit_task = NULL;
-    semaphore = xSemaphoreCreateBinary();
-
-    xTaskCreatePinnedToCore(
-        commitTaskProcedure,         /* Task function. */
-        "ShowRunnerTask",            /* name of task. */
-        10000,                       /* Stack size of task */
-        NULL,                        /* parameter of the task */
-        4,                           /* priority of the task */
-        &commit_task,                /* Task handle to keep track of created task */
-        1);                          /* pin task to core core_id */
-}
 
 /************ TFT Einstellungen ******************/
 
@@ -507,7 +473,6 @@ void setup()
 	/*********** Neopixel Starten ***************/
 
 	strip1.Begin();
-	init_task();
 	strip1.SetPixelColor(3, RgbColor(0, 0, 200));
 	aktHell = maxHell;
 	strip1.Show();
@@ -704,9 +669,7 @@ void loop()
 
 	/************** Stripe helligkeit ändern ************/
 
-
-	commit();
-    delay(10);
+    // delay(10);
 	//ledcWrite(PowerledKanal, PowerledwertManu);
 
 	/************* Uhr im Display aktualisieren ********/

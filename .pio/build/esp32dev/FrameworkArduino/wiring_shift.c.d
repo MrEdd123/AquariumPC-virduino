@@ -106,4 +106,5 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp_arduino_version.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp8266-compat.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/stdlib_noniso.h \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/binary.h
+ C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/binary.h \
+ C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/io_pin_remap.h
