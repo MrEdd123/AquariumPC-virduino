@@ -150,6 +150,7 @@
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/Rgbw64Color.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/RgbwwColor.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/Rgbww80Color.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/RgbwwwColor.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/SegmentDigit.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGamma.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/colors/NeoGammaEquationMethod.h \
@@ -167,6 +168,7 @@
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo4ByteFeature.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarX4ByteFeature.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/DotStarL4ByteFeature.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo6ByteFeature.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo6xByteFeature.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo6xxByteFeature.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/Neo3WordFeature.h \
@@ -178,6 +180,7 @@
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbw64Features.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbwxxFeatures.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbcwxFeatures.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoRgbwwwFeatures.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoSm168x3Features.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoSm168x4Features.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/features/NeoSm168x5Features.h \
@@ -225,6 +228,7 @@
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Tlc5947GenericMethod.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Sm16716GenericMethod.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Mbi6033GenericMethod.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/PixieStreamMethod.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEsp32I2sMethod.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Esp32_i2s.h \
  .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEsp32RmtMethod.h \

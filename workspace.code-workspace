@@ -28,5 +28,10 @@
 			"unordered_set": "cpp",
 			"vector": "cpp"
 		}
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-ceintl.vscode-language-pack-de"
+		]
 	}
 }

@@ -281,7 +281,10 @@ void virduino()
 	if (V[22] == 1)		//Powerled Helligkeit setzten
 	{
 		Powerledwert = V[21];
-		ledcWrite(PowerledKanal, Powerledmax);
+
+		ledcWrite(PowerledKanal, Powerledwert);	
+		Powerledmax = Powerledwert;
+		
 	}
 
 	if (V[30] == 1)		//Sonnenaufgang

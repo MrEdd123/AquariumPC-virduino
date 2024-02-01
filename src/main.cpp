@@ -14,7 +14,6 @@
 #include <ArduinoOTA.h>
 #include <DallasTemperature.h>
 
-
 boolean debug = false;              			// HIER AUF "TRUE" SETZTEN WENN SERIAL DEBUG AUSGABE SEIN SOLL.
 
 SimpleTimer timer;
@@ -454,7 +453,7 @@ void setup()
 	V[18] = Futterdauerhelp;
 	V[19] = Futtergesch;
 	V[20] = Hysterese;
-	V[21] = PowerledwertManu;
+	V[21] = Powerledwert;
 	
 	
 	/*********** GPIO´s definieren ****************/
