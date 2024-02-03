@@ -23,7 +23,6 @@ void virduino()
 		LuefTemp = V[2];
 	}
 
-
 	if (V[3] != V3SonneAuf)
 	{
 		V3SonneAuf = V[3];
@@ -135,8 +134,7 @@ void virduino()
 		SunTimer();
 	
 	}
-	
-	
+		
 	if (V[8] != V8CO2AN)
 	{
 		V8CO2AN = V[8];
@@ -209,6 +207,7 @@ void virduino()
 	{
 		Powerledmax = V[14];
 		preferences.putUInt ("PowH", Powerledmax);
+		Powerledwert = Powerledmax;
 		
 	}
 
@@ -322,5 +321,4 @@ void virduino()
 	}
 
 }
-
 #endif
