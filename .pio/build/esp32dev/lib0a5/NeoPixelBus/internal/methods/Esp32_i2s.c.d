@@ -67,6 +67,7 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/queue.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/task.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/queue.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/FractionClk.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/esp_intr_alloc.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_rom/include/esp32/rom/lldesc.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/gpio_reg.h \
@@ -78,7 +79,6 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/dport_access.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/esp32/dport_access.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_ipc/include/esp_ipc_isr.h \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/sens_reg.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/driver/include/driver/gpio.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_common/include/esp_types.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/include/soc/gpio_periph.h \
@@ -115,6 +115,7 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-matrix.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-uart.h \
+ C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/uart_types.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-gpio.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/variants/esp32/pins_arduino.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-touch.h \

@@ -4,7 +4,7 @@ RgbwColor provides a color object that can be directly consumed by NeoPixelBus
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -33,6 +33,43 @@ License along with NeoPixel.  If not, see
 #include "HsbColor.h"
 #include "RgbwColor.h"
 #include "HtmlColor.h"
+
+#include "RgbwwColor.h"
+#include "RgbwwwColor.h"
+#include "Rgbw64Color.h"
+#include "Rgbww80Color.h"
+
+RgbwColor::RgbwColor(const RgbwwColor& color) :
+    R(color.R),
+    G(color.G),
+    B(color.B),
+    W(static_cast<uint8_t>((static_cast<uint16_t>(color.WW) + static_cast<uint16_t>(color.CW)) / 2))
+{
+};
+
+RgbwColor::RgbwColor(const RgbwwwColor& color) :
+    R(color.R),
+    G(color.G),
+    B(color.B),
+    W(static_cast<uint8_t>((static_cast<uint16_t>(color.W1) + static_cast<uint16_t>(color.W2) + static_cast<uint16_t>(color.W3)) / 3))
+{
+};
+
+RgbwColor::RgbwColor(const Rgbw64Color& color) :
+    R(color.R >> 8),
+    G(color.G >> 8),
+    B(color.B >> 8),
+    W(color.W >> 8)
+{
+};
+
+RgbwColor::RgbwColor(const Rgbww80Color& color) :
+    R(color.R >> 8),
+    G(color.G >> 8),
+    B(color.B >> 8),
+    W(static_cast<uint8_t>((static_cast<uint32_t>(color.WW) + static_cast<uint32_t>(color.CW)) >> 9)) // div 2 >> 8
+{
+};
 
 RgbwColor::RgbwColor(const HtmlColor& color)
 {

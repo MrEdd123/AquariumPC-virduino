@@ -4,7 +4,7 @@ NeoPixel library helper functions
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -25,6 +25,24 @@ License along with NeoPixel.  If not, see
 -------------------------------------------------------------------------*/
 
 #pragma once
+
+#ifdef ARDUINO_ARCH_ESP32
+#if defined NDEBUG || defined CONFIG_COMPILER_OPTIMIZATION_ASSERTIONS_SILENT
+#define ESP_ERROR_CHECK_WITHOUT_ABORT_SILENT_TIMEOUT(x) ({                                         \
+        esp_err_t err_rc_ = (x);                                                    \
+        err_rc_;                                                                    \
+    })
+#else
+#define ESP_ERROR_CHECK_WITHOUT_ABORT_SILENT_TIMEOUT(x) ({                                         \
+        esp_err_t err_rc_ = (x);                                                    \
+        if (unlikely(err_rc_ != ESP_OK && err_rc_ != ESP_ERR_TIMEOUT)) {                                          \
+            _esp_error_check_failed_without_abort(err_rc_, __FILE__, __LINE__,      \
+                                                  __ASSERT_FUNC, #x);               \
+        }                                                                           \
+        err_rc_;                                                                    \
+    })
+#endif // NDEBUG
+#endif // ARDUINO_ARCH_ESP32
 
 // some platforms do not come with STL or properly defined one, specifically functional
 // if you see...
@@ -52,6 +70,8 @@ License along with NeoPixel.  If not, see
 
 #ifdef PIN_NOT_A_PIN
 #define NOT_A_PIN PIN_NOT_A_PIN
+#else
+#define NOT_A_PIN -1
 #endif
 
 #endif
@@ -92,4 +112,17 @@ public:
         return (b * 0x0202020202ULL & 0x010884422010ULL) % 1023;
     }
     */
+
+    template<typename T_TYPE> static void PrintBin(T_TYPE value)
+    {
+        const size_t CountBits = sizeof(value) * 8;
+        const T_TYPE BitMask = 1 << (CountBits - 1);
+
+        for (uint8_t bit = 0; bit < CountBits; bit++)
+        {
+            Serial.print((value & BitMask) ? "1" : "0");
+            value <<= 1;
+        }
+    }
+
 };

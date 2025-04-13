@@ -1,5 +1,5 @@
-.pio/build/esp32dev/lib0a5/NeoPixelBus/internal/methods/NeoEsp32RmtMethod-andrereichl-System-Product-Name.cpp.o: \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEsp32RmtMethod-andrereichl-System-Product-Name.cpp \
+.pio/build/esp32dev/lib0a5/NeoPixelBus/internal/methods/Rp2040/NeoRp2040PioMonoProgram.cpp.o: \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Rp2040/NeoRp2040PioMonoProgram.cpp \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp_arduino_version.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/FreeRTOS.h \
@@ -84,6 +84,7 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/log/include/esp_log_internal.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-matrix.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-uart.h \
+ C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/uart_types.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-gpio.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/variants/esp32/pins_arduino.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-touch.h \
@@ -122,6 +123,7 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/IPAddress.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/HardwareSerial.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/HWCDC.h \
+ C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/USBCDC.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/Esp.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_partition.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/spi_flash/include/esp_flash.h \
@@ -132,10 +134,7 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/esp32/spiram.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/io_pin_remap.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/../NeoSettings.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/../NeoBusChannel.h \
- .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/NeoEsp32RmtMethod.h \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/driver/include/driver/rmt.h \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_ringbuf/include/freertos/ringbuf.h \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/soc/esp32/include/soc/rmt_struct.h \
- C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/rmt_types.h
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Rp2040/../../NeoUtil.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Rp2040/../../NeoBusChannel.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Rp2040/../../NeoSettings.h \
+ .pio/libdeps/esp32dev/NeoPixelBus/src/internal/methods/Rp2040/NeoRp2040x4Method.h

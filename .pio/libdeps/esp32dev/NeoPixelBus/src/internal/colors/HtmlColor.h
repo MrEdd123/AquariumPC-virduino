@@ -4,7 +4,7 @@ HtmlColor provides a color object that can be directly consumed by NeoPixelBus
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -249,10 +249,12 @@ struct HtmlColor
         return Parse<T_HTMLCOLORNAMES>(name, MAX_HTML_COLOR_NAME_LEN + 1);
     }
 
+#if !defined(ARDUINO_AVR_DIGISPARK)
     template <typename T_HTMLCOLORNAMES> size_t Parse(String const &name)
     { 
         return Parse<T_HTMLCOLORNAMES>(name.c_str(), name.length() + 1);
     }
+#endif
 
     // ------------------------------------------------------------------------
     // Converts this color code to its HTML4/CSS3 name

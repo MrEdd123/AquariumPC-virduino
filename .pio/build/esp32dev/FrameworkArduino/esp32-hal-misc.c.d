@@ -113,6 +113,7 @@
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-log.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-matrix.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-uart.h \
+ C:/Users/andre/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/hal/include/hal/uart_types.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-gpio.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/variants/esp32/pins_arduino.h \
  C:/Users/andre/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-touch.h \

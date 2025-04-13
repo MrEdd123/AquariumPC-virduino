@@ -4,7 +4,7 @@ NeoPixel library helper functions for WS2801
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -86,7 +86,7 @@ public:
     {
         while (!IsReadyToUpdate())
         {
-#if !defined(ARDUINO_TEEONARDU_LEO) && !defined(ARDUINO_TEEONARDU_FLORA)
+#if !defined(ARDUINO_TEEONARDU_LEO) && !defined(ARDUINO_TEEONARDU_FLORA) && !defined(ARDUINO_AVR_DIGISPARK)
             yield(); // allows for system yield if needed
 #endif
         }
@@ -105,6 +105,11 @@ public:
     bool AlwaysUpdate()
     {
         // this method requires update to be called only if changes to buffer
+        return false;
+    }
+
+    bool SwapBuffers()
+    {
         return false;
     }
 

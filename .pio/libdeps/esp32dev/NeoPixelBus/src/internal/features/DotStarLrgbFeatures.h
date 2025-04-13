@@ -5,7 +5,7 @@ color depth for NeoPixelBus template class when used with DotStars
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -26,40 +26,58 @@ License along with NeoPixel.  If not, see
 -------------------------------------------------------------------------*/
 #pragma once
 
+// Byte features
 class DotStarLrgbFeature : 
-    public DotStarL4Feature<ColorIndexR, ColorIndexG, ColorIndexB>,
+    public DotStarL4ByteFeature<ColorIndexR, ColorIndexG, ColorIndexB>,
     public NeoElementsNoSettings
 {
 };
 
 class DotStarLrbgFeature :
-    public DotStarL4Feature<ColorIndexR, ColorIndexB, ColorIndexG>,
+    public DotStarL4ByteFeature<ColorIndexR, ColorIndexB, ColorIndexG>,
     public NeoElementsNoSettings
 {
 };
 
 
 class DotStarLgrbFeature :
-    public DotStarL4Feature<ColorIndexG, ColorIndexR, ColorIndexB>,
+    public DotStarL4ByteFeature<ColorIndexG, ColorIndexR, ColorIndexB>,
     public NeoElementsNoSettings
 {
 };
 
 class DotStarLgbrFeature :
-    public DotStarL4Feature<ColorIndexG, ColorIndexB, ColorIndexR>,
+    public DotStarL4ByteFeature<ColorIndexG, ColorIndexB, ColorIndexR>,
     public NeoElementsNoSettings
 {
 };
 
 
 class DotStarLbrgFeature :
-    public DotStarL4Feature<ColorIndexB, ColorIndexR, ColorIndexG>,
+    public DotStarL4ByteFeature<ColorIndexB, ColorIndexR, ColorIndexG>,
     public NeoElementsNoSettings
 {
 };
 
 class DotStarLbgrFeature :
-    public DotStarL4Feature<ColorIndexB, ColorIndexG, ColorIndexR>,
+    public DotStarL4ByteFeature<ColorIndexB, ColorIndexG, ColorIndexR>,
     public NeoElementsNoSettings
 {
 };
+
+// Word features
+
+class DotStarLbgr64Feature :
+    public DotStarL4WordFeature<ColorIndexB, ColorIndexG, ColorIndexR>,
+    public NeoElementsNoSettings
+{
+};
+
+class DotStarLrgb64Feature :
+    public DotStarL4WordFeature<ColorIndexR, ColorIndexG, ColorIndexB>,
+    public NeoElementsNoSettings
+{
+};
+
+typedef DotStarLbgr64Feature Hd108LbgrFeature;
+typedef DotStarLrgb64Feature Hd108LrgbFeature;

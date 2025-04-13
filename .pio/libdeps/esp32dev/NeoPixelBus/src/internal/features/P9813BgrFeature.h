@@ -5,7 +5,7 @@ color depth for NeoPixelBus template class when used with P9813s
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -60,7 +60,7 @@ public:
         ColorObject color;
         const uint8_t* p = getPixelAddress((const uint8_t*)pPixels, indexPixel);
 
-        pgm_read_byte(p++); // ignore the first byte
+        p++; // ignore the first byte
         color.B = pgm_read_byte(p++);
         color.G = pgm_read_byte(p++);
         color.R = pgm_read_byte(p);

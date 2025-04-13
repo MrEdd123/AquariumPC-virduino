@@ -35,7 +35,7 @@ void setup(void)
   if (sensors.isParasitePowerMode()) Serial.println("ON");
   else Serial.println("OFF");
 
-  // Assign address manually. The addresses below will beed to be changed
+  // Assign address manually. The addresses below will need to be changed
   // to valid device addresses on your bus. Device address can be retrieved
   // by using either oneWire.search(deviceAddress) or individually via
   // sensors.getAddress(deviceAddress, index)
@@ -105,6 +105,7 @@ void loop(void)
   Serial.print("Requesting temperatures...");
   sensors.requestTemperatures(); // Send the command to get temperatures
   Serial.println("DONE");
+  delay(1500);
 
   // It responds almost immediately. Let's print out the data
   printTemperature(insideThermometer); // Use a simple function to print out the data

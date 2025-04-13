@@ -4,7 +4,7 @@ RgbwColor provides a color object that can be directly consumed by NeoPixelBus
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -28,6 +28,11 @@ License along with NeoPixel.  If not, see
 struct RgbColor;
 struct HslColor;
 struct HsbColor;
+
+struct RgbwwColor;
+struct RgbwwwColor;
+struct Rgbw64Color;
+struct Rgbww80Color;
 
 // ------------------------------------------------------------------------
 // RgbwColor represents a color object that is represented by Red, Green, Blue
@@ -66,6 +71,26 @@ struct RgbwColor : RgbColorBase
         W(0)
     {
     };
+
+    // ------------------------------------------------------------------------
+    // explicitly Construct a RgbColor using RgbwwColor
+    // ------------------------------------------------------------------------
+    explicit RgbwColor(const RgbwwColor& color);
+
+    // ------------------------------------------------------------------------
+    // explicitly Construct a RgbColor using RgbwwwColor
+    // ------------------------------------------------------------------------
+    explicit RgbwColor(const RgbwwwColor& color);
+
+    // ------------------------------------------------------------------------
+     // explicitly Construct a RgbColor using Rgbw64Color
+     // ------------------------------------------------------------------------
+    explicit RgbwColor(const Rgbw64Color& color);
+
+    // ------------------------------------------------------------------------
+    // explicitly Construct a RgbColor using Rgbww80Color
+    // ------------------------------------------------------------------------
+    explicit RgbwColor(const Rgbww80Color& color);
 
     // ------------------------------------------------------------------------
     // Construct a RgbwColor using HtmlColor

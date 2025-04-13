@@ -4,7 +4,7 @@ NeoPixel library helper functions for DotStars using general Pins (APA102).
 Written by Michael C. Miller.
 
 I invest time and resources providing this open source code,
-please support me by dontating (see https://github.com/Makuna/NeoPixelBus)
+please support me by donating (see https://github.com/Makuna/NeoPixelBus)
 
 -------------------------------------------------------------------------
 This file is part of the Makuna/NeoPixelBus library.
@@ -90,11 +90,11 @@ public:
         // data
         _wire.transmitBytes(_data, _sizeData);
 
-       // reset frame
+        // reset frame
         _wire.transmitBytes(resetFrame, sizeof(resetFrame));
         
         // end frame 
-        
+        //
         // one bit for every two pixels with no less than 1 byte
         for (size_t endFrameByte = 0; endFrameByte < _sizeEndFrame; endFrameByte++)
         {
@@ -107,6 +107,11 @@ public:
     bool AlwaysUpdate()
     {
         // this method requires update to be called only if changes to buffer
+        return false;
+    }
+
+    bool SwapBuffers()
+    {
         return false;
     }
 
